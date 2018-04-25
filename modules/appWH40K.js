@@ -1,4 +1,4 @@
-var app = angular.module('WH40KApp', ['ngWebSocket', 'ngRoute']);
+var app = angular.module('WH40KApp', ['ngWebSocket', 'ngRoute', 'xeditable', 'ui.select', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 app.constant('properties', wh40KProperties);
 
@@ -35,3 +35,7 @@ app.factory('requestUtil', function($location, $http) {
         }
     };
 });
+
+app.run(['editableOptions', function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+}]);
