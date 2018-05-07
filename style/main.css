@@ -1,0 +1,19 @@
+#parent_div_1, #parent_div_2, #parent_div_3{
+    width:1224px;
+    height:600px;
+    border:1px solid red;
+    margin:10px;
+    float:left;
+}
+.child_div_1{
+    float:left;
+    margin:5px;
+    width:49%;
+    border: 1px solid blue;
+}
+.child_div_2{
+    float:right;
+    margin:5px;
+    width:49%;
+    border: 1px solid blue;
+}

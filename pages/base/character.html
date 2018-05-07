@@ -1,0 +1,44 @@
+charObj.id::{{charObj.id}}
+<div class="well line-example">
+    <form data-editable-form name="uiSelectForm" onbeforesave="afterSaveForm(charObj)" onaftersave="beforeSaveForm(charObj)">
+        <div editable-ui-select="selectedEntry" data-e-form="uiSelectForm" data-e-name="_name" name="_name" theme="bootstrap" data-e-ng-model="selectedEntry.state" data-e-style="min-width:300px;">
+            <a href="#" ng-click="uiSelectForm.$show()" ng-show="!uiSelectForm.$visible">{{selectedEntry._name}}</a>
+            <editable-ui-select-match placeholder="Seleccione">
+                {{$select.selected._name}}
+            </editable-ui-select-match>
+            <editable-ui-select-choices ng-click="showSelected($select, charObj)" repeat="selectionEntry in listSelectionEntry | filter: $select.search track by $index">
+                {{selectionEntry._name}}
+            </editable-ui-select-choices>
+        </div>
+        <br/>
+        <div class="buttons">
+            <!-- button to show form -->
+            <button type="button" class="btn btn-default" ng-click="uiSelectForm.$show()" ng-show="!uiSelectForm.$visible">
+                Edit
+            </button>
+            <!-- buttons to submit / cancel form -->
+            <span ng-show="uiSelectForm.$visible">
+                <br/>
+                <button type="submit" class="btn btn-primary" ng-disabled="uiSelectForm.$waiting">
+                    Save
+                </button>
+                <button type="button" class="btn btn-default" ng-disabled="uiSelectForm.$waiting" ng-click="uiSelectForm.$cancel()">
+                    Cancel
+                </button>
+            </span>
+        </div>
+    </form>
+
+</div>
+<div class="well line-example">{{selectedEntry.catalogue._name}}
+    <table class="table table-bordered table-hover table-condensed" style="width: 100%;">
+        <tr style="font-weight: bold">
+            <td style="width:35%">Name</td>
+            <td ng-repeat="characteristic in characteristics">{{characteristic._name}}</td>
+        </tr>
+        <tr>
+            <td style="width:35%">{{listCharSelected[0]._name || 'Seleccione Personaje ...'}}</td>
+            <td ng-repeat="characteristic in characteristics">{{characteristic._value}}</td>
+        </tr>
+    </table>
+</div>
