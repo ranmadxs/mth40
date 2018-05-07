@@ -28,10 +28,17 @@ app.service("battleScribeSvc", function(properties){
             }
             
         }
+        
+        if(profile === undefined){
+            console.log("undefined", "veamos profile");   
+            profile = entry.profiles.profile;
+        }
+        console.log(profile, "veamos profile");
         return profile;
     }
    
     this.getCharacteristics = function(entry) { 
+        console.log(entry);
         var profile = this.getProfileType(properties.filtros_xml.character_profile_name, entry);
         var characteristics = [];
         for (var index in profile.characteristics.characteristic) {
