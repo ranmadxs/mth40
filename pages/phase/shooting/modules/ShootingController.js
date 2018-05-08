@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//TODO: Revisar como poner los tanques y las escuadras.
 //<entryLinks>
 //<sharedSelectionEntries> -> 
 app.controller('ShootingController', function($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, battleScribeSvc) {
@@ -32,7 +33,8 @@ app.controller('ShootingController', function($http, $scope, $filter, $location,
 //      }
           $scope.listCharSelected[charObj.id] = {
             _name: data.selected._name,
-            _id : data.selected._id              
+            _id : data.selected._id,
+            _valuesChars : []
           };
           //console.log($scope.listCharSelected, ":SSS")
       
@@ -44,15 +46,21 @@ app.controller('ShootingController', function($http, $scope, $filter, $location,
       };
     
       $scope.beforeSaveForm = function(charObj){
-            console.log(charObj);
+            var charObjId = charObj.id;
+            console.log(charObj, "beforeSaveForm id="+charObjId);
             
+            console.log($scope.listCharSelected[charObj.id]._valuesChars, ">> beforeSaveForm");
+            
+            //$scope.characteristics[charObjId] = properties.characteristics;
             var entryFull = $scope.arraySelectionEntry[$scope.selectedEntry._id];
             console.log(entryFull, "beforeSaveForm");
             var listChar = battleScribeSvc.getCharacteristics(entryFull);
             for (var index in $scope.characteristics) {
                 var valurChr = listChar[$scope.characteristics[index]._xmlName];
-                $scope.characteristics[index]._value = valurChr;
+                $scope.listCharSelected[charObj.id]._valuesChars.push(valurChr);
+                //$scope.characteristics[charObjId][index]._value = valurChr;
             }
+            console.log($scope.listCharSelected[charObj.id]._valuesChars, ">> beforeSaveForm");
       }
     
     battleScribeSvc.getSelectionEntry();

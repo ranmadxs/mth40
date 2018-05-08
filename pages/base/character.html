@@ -37,8 +37,8 @@ charObj.id::{{charObj.id}}
             <td ng-repeat="characteristic in characteristics">{{characteristic._name}}</td>
         </tr>
         <tr>
-            <td style="width:35%">{{listCharSelected[0]._name || 'Seleccione Personaje ...'}}</td>
-            <td ng-repeat="characteristic in characteristics">{{characteristic._value}}</td>
+            <td style="width:35%">{{listCharSelected[charObj.id]._name || 'Seleccione Personaje ...'}}</td>
+            <td ng-repeat="charval in listCharSelected[charObj.id]._valuesChars track by $index">{{charval}}</td>
         </tr>
     </table>
 </div>
