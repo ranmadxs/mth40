@@ -1,33 +1,29 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html ng-app="WH40KApp">
     <head>
         <title>Shooting Phase</title>
         <meta charset="UTF-8">
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-     
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--        <link rel="shortcut icon" href="../../img/favicon.ico">-->
+        <!--        <link rel="shortcut icon" href="../../img/favicon.ico">-->
         <!-- Angularjs -->
-        <script src="../../../plugins/angularjs-1.6.0/angular.min.js"></script>
-        <script src="../../../plugins/angularjs-1.6.0/angular-route.min.js"></script>
-        <script src="../../../plugins/angularjs-1.6.0/angular-websocket.min.js"></script>
-        
+        <script src="../../../plugins/angularjs/1.6.0/angular.min.js"></script>
+        <script src="../../../plugins/angularjs/1.6.0/angular-route.min.js"></script>
+        <script src="../../../plugins/angularjs/1.6.0/angular-websocket.min.js"></script>
+
         <!-- Angular-xeditable -->
         <link href="../../../plugins/angular-xeditable-0.8.1/css/xeditable.css" rel="stylesheet">
         <script src="../../../plugins/angular-xeditable-0.8.1/js/xeditable.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js"></script>
+        <script src="../../../plugins/angular-ui-select/0.16.1/select.min.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.css" rel="stylesheet" media="screen"> 
+        <link href="../../../plugins/angular-ui-select/0.16.1/select.min.css" rel="stylesheet" media="screen"> 
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
 
         <!-- jQuery 2.2.3 -->
         <script src="../../../plugins/jquery-2.1.4/jquery.min.js"></script>    
@@ -40,63 +36,18 @@ and open the template in the editor.
         <link href="../../../style/main.css" rel="stylesheet">
     </head>
     <body ng-controller="ShootingController">
-       <div>TODO write content</div>
+        <div>TODO write content</div>
         <br/>
         version ::  {{properties.version}}
         <br/>
 
-
-<!--  
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="input-group">
-            <input type="text" class="form-control" ng-model="buscador2">
-            <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li ng-repeat="selectionEntry in listSelectionEntry" class="input-lg"><a href="#">{{selectionEntry._name}}</a></li>
-                    </ul>
+        <div id='parent_div_1'>
+            <div class ='child_div_1'>
+                <div ng-repeat="charObj in [{'id': '0'}]" ng-include="'../../base/character.html'"></div>
+            </div>
+            <div class ='child_div_2'>
+                <div ng-repeat="charObj in [{'id': '1'}]" ng-include="'../../base/character.html'"></div>      
             </div>
         </div>
-    </div>
-        
-      
-                <input type="text" ng-model="buscador" />
-        <div ng-repeat="selectionEntry in listSelectionEntry|filter:buscador|orderBy:_name">
-            <pre>{{selectionEntry._name}}</pre>
-        </div>-->
-
-<!--
-        <br/><br/><br/>
-        
-        
-        <a href="#" editable-text="selectedEntry.name">{{ selectedEntry.name || "empty" }}</a>
-        
-        <br/><br/><br/>
-        
-        <a href="#" editable-select="selectedEntry.status" e-ng-options="s.value as s.text for s in statuses">
-            {{ showStatus() }}
-        </a>        
-        <br/><br/><br/>
--->
-<div id='parent_div_1'>
-    <div class ='child_div_1'>
-        <div ng-repeat="charObj in [{'id':'0'}]" ng-include="'../../base/character.html'"></div>
-    </div>
-    <div class ='child_div_2'>
-        <div ng-repeat="charObj in [{'id':'1'}]" ng-include="'../../base/character.html'"></div>      
-    </div>
-</div>
-<!--
-<hr/>
-<br/>
-<br/>&nbsp;
-<br/>
-       
-    <h4>Static arrays</h4>
-    <pre>Model: {{selected | json}}</pre>
-    <input type="text" ng-model="selected" uib-typeahead="selectionEntry._name for selectionEntry in listSelectionEntry | filter:$viewValue | limitTo:8" class="form-control">
-  
-    
--->
     </body>
 </html>

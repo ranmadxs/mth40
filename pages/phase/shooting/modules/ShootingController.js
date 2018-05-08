@@ -98,7 +98,9 @@ app.controller('ShootingController', function($http, $scope, $filter, $location,
         }
         $scope.listSelectionEntry = listSelectionEntry;
     };  
-    
-    requestUtil.get("../../../resources/xml_db/8th/Adeptus_Ministorum_8th.cat", setData, battleScribeSvc.xmlTransform);
+    for (var index in properties.wh_40_databases) {
+        requestUtil.get(properties.wh_40_databases[index]._path, setData, battleScribeSvc.xmlTransform);
+    }
+    //requestUtil.get("../../../resources/xml_db/8th/Adeptus_Ministorum_8th.cat", setData, battleScribeSvc.xmlTransform);
     //requestUtil.get("../../../resources/xml_db/8th/Marines_Espaciales_8th.cat", setData, battleScribeSvc.xmlTransform);
 });
