@@ -31,6 +31,7 @@
         <script src="../../../config/config.properties"></script>
         <script src="../../../modules/appWH40K.js"></script>
         <script src="../../../services/BattleScribeSvc.js"></script>
+        <script src="../../../services/ComparaSvc.js"></script>
         <script src="modules/ShootingController.js"></script>
         <link href="../../../style/main.css" rel="stylesheet">
     </head>
@@ -47,6 +48,11 @@
             <div class ='child_div_2'>
                 <div ng-repeat="charObj in [{'id': '1'}]" ng-include="'../../base/character.html'"></div>      
             </div>
+            <div class ='child_div_3'>
+                <button type="button" class="btn btn-default" ng-click="comparar()">
+                    Comparar
+                </button>
+            </div>            
         </div>
     </body>
 </html>

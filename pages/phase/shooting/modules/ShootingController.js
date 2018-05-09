@@ -6,7 +6,7 @@
 //TODO: Revisar como poner los tanques y las escuadras.
 //<entryLinks>
 //<sharedSelectionEntries> -> 
-app.controller('ShootingController', function($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, battleScribeSvc) {
+app.controller('ShootingController', function($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, battleScribeSvc, comparaSvc) {
     $scope.properties = properties;
     $scope.listSelectionEntry = [];
     $scope.selected = undefined;
@@ -22,6 +22,13 @@ app.controller('ShootingController', function($http, $scope, $filter, $location,
     };    
 
     $scope.characteristics = properties.characteristics;
+
+    $scope.comparar = function(){
+        console.log("Init comparar", "comparar");
+        var resCompara = comparaSvc.compara($scope.listCharSelected);
+        console.log(resCompara);
+
+    };
 
     $scope.showSelected = function(data, charObj) {
       //console.log(data.selected, "afterSaveForm");
@@ -49,18 +56,22 @@ app.controller('ShootingController', function($http, $scope, $filter, $location,
             var charObjId = charObj.id;
             console.log(charObj, "beforeSaveForm id="+charObjId);
             
-            console.log($scope.listCharSelected[charObj.id]._valuesChars, ">> beforeSaveForm");
+            console.log($scope.listCharSelected[charObj.id], ">> beforeSaveForm");
             
             //$scope.characteristics[charObjId] = properties.characteristics;
             var entryFull = $scope.arraySelectionEntry[$scope.selectedEntry._id];
             console.log(entryFull, "beforeSaveForm");
             var listChar = battleScribeSvc.getCharacteristics(entryFull);
+            console.log(listChar, "listChar");
+            $scope.listCharSelected[charObj.id]._characteristics = listChar;
             for (var index in $scope.characteristics) {
                 var valurChr = listChar[$scope.characteristics[index]._xmlName];
                 $scope.listCharSelected[charObj.id]._valuesChars.push(valurChr);
                 //$scope.characteristics[charObjId][index]._value = valurChr;
             }
-            console.log($scope.listCharSelected[charObj.id]._valuesChars, ">> beforeSaveForm");
+            if(!$rootScope.$$phase) {
+                $rootScope.$digest();
+            }
       }
     
     battleScribeSvc.getSelectionEntry();

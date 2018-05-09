@@ -1,5 +1,5 @@
 #parent_div_1, #parent_div_2, #parent_div_3{
-    width:1224px;
+    width:1324px;
     height:600px;
     border:1px solid red;
     margin:10px;
@@ -8,12 +8,19 @@
 .child_div_1{
     float:left;
     margin:5px;
-    width:49%;
+    width:45%;
     border: 1px solid blue;
 }
 .child_div_2{
-    float:right;
+    float:left;
     margin:5px;
-    width:49%;
+    width:45%;
     border: 1px solid blue;
+}
+.child_div_3{
+    float:right;
+    margin-right:5px;
+    margin-top:5px;
+    width:8%;
+    border: 1px solid green;
 }
