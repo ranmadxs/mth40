@@ -1,7 +1,16 @@
 app.service("comparaSvc", function(properties){  
     
     this.compara = function (listCharSelected){
-        var listCompara = [];
+        var listCompara = [];                
+        
+        for (var index in properties.characteristics) {
+            console.log(properties.characteristics[index]);
+            var valAux;
+            for (var idx in listCharSelected){
+                
+            }
+        }
+        
         for (var idx in listCharSelected){
             console.log(listCharSelected[idx], "compara"); 
             var comparaEntry = {_id: listCharSelected[idx]._id,
