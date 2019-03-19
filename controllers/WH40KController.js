@@ -1,13 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//TODO: Revisar como poner los tanques y las escuadras.
-//<entryLinks>
-//<sharedSelectionEntries> -> 
 app.controller('WH40KController', function($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, wh40KBaseSvc) {
     $scope.properties = properties;
+    console.log("init", "WH40KController");
+    var promisedSvc = wh40KBaseSvc.loadAllCodex();
+    $scope.codexList = {'status' : "LOADING"};
+    promisedSvc.then(function(result) {
+        userDetails = result;
+        console.log("Ready All codex", "Result promise")
+        $scope.codexList.status = "READY";
+        //console.log(result);
+	if(!$rootScope.$$phase) {
+            $rootScope.$digest();
+	}            
+    }, errHandler);
     
+  
     
 });

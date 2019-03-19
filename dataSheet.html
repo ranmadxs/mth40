@@ -32,15 +32,27 @@
         <script src="modules/appWH40K.js"></script>
         <script src="factories/WH40KFactory.js"></script>        
         <script src="services/WH40KBaseSvc.js"></script>
-        <script src="controllers/WH40KController.js"></script>
+        <script src="controllers/DataSheetController.js"></script>
         <link href="style/main.css" rel="stylesheet">
     </head>
-    <body ng-controller="WH40KController">
+    <body ng-controller="DataSheetController">
         <div>TODO write content</div>
         <br/>
         version ::  {{properties.version}}
-        
+
         {{codexList.status}}
-        <br/>
+        <br/><br/>
+        <form name="formWH40K">
+            <select name="selectedCodex" id="selectedCodex" ng-model="data.selectedCodex">
+                <option value="none">[Seleccione Codex]</option>
+                <option value="Orks">Orks</option>
+                <option value="Mechanicus">Mechanicus</option>
+            </select>        
+            <input type="text" name="input" ng-model="example.text" ng-pattern="example.word" required ng-trim="false"><br/>
+            <button ng-click="eraseOption()">Borrar</button>
+            <button ng-click="searchOption()">Buscar</button><br/>
+            <tt>singleSelect = {{data.selectedCodex}}</tt>      
+            <br/>            
+        </form>        
     </body>
 </html>

@@ -1,5 +1,29 @@
-app.service("wh40KBaseSvc", function(properties){  
+app.service("wh40KBaseSvc", function(properties, wh40KFactory){  
     console.log("init", "wh40KBaseSvc");
+    var loadOrks = wh40KFactory.loadCodex("Orks", 'resources/xml_db/8th/eng/Orks.cat', "catalogue");
+    var loadMechanicus = wh40KFactory.loadCodex("Mechanicus", 'resources/xml_db/8th/eng/Imperium_-_Adeptus_Mechanicus.cat', "catalogue");
+    var loadWH40K = wh40KFactory.loadCodex("WH40K", 'resources/xml_db/8th/eng/Warhammer_40,000_8th_Edition.cat', "gameSystem");
+ 
+    var listCodex = {};
+
+    this.loadAllCodex = function (){
+        return new Promise(function(resolve, reject) {
+            Promise.all([loadWH40K, loadOrks, loadMechanicus]).then(values => { 
+                values.forEach(function(e){
+                    listCodex[e.name] = e.catalogue;
+                });
+                resolve("OK");
+                console.log(listCodex, "loadAllCodex");
+            }, errHandler);                           
+        });
+        
+        return  [];
+    };
+
+    this.findUnit = function ($value) {
+        
+    };
+    
     var parser = new DOMParser();
     var x = new XMLHttpRequest();
     //x.open("GET", "http://localhost/simulation-web/mth40/resources/xml_db/8th/eng/Orks.cat", true);
