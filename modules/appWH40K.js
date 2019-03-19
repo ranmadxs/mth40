@@ -36,11 +36,17 @@ app.factory('requestUtil', function($location, $http) {
     };
 });
 
+var errHandler = function(err) {
+    console.log(err);
+}
+
 app.run(['editableOptions', 'wh40KFactory', function(editableOptions, wh40KFactory) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-    wh40KFactory.load();
+    var load40KPromised = wh40KFactory.load();
     var orksCodex = wh40KFactory.getCodex("Orks");
     console.log(orksCodex);
+    var dataPromise = wh40KFactory.getData("Orks");
+
     /*
      * orksCodex.each(function(e){
         console.log(this);
