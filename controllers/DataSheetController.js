@@ -4,7 +4,9 @@ app.controller('DataSheetController', function ($http, $scope, $filter, $locatio
     var promisedSvc = wh40KBaseSvc.loadAllCodex();
     $scope.codexList = {'status': "LOADING"};
     $scope.data = {
-        selectedCodex: "none"
+        selectedCodex: "Orks",
+        findUnit: "boy",
+        dataFind : []
     }
     promisedSvc.then(function (result) {
         userDetails = result;
@@ -19,4 +21,10 @@ app.controller('DataSheetController', function ($http, $scope, $filter, $locatio
     $scope.eraseOption = function() {
         $scope.data.selectedCodex = 'none';
     };  
+    
+    $scope.findUnit = function () {
+        console.log($scope.data.findUnit, "findUnit");
+        $scope.data.dataFind = wh40KBaseSvc.findUnit($scope.data.selectedCodex, $scope.data.findUnit);
+        
+    };    
 });

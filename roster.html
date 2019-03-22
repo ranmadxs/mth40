@@ -31,30 +31,23 @@
         <script src="config/config.properties"></script>
         <script src="modules/appWH40K.js"></script>
         <script src="factories/WH40KFactory.js"></script>        
-        <script src="services/WH40KBaseSvc.js"></script>
-        <script src="controllers/DataSheetController.js"></script>
+        <script src="services/RosterSvc.js"></script>
+        <script src="controllers/RosterController.js"></script>
         <link href="style/main.css" rel="stylesheet">
     </head>
-    <body ng-controller="DataSheetController">
+    <body ng-controller="RosterController">
         <div>TODO write content</div>
         <br/>
         version ::  {{properties.version}}
 
-        {{codexList.status}}
+        {{data.roster.status}}
         <br/><br/>
-        <form name="formWH40K">
-            <select name="selectedCodex" id="selectedCodex" ng-model="data.selectedCodex">
-                <option value="none">[Seleccione Codex]</option>
-                <option value="Orks">Orks</option>
-                <option value="Mechanicus">Mechanicus</option>
-            </select>        
-            <input type="text" name="input" ng-model="data.findUnit" required ng-trim="false"><br/>
-            <button ng-click="eraseOption()">Borrar</button>
-            <button ng-click="findUnit()">Buscar</button><br/>
-            <tt>singleSelect = {{data.selectedCodex}}</tt>      
+        <form name="formWH40K">      
+            <input type="text" name="input" ng-model="data.roster.file" required ng-trim="false" size="90px"><br/>
+            <button ng-click="analizar()">Analizar</button><br/> 
             <br/>  
             <pre>
-              {{data.dataFind | json}}
+              {{data.analisis | json}}
             </pre>            
         </form>        
     </body>
