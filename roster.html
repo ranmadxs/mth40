@@ -43,11 +43,13 @@
         {{data.roster.status}}
         <br/><br/>
         <form name="formWH40K">      
-            <input type="text" name="input" ng-model="data.roster.file" required ng-trim="false" size="90px"><br/>
+            <input type="text" name="input" ng-model="data.roster.file" required ng-trim="false" size="90px">
+            <input type="text" name="input" ng-model="data.roster.file" required ng-trim="false" size="90px">
+            <br/>
             <button ng-click="analizar()">Analizar</button><br/> 
             <br/>  
             <pre>
-              {{data.analisis | json}}
+              {{data.roster | json}}
             </pre>            
         </form>        
     </body>

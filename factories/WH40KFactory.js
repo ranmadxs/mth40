@@ -16,7 +16,7 @@ app.factory('wh40KFactory', function($location, $http, properties) {
                         //var strFind = "selectionEntry[type='unit']";
                         //var sharedSelectionEntries = jQuery(gameSystemDoc).find("catalogue sharedSelectionEntries");
                         //var codexAux = jQuery(sharedSelectionEntries).find(strFind);
-                        //console.log("promised3", "wh40KFactory::loadCodex");
+                        console.log("promised3", "wh40KFactory::loadCodex");
                         var codex = {"name" : $codexName, "catalogue" : catalogue};
                         resolve(codex);
     //                    jQuery(sharedSelectionEntries).find(strFind).each(function(x){

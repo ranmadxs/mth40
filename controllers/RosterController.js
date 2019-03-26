@@ -17,9 +17,12 @@ app.controller('RosterController', function ($http, $scope, $filter, $location, 
         console.debug("data.roster.file=" + $scope.data.roster.file);
         var promisedSvc = rosterSvc.init($scope.data.roster);
         promisedSvc.then(function (result) {
-            response = result;
-            console.log("Ready All roster load " + response, "Result promise");
+            var response = result;
+            console.info("Ready All roster load ", "Result promise");
+            console.debug(response, "analizar")
             $scope.data.roster.status = "READY";
+            var rosterAux = jQuery.extend({}, $scope.data.roster, response);
+            $scope.data.roster = rosterAux;
             //console.log(result);w
             if (!$rootScope.$$phase) {
                 $rootScope.$digest();
