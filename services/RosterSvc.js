@@ -60,11 +60,32 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
         }
         if ($value.includes("\+")) {
             ret = $normal + 2;
-        }        
+        }
         return ret;
     };
 
-    getUnitMelee = function (model, charXML) {
+    getImpact = function ($model, $weapon, $enemy) {
+        var ws = $model.characteristics.WS.replace("+", "");
+        var prob = getDiceProb(ws);
+        var total = $model.number * $model.characteristics.A;
+        var impact = {
+            'probability': prob,
+            'average': prob * total / 100
+        };
+        return impact;
+    }
+
+    getWound = function ($model, $weapon, $enemy) {
+        var probWound = getProbWound($weapon.S, $enemy.s);
+        var wound = {
+            'probability': probWound,
+            'average': probWound * $weapon.impact.average / 100
+        }
+        return wound;
+    }
+
+
+    getUnitMelee = function (model, charXML, $enemy) {
         var ws = model.characteristics.WS.replace("+", "");
         var prob = getDiceProb(ws);
         var total = model.number * model.characteristics.A;
@@ -73,39 +94,33 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
             'probability': prob,
             'average': prob * total / 100
         };
-        var wound = {
-            'normal': {
-                'T4': {
-                    'probability': getProbWound(s, 4),
-                    'average': getProbWound(s, 4) * impact.average / 100
-                }
-            }
-        };
+        var weapons = [];
+        var weapon = {'name': 'normal', 'S': s};
+        weapon['impact'] = getImpact(model, weapon, $enemy);
+        weapon['wound'] = getWound(model, weapon, $enemy);
+        weapons.push(weapon);
         model.weapons.forEach(function (e) {
             //'probability': getProbWound(e.characteristics.S, 4),
             if (e.characteristics.Type === 'Melee') {
                 //console.debug(e.characteristics);
                 var strong = e.characteristics.S;
                 strong = getAmplifierFunction(s, strong);
-                //console.info(strong, e.name);
-                wound[e.name] = {
-                    'T4': {
-                        'probability': getProbWound(strong, 4),
-                        'average': getProbWound(strong, 4) * impact.average / 100
-                    }
-                }
+                var weapon = {'name': e.name, 'S': strong};
+                weapon['impact'] = getImpact(model, weapon, $enemy);
+                weapon['wound'] = getWound(model, weapon, $enemy);
+                weapons.push(weapon);
+
             }
         });
         var statistics = {
             'total': total,
-            'impact': impact,
-            'wound': wound
+            'weapons': weapons,
         };
         var melee = {'statistics': statistics};
         return melee;
     };
 
-    getChars = function ($charXML) {
+    getChars = function ($charXML, $enemy) {
         //console.debug($charXML);
         var charJson = {};
         var characteristicsObj = jQuery($charXML).find("selection profiles profile[profileTypeName='Unit'] characteristics");
@@ -119,18 +134,18 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
             'characteristics': charJson,
             'weapons': weapons
         };
-        model.melee = getUnitMelee(model, $charXML);
+        model.melee = getUnitMelee(model, $charXML, $enemy);
         return model;
     };
 
-    getForceUnits = function ($forceXML) {
+    getForceUnits = function ($forceXML, $enemy) {
         var units = [];
         jQuery($forceXML).find("force selections selection[type='unit']").each(function (x) {
             var models = [];
             var selectObj = jQuery(this).find("selection selection[type='model']");
             if (jQuery(selectObj).children().length > 0) {
                 jQuery(selectObj).each(function (y) {
-                    models.push(getChars(this));
+                    models.push(getChars(this, $enemy));
                 });
             } else {
                 /*
@@ -143,7 +158,7 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
                  model.totals = {'melee': model.number * model.characteristics.A};
                  models.push(model);
                  */
-                models.push(getChars(this));
+                models.push(getChars(this, $enemy));
             }
 
 
@@ -170,9 +185,10 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
                         //console.debug(x, "init");
                         //console.debug(this, "init");
                         //var forceName = jQuery(characteristicsObj).find("characteristics characteristic[name='M']").attr("value");
+
                         var force = {
                             'name': jQuery(this).attr("name"),
-                            'units': getForceUnits(this)
+                            'units': getForceUnits(this, rosterVO.enemy)
                         };
                         forces.push(force);
                     });

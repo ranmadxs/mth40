@@ -2,16 +2,22 @@ app.controller('RosterController', function ($http, $scope, $filter, $location, 
     $scope.properties = properties;
     console.info("init", "RosterController");
 
+    var enemy = {
+        's': 4
+    };
+
     var rosterVO = {
         'status': 'LOADING',
         'codex': 'Orks',
         'name': 'Tipejoz Machaconez',
-        'file': 'resources/xml_db/8th/roster/Tipejoz_Machaconez_orks.ros'
+        'file': 'resources/xml_db/8th/roster/Tipejoz_Machaconez_orks.ros',
+        'enemy': enemy
     };
 
     $scope.data = {
         'roster': rosterVO,
-    }
+        'enemy' : enemy
+    };
 
     $scope.analizar = function () {
         console.debug("data.roster.file=" + $scope.data.roster.file);
