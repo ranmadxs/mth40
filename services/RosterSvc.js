@@ -1,4 +1,4 @@
-app.service("rosterSvc", function (properties, wh40KFactory) {
+app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
     console.log("init", "rosterSvc");
 
 
@@ -14,11 +14,17 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
     };
 
     getDiceProb = function ($dice) {
+        if($dice <= 2){
+            $dice = 2;
+        }
+        if($dice >= 6){
+            $dice = 6;
+        }
         return 100 * (7 - $dice) / 6;
     }
 
     getProbWound = function ($strong, $taunt) {
-        if (Number($strong) === $taunt) {
+        if (Number($strong) == $taunt) {
             return getDiceProb(4);
         }
         if (Number($strong) >= 2 * $taunt) {
@@ -54,19 +60,27 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
     };
 
     getAmplifierFunction = function ($normal, $value) {
-        var ret = $value;
-        if ($value.includes("x") || $value.includes("X")) {
-            ret = $normal * 2;
+        var ret = Number($value);
+        var factor = 1;
+        if ($value.includes("x") || $value.includes("X")) {            
+            factor = $value.replace("x", "").replace("X", "");
+            ret = Number($normal) * Number(factor);
         }
         if ($value.includes("\+")) {
-            ret = $normal + 2;
+            
+            factor = $value.replace("+", "");
+            ret = Number($normal) + Number(factor);
+            //console.info($normal + "+" + factor + "="+ret);
         }
         return ret;
     };
 
     getImpact = function ($model, $weapon, $enemy) {
-        var ws = $model.characteristics.WS.replace("+", "");
-        var prob = getDiceProb(ws);
+        var ws = Number($model.characteristics.WS.replace("+", ""));
+        var modifi = Number(ruleSvc.getModifierHit($weapon));
+        var diceTotal = ws + modifi;
+        //console.info(ws + " + " + modifi + "= " + diceTotal, $weapon.name);
+        var prob = getDiceProb(diceTotal);
         var total = $model.number * $model.characteristics.A;
         var impact = {
             'probability': prob,
@@ -77,23 +91,27 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
 
     getWound = function ($model, $weapon, $enemy) {
         var probWound = getProbWound($weapon.S, $enemy.s);
+        var isReroll = ruleSvc.isRerollWound($weapon);
         var wound = {
             'probability': probWound,
-            'average': probWound * $weapon.impact.average / 100
+            'average': probWound * $weapon.impact.average / 100,
+            'reroll' : isReroll
         }
+        var failed= $weapon.impact.average - wound.average;
+        if(isReroll){
+            var reroll = probWound * failed / 100;      
+            //console.log($weapon.impact.average + " - " + wound.average + " = " + failed + " reroll=" + reroll, $weapon.name);
+            wound.average = reroll + wound.average;
+        }
+        
         return wound;
     }
 
 
     getUnitMelee = function (model, charXML, $enemy) {
         var ws = model.characteristics.WS.replace("+", "");
-        var prob = getDiceProb(ws);
         var total = model.number * model.characteristics.A;
         var s = model.characteristics.S;
-        var impact = {
-            'probability': prob,
-            'average': prob * total / 100
-        };
         var weapons = [];
         var weapon = {'name': 'normal', 'S': s};
         weapon['impact'] = getImpact(model, weapon, $enemy);
@@ -102,10 +120,15 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
         model.weapons.forEach(function (e) {
             //'probability': getProbWound(e.characteristics.S, 4),
             if (e.characteristics.Type === 'Melee') {
-                //console.debug(e.characteristics);
+                if(e.name == "'Urty Syringe"){
+                    console.debug(e.characteristics);
+                }
                 var strong = e.characteristics.S;
+                if(strong.toUpperCase() == "USER"){
+                    strong = s;
+                }
                 strong = getAmplifierFunction(s, strong);
-                var weapon = {'name': e.name, 'S': strong};
+                var weapon = {'name': e.name, 'S': strong, 'abilities' : e.characteristics.Abilities};
                 weapon['impact'] = getImpact(model, weapon, $enemy);
                 weapon['wound'] = getWound(model, weapon, $enemy);
                 weapons.push(weapon);
@@ -113,7 +136,8 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
             }
         });
         var statistics = {
-            'total': total,
+            'units': model.number,
+            'attacks' : model.characteristics.A,
             'weapons': weapons,
         };
         var melee = {'statistics': statistics};
@@ -197,7 +221,6 @@ app.service("rosterSvc", function (properties, wh40KFactory) {
 
                 roster.costs = getRosterCost(rosterXML);
                 resolve(roster);
-                console.log("XD", "loadAllCodex");
 
             }, errHandler);
         });
