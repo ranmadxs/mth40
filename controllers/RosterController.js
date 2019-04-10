@@ -3,7 +3,8 @@ app.controller('RosterController', function ($http, $scope, $filter, $location, 
     console.info("init", "RosterController");
 
     var enemy = {
-        's': 4
+        'T': 4,
+        'Save' : '3+'
     };
 
     var rosterVO = {

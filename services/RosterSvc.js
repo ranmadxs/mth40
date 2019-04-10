@@ -13,6 +13,16 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         return costs;
     };
 
+    getSaveProb = function ($dice) {
+        if($dice <= 2){
+            $dice = 2;
+        }
+        if($dice > 6){
+            return 0;
+        }
+        return 100 * (7 - $dice) / 6;
+    };
+
     getDiceProb = function ($dice) {
         if($dice <= 2){
             $dice = 2;
@@ -21,7 +31,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
             $dice = 6;
         }
         return 100 * (7 - $dice) / 6;
-    }
+    };
 
     getProbWound = function ($strong, $taunt) {
         if (Number($strong) == $taunt) {
@@ -80,12 +90,13 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         var modifi = Number(ruleSvc.getModifierHit($weapon));
         var diceTotal = ws + modifi;
         //console.info(ws + " + " + modifi + "= " + diceTotal, $weapon.name);
-        var prob = getDiceProb(diceTotal);        
-        var aditionalHitRoll = ruleSvc.getAditionalMeleeHitRoll($model, $force);
+        var prob = getDiceProb(diceTotal);    
+        var attacks = ruleSvc.getWeaponAttacks($model, $weapon);
+        var aditionalHitRoll = ruleSvc.getAditionalMeleeHitRoll(attacks, $force, $weapon);
         var impact = {};
         impact['aditionalHitRoll'] = aditionalHitRoll * $model.number;
         //impact['aditionalHitRoll'] = 0;
-        impact['hitRoll'] = $model.number * $model.characteristics.A;
+        impact['hitRoll'] = $model.number * attacks;
         var total = impact['totalHitRoll'] = impact['hitRoll'] + impact['aditionalHitRoll'];
         impact['probability'] = prob;
         impact['average'] = prob * total / 100;
@@ -94,7 +105,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
     };
 
     getWound = function ($model, $weapon, $enemy) {
-        var probWound = getProbWound($weapon.S, $enemy.s);
+        var probWound = getProbWound($weapon.S, $enemy.T);
         var isReroll = ruleSvc.isRerollWound($weapon);
         var wound = {
             'probability': probWound,
@@ -109,17 +120,31 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         }
         
         return wound;
-    }
+    };
 
+    getDamage = function ($model, $weapon, $enemy){
+        var save = Number($enemy.Save.replace("+", "")) - Number($weapon.AP);
+        //console.info(save, $weapon.name);
+        var salvations = $weapon.wound.average * getSaveProb(save) / 100;
+        //console.info($weapon.wound.average, getSaveProb(save));
+        var salvation = {
+            'wound' : $weapon.wound.average - salvations
+        };
+        var weaponDamage = ruleSvc.getWeaponDamage($weapon);
+        salvation['damage'] = weaponDamage;
+        salvation['average'] =  weaponDamage * salvation['wound'];
+        return salvation;
+    };
 
     getUnitMelee = function (model, charXML, $enemy, $force) {
         var ws = model.characteristics.WS.replace("+", "");
         var total = model.number * model.characteristics.A;
         var s = model.characteristics.S;
         var weapons = [];
-        var weapon = {'name': 'normal', 'S': s};
+        var weapon = {'name': 'normal', 'S': s, 'D' : 1, 'AP' : 0};
         weapon['impact'] = getImpact(model, weapon, $enemy, $force);
         weapon['wound'] = getWound(model, weapon, $enemy);
+        weapon['save'] = getDamage(model, weapon, $enemy);
         weapons.push(weapon);
         model.weapons.forEach(function (e) {
             //'probability': getProbWound(e.characteristics.S, 4),
@@ -132,9 +157,14 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
                     strong = s;
                 }
                 strong = getAmplifierFunction(s, strong);
-                var weapon = {'name': e.name, 'S': strong, 'abilities' : e.characteristics.Abilities};
+                var weapon = {'name': e.name, 'S': strong, 
+                    'abilities' : e.characteristics.Abilities,
+                    'D' : e.characteristics.D,
+                    'AP' : e.characteristics.AP
+                };
                 weapon['impact'] = getImpact(model, weapon, $enemy, $force);
                 weapon['wound'] = getWound(model, weapon, $enemy);
+                weapon['save'] = getDamage(model, weapon, $enemy);
                 weapons.push(weapon);
 
             }
