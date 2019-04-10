@@ -75,19 +75,23 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         return ret;
     };
 
-    getImpact = function ($model, $weapon, $enemy) {
+    getImpact = function ($model, $weapon, $enemy, $force) {
         var ws = Number($model.characteristics.WS.replace("+", ""));
         var modifi = Number(ruleSvc.getModifierHit($weapon));
         var diceTotal = ws + modifi;
         //console.info(ws + " + " + modifi + "= " + diceTotal, $weapon.name);
-        var prob = getDiceProb(diceTotal);
-        var total = $model.number * $model.characteristics.A;
-        var impact = {
-            'probability': prob,
-            'average': prob * total / 100
-        };
+        var prob = getDiceProb(diceTotal);        
+        var aditionalHitRoll = ruleSvc.getAditionalMeleeHitRoll($model, $force);
+        var impact = {};
+        impact['aditionalHitRoll'] = aditionalHitRoll * $model.number;
+        //impact['aditionalHitRoll'] = 0;
+        impact['hitRoll'] = $model.number * $model.characteristics.A;
+        var total = impact['totalHitRoll'] = impact['hitRoll'] + impact['aditionalHitRoll'];
+        impact['probability'] = prob;
+        impact['average'] = prob * total / 100;
+
         return impact;
-    }
+    };
 
     getWound = function ($model, $weapon, $enemy) {
         var probWound = getProbWound($weapon.S, $enemy.s);
@@ -108,13 +112,13 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
     }
 
 
-    getUnitMelee = function (model, charXML, $enemy) {
+    getUnitMelee = function (model, charXML, $enemy, $force) {
         var ws = model.characteristics.WS.replace("+", "");
         var total = model.number * model.characteristics.A;
         var s = model.characteristics.S;
         var weapons = [];
         var weapon = {'name': 'normal', 'S': s};
-        weapon['impact'] = getImpact(model, weapon, $enemy);
+        weapon['impact'] = getImpact(model, weapon, $enemy, $force);
         weapon['wound'] = getWound(model, weapon, $enemy);
         weapons.push(weapon);
         model.weapons.forEach(function (e) {
@@ -129,7 +133,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
                 }
                 strong = getAmplifierFunction(s, strong);
                 var weapon = {'name': e.name, 'S': strong, 'abilities' : e.characteristics.Abilities};
-                weapon['impact'] = getImpact(model, weapon, $enemy);
+                weapon['impact'] = getImpact(model, weapon, $enemy, $force);
                 weapon['wound'] = getWound(model, weapon, $enemy);
                 weapons.push(weapon);
 
@@ -144,7 +148,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         return melee;
     };
 
-    getChars = function ($charXML, $enemy) {
+    getChars = function ($charXML, $enemy, $force) {
         //console.debug($charXML);
         var charJson = {};
         var characteristicsObj = jQuery($charXML).find("selection profiles profile[profileTypeName='Unit'] characteristics");
@@ -158,31 +162,33 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
             'characteristics': charJson,
             'weapons': weapons
         };
-        model.melee = getUnitMelee(model, $charXML, $enemy);
+        model.melee = getUnitMelee(model, $charXML, $enemy, $force);
         return model;
     };
 
-    getForceUnits = function ($forceXML, $enemy) {
+    getUpgrades = function($forceXML) {
+        var upgrades = [];
+        jQuery($forceXML).find("force selections selection[type='upgrade'] selections selection[type='upgrade'] profiles profile[profileTypeName='Abilities']").each(function (x) {
+            //console.log(jQuery(this).attr("name"), jQuery(this).attr("id"));
+            var selectObj = jQuery(this).find("profile characteristics characteristic");
+            var upgrade = {'name' : jQuery(this).attr("name"), 'description' : selectObj.attr("value")};
+            //console.info(selectObj.attr("value"));
+            upgrades.push(upgrade);
+        });
+        return upgrades;
+    };
+
+    getForceUnits = function ($forceXML, $enemy, $force) {
         var units = [];
         jQuery($forceXML).find("force selections selection[type='unit']").each(function (x) {
             var models = [];
-            var selectObj = jQuery(this).find("selection selection[type='model']");
+            var selectObj = jQuery(this).find("selections selection[type='model']");
             if (jQuery(selectObj).children().length > 0) {
                 jQuery(selectObj).each(function (y) {
-                    models.push(getChars(this, $enemy));
+                    models.push(getChars(this, $enemy, $force));
                 });
             } else {
-                /*
-                 var characteristicsObj = jQuery(this).find("selection profiles profile[profileTypeName='Unit'] characteristics");
-                 var model = {
-                 'name': jQuery(this).attr('name'),
-                 'number': jQuery(this).attr('number'),
-                 'characteristics': getChars(characteristicsObj),
-                 };
-                 model.totals = {'melee': model.number * model.characteristics.A};
-                 models.push(model);
-                 */
-                models.push(getChars(this, $enemy));
+                models.push(getChars(this, $enemy, $force));
             }
 
 
@@ -212,8 +218,9 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
 
                         var force = {
                             'name': jQuery(this).attr("name"),
-                            'units': getForceUnits(this, rosterVO.enemy)
+                            'upgrades' : getUpgrades(this)
                         };
+                        force["units"] = getForceUnits(this, rosterVO.enemy, force);
                         forces.push(force);
                     });
                     roster.forces = forces;
