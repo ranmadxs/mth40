@@ -36,7 +36,7 @@
         <script src="controllers/RosterController.js"></script>
         <link href="style/main.css" rel="stylesheet">
     </head>
-    <body ng-controller="RosterController" class="battlescribe">
+    <body ng-controller="RosterController">
         <div>TODO write content</div>
         <br/>
         version ::  {{properties.version}}
@@ -52,10 +52,10 @@
             </fieldset>
             <br/>
             <button ng-click="analizar()">Analizar</button><br/> 
-            <br/> 
-            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status=='READY'"></div>   
-            <div ng-include="'pages/roster/json.html'"></div>   
-                              
+            <br/>  
+            <pre>
+              {{data.roster| json}}
+            </pre>            
         </form>        
     </body>
 </html>

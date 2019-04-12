@@ -1,0 +1,25 @@
+<table cellspacing="-1" width="400px" class="tableUnit">
+    <tbody>
+        <tr>
+            <th>Unit</th>            
+            <th ng-repeat="chr in properties.characteristics"><b>{{chr.name}}</b></th>
+        </tr>
+        <tr>
+            <td class="profile-name">{{model.name}}</td>
+            <td ng-repeat="chr in properties.characteristics">{{getCharacteristic(model, chr.name)}}</td>
+        </tr>
+    </tbody>    
+</table>
+
+<table cellspacing="-1" class="tableWeapon">
+    <tbody>
+        <tr>
+            <th>Weapon</th>
+            <th ng-repeat="chr in properties.weapon_chars">{{chr.name}}</th>
+        </tr>
+        <tr ng-repeat="weapon in model.weapons">
+            <td class="profile-name">{{weapon.name}}</td>
+            <td ng-repeat="chr in properties.weapon_chars">{{getWeaponCharacteristics(weapon, chr.name)}}</td>
+        </tr>
+    </tbody>
+</table>

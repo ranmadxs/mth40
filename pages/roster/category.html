@@ -1,0 +1,8 @@
+<h3>
+    {{category}}
+</h3>
+<ul>
+    <li ng-repeat="unit in force.units" ng-if="unit.categories.main === category"  class="rootselection" ng-include="'pages/roster/unit.html'"></li>
+</ul>    
+
+<hr/>

@@ -1,0 +1,9 @@
+<h4>
+    {{unit.name}}
+</h4>
+
+<div ng-repeat="model in unit.models" ng-include="'pages/roster/model.html'"></div>
+
+<pre>
+        {{unit.models | json}}
+</pre>

@@ -4,7 +4,7 @@ app.controller('RosterController', function ($http, $scope, $filter, $location, 
 
     var enemy = {
         'T': 4,
-        'Save' : '3+'
+        'Save': '3+'
     };
 
     var rosterVO = {
@@ -17,7 +17,16 @@ app.controller('RosterController', function ($http, $scope, $filter, $location, 
 
     $scope.data = {
         'roster': rosterVO,
-        'enemy' : enemy
+        'enemy': enemy,
+        'categories': ["Fast Attack"]
+    };
+
+    $scope.getCharacteristic = function ($model, $charName) {
+        return $model.characteristics[$charName];
+    };
+
+    $scope.getWeaponCharacteristics = function ($weapon, $charName) {
+        return $weapon.characteristics[$charName];
     };
 
     $scope.analizar = function () {

@@ -1,26 +1,206 @@
-#parent_div_1, #parent_div_2, #parent_div_3{
-    width:1324px;
-    height:600px;
-    border:1px solid red;
-    margin:10px;
-    float:left;
+body.battlescribe {
+    margin: 0px;
+    padding: 0px;
+    border-width: 0px;
 }
-.child_div_1{
-    float:left;
-    margin:5px;
-    width:45%;
-    border: 1px solid blue;
+
+div.battlescribe {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    border-width: 0px;
+
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #444444;
+    text-align: left;
 }
-.child_div_2{
-    float:left;
-    margin:5px;
-    width:45%;
-    border: 1px solid blue;
+
+div.battlescribe h1,
+div.battlescribe h2,
+div.battlescribe h3,
+div.battlescribe h4 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 0px;
 }
-.child_div_3{
-    float:right;
-    margin-right:5px;
-    margin-top:5px;
-    width:8%;
-    border: 1px solid green;
+
+div.battlescribe h1 {
+    margin: 8px 0px 0px 0px;
+
+    font-size: 16px;
+}
+
+div.battlescribe h2 {
+    font-size: 15px;
+}
+
+div.battlescribe h3 {
+    font-size: 14px;
+}
+
+div.battlescribe h4 {
+    font-size: 13px;
+}
+
+div.battlescribe div.summary {
+    margin: 16px 0px 0px 0px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+div.battlescribe ul {
+    margin: 0px 0px 0px 16px;
+    padding: 0px;
+    border-width: 0px;
+
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+
+div.battlescribe li {
+    margin: 8px 0px 0px 0px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+div.battlescribe li.force {
+    margin: 24px 0px 0px 0px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+div.battlescribe li.category {
+    margin: 16px 0px 0px 0px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+div.battlescribe li.rootselection {
+    margin: 16px 0px 0px 0px;
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #BBBBBB;
+
+    page-break-inside: avoid;
+}
+
+div.battlescribe p {
+    margin: 4px 0px 0px 16px;
+    padding: 0px;
+    border-width: 0px;
+
+    font-size: 12px;
+}
+
+div.battlescribe p.category-names {
+}
+
+div.battlescribe p.rule-names {
+}
+
+div.battlescribe p.profile-names {
+}
+
+.tableUnit th {
+  background-color: #5E3E3E;
+  color: white;
+}
+
+.tableWeapon tr:nth-child(even){background-color: #f2f2f2}
+
+.tableWeapon th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+div.battlescribe table {
+    margin: 8px 0px 0px 16px;
+    padding: 0px;
+    border-collapse: collapse;
+
+    font-size: 12px;
+    color: #444444;
+
+    page-break-inside: avoid;
+}
+
+div.battlescribe tr {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #BBBBBB;
+}
+
+div.battlescribe th {
+    padding: 4px;
+    margin: 0px;
+    border-width: 0px;
+
+    font-weight: bold;
+    text-align: left;
+}
+
+div.battlescribe td {
+    padding: 4px;
+    margin: 0px;
+    border-width: 0px;
+
+    text-align: left;
+}
+
+div.battlescribe td.profile-name {
+    font-weight: bold;
+}
+
+div.battlescribe td.statistic-name {
+    font-weight: bold;
+}
+
+div.battlescribe table.statistics {
+}
+
+div.battlescribe table.statistics tr.subtotal {
+    font-weight: bold;
+}
+
+div.battlescribe table.statistics tr.total {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+div.battlescribe table.statistics th {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #BBBBBB;
+
+    font-size: 13px;
+    text-align: right;
+}
+
+div.battlescribe table.statistics th.center {
+    text-align: center;
+}
+
+div.battlescribe table.statistics td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #BBBBBB;
+
+    text-align: right;
+}
+
+div.battlescribe span.bold {
+    font-weight: bold;
+}
+
+div.battlescribe span.italic {
+    font-style: italic;
+}
+
+div.battlescribe span.caps {
+    font-variant: small-caps;
 }
