@@ -27,6 +27,10 @@ div.battlescribe h4 {
     border-width: 0px;
 }
 
+div.battlescribe h5 {
+    color: #00334d;
+}
+
 div.battlescribe h1 {
     margin: 8px 0px 0px 0px;
 
@@ -106,16 +110,25 @@ div.battlescribe p.rule-names {
 div.battlescribe p.profile-names {
 }
 
+
+
 .tableUnit th {
   background-color: #5E3E3E;
   color: white;
 }
 
-.tableWeapon tr:nth-child(even){background-color: #f2f2f2}
+.tableWeapon tr:nth-child(even){background-color: #d9f2e6}
 
 .tableWeapon th {
   background-color: #4CAF50;
   color: white;
+}
+
+.tableStatistics tr:nth-child(even){background-color: white}
+
+.tableStatistics th {
+  background-color: #d9f2e6;
+  color: black;
 }
 
 div.battlescribe table {

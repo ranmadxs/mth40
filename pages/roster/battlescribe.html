@@ -3,7 +3,7 @@
     <li class="force" ng-repeat="force in data.roster.forces">
         <h2>{{force.name}}</h2>
         <ul>
-            <li ng-repeat="category in data.categories" class="category" ng-include="'pages/roster/category.html'"></li>
+            <li ng-repeat="category in data.categories" class="category" ng-include="url.category"></li>
         </ul> 
     </li>
 </ul>

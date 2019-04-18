@@ -103,9 +103,14 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         return impact;
     };
 
-    getWound = function ($model, $weapon, $enemy) {
-        var probWound = getProbWound($weapon.S, $enemy.T);
+    getWound = function ($model, $weapon, $enemy) {        
         var isReroll = ruleSvc.isRerollWound($weapon);
+        var strong = $weapon.S;
+        if (strong.toUpperCase() == "USER") {
+            strong = $model.characteristics.S;
+        }
+        strong = getAmplifierFunction($model.characteristics.S, strong);
+        var probWound = getProbWound(strong, $enemy.T);
         var wound = {
             'probability': probWound,
             'average': probWound * $weapon.impact.average / 100,
@@ -114,7 +119,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         var failed = $weapon.impact.average - wound.average;
         if (isReroll) {
             var reroll = probWound * failed / 100;
-            //console.log($weapon.impact.average + " - " + wound.average + " = " + failed + " reroll=" + reroll, $weapon.name);
+            console.log(strong + " [s]" + $weapon.impact.average + " - " + wound.average + " = " + failed + " reroll=" + reroll, $weapon.name);
             wound.average = reroll + wound.average;
         }
 
@@ -124,10 +129,12 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
     getDamage = function ($model, $weapon, $enemy) {
         var save = Number($enemy.Save.replace("+", "")) - Number($weapon.AP);
         //console.info(save, $weapon.name);
-        var salvations = $weapon.wound.average * getSaveProb(save) / 100;
+        var probSave = getSaveProb(save);
+        var salvations = $weapon.wound.average * probSave / 100;
         //console.info($weapon.wound.average, getSaveProb(save));
         var salvation = {
-            'wound': $weapon.wound.average - salvations
+            'wound': $weapon.wound.average - salvations,
+            'probSave' : probSave
         };
         var weaponDamage = ruleSvc.getWeaponDamage($weapon);
         salvation['damage'] = weaponDamage;
@@ -140,7 +147,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         var total = model.number * model.characteristics.A;
         var s = model.characteristics.S;
         var weapons = [];
-        var weapon = {'name': 'normal', 'S': s, 'D': 1, 'AP': 0};
+        var weapon = {'name': 'normal', 'S': s, 'D': 1, 'AP': 0, 'Range': 'Melee', 'Type': 'Melee', 'Abilities': '-'};
         weapon['impact'] = getImpact(model, weapon, $enemy, $force);
         weapon['wound'] = getWound(model, weapon, $enemy);
         weapon['save'] = getDamage(model, weapon, $enemy);
@@ -148,16 +155,13 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         model.weapons.forEach(function (e) {
             //'probability': getProbWound(e.characteristics.S, 4),
             if (e.characteristics.Type === 'Melee') {
-                var strong = e.characteristics.S;
-                if (strong.toUpperCase() == "USER") {
-                    strong = s;
-                }
-                strong = getAmplifierFunction(s, strong);
-                var weapon = {'name': e.name, 'S': strong,
+                var weapon = {'name': e.name,
                     'abilities': e.characteristics.Abilities,
-                    'D': e.characteristics.D,
-                    'AP': e.characteristics.AP
                 };
+                properties.weapon_chars.forEach(function (char) {
+                    weapon[char.name] = e.characteristics[char.name];
+                });
+                //console.log(weapon, weapon.name);
                 weapon['impact'] = getImpact(model, weapon, $enemy, $force);
                 weapon['wound'] = getWound(model, weapon, $enemy);
                 weapon['save'] = getDamage(model, weapon, $enemy);
@@ -221,26 +225,31 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
             var categories = getCategories(this);
             if (jQuery(selectObj).children().length > 0) {
                 jQuery(selectObj).each(function (y) {
-                    character = getChars(this, $enemy, $force);                    
+                    character = getChars(this, $enemy, $force);
                     models.push(character);
                 });
             } else {
                 character = getChars(this, $enemy, $force);
                 models.push(character);
             }
-            
+
 
             var unit = {
                 'name': jQuery(this).attr('name'),
                 'models': models,
-                'categories' : categories
+                'categories': categories
             };
             units.push(unit);
         });
         return units;
     };
     this.init = function (rosterVO) {
-        loadRoster = wh40KFactory.loadCodex(rosterVO.codex, rosterVO.file, 'roster');
+        console.info(rosterVO, "init")
+        if(rosterVO.file != null){
+            loadRoster = wh40KFactory.loadCodexFromFile(rosterVO.file, 'roster');
+        }else{
+            loadRoster = wh40KFactory.loadCodexFromUrl(rosterVO.url, 'roster');
+        }
         var rosterXML;
         return new Promise(function (resolve, reject) {
             Promise.all([loadRoster]).then(values => {

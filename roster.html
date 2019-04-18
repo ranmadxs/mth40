@@ -43,8 +43,26 @@
 
         {{data.roster.status}}
         <br/><br/>
-        <form name="formWH40K">      
-            <input type="text" name="input" ng-model="data.roster.file" required ng-trim="false" size="90px">
+        <form name="formWH40K">  
+            <fieldset>
+                <legend>Roster Source</legend>
+                <input type="radio" ng-model="data.roster.rosterFormat" value="upload"> Upload
+                <input type="radio" ng-model="data.roster.rosterFormat" value="url"> URL
+                <br/>
+                <input type = "file" file-model = "rosterFile" ng-show="data.roster.rosterFormat == 'upload'" / >
+                <br/>
+                <div ng-show="data.roster.rosterFormat == 'upload'">
+                    <input type="checkbox" ng-model="data.help" ng-true-value="'YES'" ng-false-value="'NO'" ng-show="data.roster.rosterFormat == 'upload'" /> 
+                    Mostrar ayuda
+                </div>                
+                <div ng-show="data.help == 'YES'">
+                    <img src ="images/tutorial01.png" title="Units" />
+                    <img src ="images/tutorial02.png" title="Units" />
+                </div>       
+
+                <input type="text" name="input" ng-model="data.roster.url" required ng-trim="false" size="90px" ng-show="data.roster.rosterFormat == 'url'" />
+            </fieldset>
+
             <fieldset>
                 <legend>Enemy</legend>
                 T:<input type="text" name="input" ng-model="data.enemy.T" required ng-trim="false" size="10px">
@@ -53,9 +71,9 @@
             <br/>
             <button ng-click="analizar()">Analizar</button><br/> 
             <br/> 
-            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status=='READY'"></div>   
-            <div ng-include="'pages/roster/json.html'"></div>   
-                              
+            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY'"></div>   
+            <!--            <div ng-include="'pages/roster/json.html'"></div>   -->
+
         </form>        
     </body>
 </html>

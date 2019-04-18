@@ -1,4 +1,6 @@
-<table cellspacing="-1" width="400px" class="tableUnit">
+<h5><b>{{model.name}}</b> Melee Statistics</h5>
+
+<table cellspacing="-1" width="800px" class="tableUnit">
     <tbody>
         <tr>
             <th>Unit</th>            
@@ -11,15 +13,67 @@
     </tbody>    
 </table>
 
-<table cellspacing="-1" class="tableWeapon">
+<table cellspacing="-1" width="800px" style="vertical-align: middle;">
+    <tbody>
+        <tr>
+            <th>
+                <img src ="images/soldier.png" title="Units" height="20"/> X {{model.melee.statistics.units}} [Units]
+            </th>            
+            <th>
+                <img src ="images/axe.png" title="Attacks" height="20"/> X {{model.melee.statistics.attacks}} [Attacks]
+            </th>            
+        </tr>
+    </tbody>    
+</table>
+
+<table ng-repeat="weapon in model.melee.statistics.weapons" cellspacing="-1" class="tableWeapon" width="800px" border="1">
     <tbody>
         <tr>
             <th>Weapon</th>
             <th ng-repeat="chr in properties.weapon_chars">{{chr.name}}</th>
-        </tr>
-        <tr ng-repeat="weapon in model.weapons">
+        </tr>        
+        <tr>
             <td class="profile-name">{{weapon.name}}</td>
             <td ng-repeat="chr in properties.weapon_chars">{{getWeaponCharacteristics(weapon, chr.name)}}</td>
         </tr>
+        <tr>
+            <td colspan="7">
+                <table cellspacing="-1" class="tableStatistics" width="750px">
+                    <tr>
+                        <th></th>
+                        <th>Total Roll</th>
+                        <th>Probability</th>
+                        <th>Sucess</th>
+                    </tr>   
+                    <tr>
+                        <td>
+                            <img src ="images/reticle.png" title="Units" height="20"/> 
+                            Impact
+                        </td>                        
+                        <td>{{weapon.impact.totalHitRoll}}</td>
+                        <td>{{weapon.impact.probability}} %</td>
+                        <td>{{weapon.impact.average}} [Hit]</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src ="images/wound.png" title="Units" height="20"/> 
+                            Wound
+                        </td>                        
+                        <td>{{weapon.impact.average}}</td>
+                        <td>{{weapon.wound.probability}} %</td>
+                        <td>{{weapon.wound.average}} [Wound]</td>                        
+                    </tr>        
+                    <tr>
+                        <td>
+                            <img src ="images/save.jpg" title="Units" height="20"/> 
+                            Save
+                        </td>                        
+                        <td>{{weapon.wound.average}}</td>
+                        <td>{{weapon.save.probSave}} %</td>
+                        <td style="background-color:  #ffe6e6;"><b>{{weapon.save.average}}</b> [Damage]</td>                        
+                    </tr>                     
+                </table>                   
+            </td>
+        </tr>       
     </tbody>
 </table>
