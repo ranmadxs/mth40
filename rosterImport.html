@@ -2,7 +2,7 @@
 
 <html ng-app="WH40KApp">
     <head>
-        <title>WH40K</title>
+        <title>WH40K->ImportRoster</title>
         <meta charset="UTF-8">
         <!--        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
 
@@ -33,47 +33,33 @@
         <script src="factories/WH40KFactory.js"></script>        
         <script src="services/RuleSvc.js"></script>
         <script src="services/RosterSvc.js"></script>
-        <script src="controllers/RosterController.js"></script>
+        <script src="services/ChallongeSvc.js"></script>
+        <script src="controllers/RosterImportController.js"></script>
         <link href="style/main.css" rel="stylesheet">
     </head>
-    <body ng-controller="RosterController" class="battlescribe">
+    <body ng-controller="RosterImportController" class="battlescribe">
         <div>TODO write content</div>
         <br/>
         version ::  {{properties.version}}
 
         {{data.roster.status}}
-        <br/><br/>
+        <br/>
         <form name="formWH40K">  
             <fieldset>
-                <legend>Roster Source</legend>
-                <input type="radio" ng-model="data.roster.rosterFormat" value="upload"> Upload
-                <input type="radio" ng-model="data.roster.rosterFormat" value="url"> URL
+                <legend>Adjuntar Roster</legend>      
+                <input type = "file" file-model = "rosterFile" />
                 <br/>
-                <input type = "file" file-model = "rosterFile" ng-show="data.roster.rosterFormat == 'upload'" />
-                <br/>
-                <div ng-show="data.roster.rosterFormat == 'upload'">
-                    <input type="checkbox" ng-model="data.help" ng-true-value="'YES'" ng-false-value="'NO'" ng-show="data.roster.rosterFormat == 'upload'" /> 
+                <div>
+                    <input type="checkbox" ng-model="data.help" ng-true-value="'YES'" ng-false-value="'NO'" /> 
                     Mostrar ayuda
                 </div>                
                 <div ng-show="data.help == 'YES'">
                     <img src ="images/tutorial01.png" title="Units" />
                     <img src ="images/tutorial02.png" title="Units" />
-                </div>       
-
-                <input type="text" name="input" ng-model="data.roster.url" required ng-trim="false" size="90px" ng-show="data.roster.rosterFormat == 'url'" />
-            </fieldset>
-
-            <fieldset>
-                <legend>Enemy</legend>
-                T:<input type="text" name="input" ng-model="data.enemy.T" required ng-trim="false" size="10px">
-                Save: <input type="text" name="input" ng-model="data.enemy.Save" required ng-trim="false" size="10px">
-            </fieldset>
-            <br/>
-            <button ng-click="analizar()">Analizar</button><br/> 
-            <br/> 
-            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY'"></div>   
-            <!--            <div ng-include="'pages/roster/json.html'"></div>   -->
-
-        </form>        
+                </div>  
+            </fieldset>   
+            <button ng-click="subirRoster()">Subir Roster</button><br/> 
+            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY'"></div>               
+        </form>
     </body>
 </html>

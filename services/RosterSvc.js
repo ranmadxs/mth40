@@ -103,7 +103,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         return impact;
     };
 
-    getWound = function ($model, $weapon, $enemy) {        
+    getWound = function ($model, $weapon, $enemy) {
         var isReroll = ruleSvc.isRerollWound($weapon);
         var strong = $weapon.S;
         if (strong.toUpperCase() == "USER") {
@@ -134,7 +134,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         //console.info($weapon.wound.average, getSaveProb(save));
         var salvation = {
             'wound': $weapon.wound.average - salvations,
-            'probSave' : probSave
+            'probSave': probSave
         };
         var weaponDamage = ruleSvc.getWeaponDamage($weapon);
         salvation['damage'] = weaponDamage;
@@ -243,11 +243,77 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         });
         return units;
     };
+
+    listForceUnits = function ($forceXML) {
+        var units = [];
+
+        jQuery($forceXML).find("force selections selection").each(function (x) {
+            var category = jQuery(this).find("selection categories category[primary='true']");
+            var categoryPrimary = category.attr("primary");
+            if (categoryPrimary == "true") {
+                var categoryName = category.attr("name");
+                if (!categoryName.includes(properties.no_type)) {
+                    console.log("[" + categoryName + "] " + jQuery(this).attr("name"));
+                    console.log(this);
+
+                    var unit = {
+                        'name': jQuery(this).attr('name'),
+                        'categories': {
+                            'main': categoryName
+                        }
+                    };
+                    units.push(unit);
+                }
+            }
+
+        });
+        return units;
+    };
+
+
+    this.loadRosterFromFile = function (rosterVO) {
+        console.info("init->loadRosterFromFile");
+        loadRoster = wh40KFactory.loadCodexFromFile(rosterVO.file, 'roster');
+        var rosterXML;
+        var roster = rosterVO;
+        return new Promise(function (resolve, reject) {
+            Promise.all([loadRoster]).then(values => {
+
+                values.forEach(function (e) {
+                    rosterXML = e.catalogue;
+                    var rosterName = jQuery(rosterXML).find("roster");
+
+                    var forcesXML = jQuery(rosterXML).find("roster forces force");
+                    var rosterName = rosterXML.attr("name");
+                    //console.debug(rosterXML, "loadRosterFromFile");
+                    //console.debug(forcesXML, "loadRosterFromFile->forcesXML");
+                    var forces = [];
+                    jQuery(forcesXML).each(function (x) {
+                        var nameForce = jQuery(this).attr("name");
+                        //console.debug(nameForce, "loadRosterFromFile");
+                        var force = {
+                            'name': nameForce,
+                            'units': listForceUnits(forcesXML)
+                        };
+                        forces.push(force);
+                        roster.forces = forces;
+                    });
+                    roster.forces = forces;
+                    roster.name = rosterName;
+                });
+
+                resolve(roster);
+            }, errHandler);
+
+
+        });
+    };
+
     this.init = function (rosterVO) {
-        console.info(rosterVO, "init")
-        if(rosterVO.file != null){
+        console.info(rosterVO, "init");
+        if (rosterVO.file != null) {
             loadRoster = wh40KFactory.loadCodexFromFile(rosterVO.file, 'roster');
-        }else{
+        } else {
             loadRoster = wh40KFactory.loadCodexFromUrl(rosterVO.url, 'roster');
         }
         var rosterXML;
