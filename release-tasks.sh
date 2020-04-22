@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "[INFO] INIT Release-task"
 ls -la
-apt --version
+npm --version
 python --version
-#python copyFTP.py
+node --version
 pwd
 echo "[INFO] END RELEASE TASK"
