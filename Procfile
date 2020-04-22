@@ -1,3 +1,2 @@
-release: node --version
-release: ls -la
+release: ./release-tasks.sh
 web: node index.js
