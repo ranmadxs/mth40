@@ -1,7 +1,13 @@
-<h1>{{data.roster.name}}</h1>
+<h1>{{data.roster.name}} [{{data.roster.costs.PL}} PL, {{data.roster.costs.CP}} CP, {{data.roster.costs.pts}}pts]</h1>
+<div ng-show="data.roster.status == 'VALID'">
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.roster.tournaments.selected">
+        <option value>[Seleccione Torneo Challonge]</option>
+        <option ng-repeat="option in data.roster.tournaments.suggestions" value="{{option.id}}">{{option.name}}</option>
+    </select>    
+</div>
 <ul>
     <li class="force" ng-repeat="force in data.roster.forces">
-        <h2>{{force.name}}</h2>
+        <h2>{{force.name}} ({{force.catalogueName}}) <a ng-show="data.roster.status == 'VALID'" href="{{force.suggestion.army.faction.url}}/#Stratagems" target="_blank">Faction Stratagems</a></h2> 
         <ul>
             <li ng-repeat="category in data.categories" class="category" ng-include="url.category"></li>
         </ul> 

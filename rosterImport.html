@@ -7,6 +7,8 @@
         <!--        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
 
         <link href="style/main.css" rel="stylesheet">
+        <link href="style/spinner.css" rel="stylesheet">
+        <link href="style/htmlComponents.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--        <link rel="shortcut icon" href="../../img/favicon.ico">-->
         <!-- Angularjs -->
@@ -58,8 +60,13 @@
                     <img src ="images/tutorial02.png" title="Units" />
                 </div>  
             </fieldset>   
-            <button ng-click="subirRoster()">Subir Roster</button><br/> 
-            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY'"></div>               
+            <button ng-click="previewRoster()">Preview Roster</button>
+            <button ng-click="validarRoster()" ng-show="data.roster.status == 'READY' || data.roster.status == 'VALID'">Validar Roster</button>
+            <br/>             
+            <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY' || data.roster.status == 'VALID'"></div>                           
+            <div class="lds-spinner" ng-show="data.roster.status == 'VALIDATE'">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
         </form>
     </body>
 </html>

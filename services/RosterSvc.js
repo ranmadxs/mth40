@@ -243,31 +243,112 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         });
         return units;
     };
+    
+    getModelCost = function ($modelXML) {
+        var allCostsXML = jQuery($modelXML).find("selection costs cost");
+        var costsXML = jQuery($modelXML).children("costs").children("cost");
+        var pts = 0;
+        var PL = 0;
+        var CP = 0;
+        
+        jQuery(costsXML).each(function(x){
+            if("CP" == jQuery(this).attr("name").trim()){
+                CP = parseInt(jQuery(this).attr("value"));  
+            }
+        });
+        
+       jQuery(allCostsXML).each(function(x){
+            if("pts" == jQuery(this).attr("name").trim()){
+                pts = pts + parseFloat(jQuery(this).attr("value"));  
+            }
+            if("PL" == jQuery(this).attr("name").trim()){
+                PL = PL + parseFloat(jQuery(this).attr("value"));
+            }
+        });
+        return {
+            'pts': pts,
+            'PL': PL,
+            'CP': CP,
+        };
+    }
+
+    listSelectionUnit = function ($modelXML) {
+        var selections = [];
+        var selectionsXML = jQuery($modelXML).children('selections').children('selection');
+        jQuery(selectionsXML).each(function (x){
+            var selection = {
+                'name' : jQuery(this).attr("name"),
+                'type' : jQuery(this).attr("type"),
+                'number' : parseInt(jQuery(this).attr("number")),
+            }
+            selections.push(selection);
+        });
+        return selections;
+    }
+
+    listProfileType = function ($modelXML, typeName) {
+        var list = new Object();
+        jQuery($modelXML).find("profiles profile[typeName='"+typeName+"']")
+            .each(function (x) {
+                var x2js = new X2JS();
+                var json = x2js.xml2json(this);
+                var characteristics = new Object();
+                json.characteristics.characteristic.forEach(chr => {
+                    characteristics[chr._name] = chr.__text;
+                });
+                var element = {
+                    'name': json._name.trim(),
+                    'characteristics': characteristics,
+                };                
+                list[json._name.trim()] = element;
+            });
+        return list;
+    }
 
     listForceUnits = function ($forceXML) {
         var units = [];
-
-        jQuery($forceXML).find("force selections selection").each(function (x) {
-            var category = jQuery(this).find("selection categories category[primary='true']");
+        var subfaction = {};
+        //jQuery($forceXML).find("force selections selection[type='model'], force selections selection[type='unit']")
+        jQuery($forceXML).find("force selections selection")
+            .each(function (x) {
+            var category = jQuery(this).find("selection categories category[primary='true'][name!='Stratagems']");
             var categoryPrimary = category.attr("primary");
             if (categoryPrimary == "true") {
                 var categoryName = category.attr("name");
                 if (!categoryName.includes(properties.no_type)) {
+                    if(categoryName == "Configuration"){
+                        var selectionConfigsObj = jQuery(this).find("selection selections selection");                        
+                        var nameSubfaction = selectionConfigsObj.attr("name");
+                        if(nameSubfaction) { 
+                            subfaction['name'] = nameSubfaction;
+                            console.log("**** Subfaction = " + nameSubfaction);
+                        }
+                    }
                     console.log("[" + categoryName + "] " + jQuery(this).attr("name"));
                     console.log(this);
-
                     var unit = {
-                        'name': jQuery(this).attr('name'),
+                        'name': jQuery(this).attr('name').trim(),
+                        'type': jQuery(this).attr('type').trim(),
+                        'costs': getModelCost(this),
+                        'selections': listSelectionUnit(this),
+                        'weapons': listProfileType(this, 'Weapon'),
                         'categories': {
                             'main': categoryName
                         }
                     };
-                    units.push(unit);
+                    //console.log(unit);
+                    if(properties.entity_type.includes(categoryName)){
+                        units.push(unit);
+                    }                    
                 }
             }
 
         });
-        return units;
+        var faction = {
+            units: units,
+            subfaction: subfaction,
+        };        
+        return faction;
     };
 
 
@@ -281,25 +362,34 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
 
                 values.forEach(function (e) {
                     rosterXML = e.catalogue;
-                    var rosterName = jQuery(rosterXML).find("roster");
-
+                    console.log(jQuery(rosterXML).find("roster"));
                     var forcesXML = jQuery(rosterXML).find("roster forces force");
-                    var rosterName = rosterXML.attr("name");
+                    var rosterName = rosterXML.attr("name").trim();
+                    console.log(rosterName);
                     //console.debug(rosterXML, "loadRosterFromFile");
                     //console.debug(forcesXML, "loadRosterFromFile->forcesXML");
                     var forces = [];
                     jQuery(forcesXML).each(function (x) {
-                        var nameForce = jQuery(this).attr("name");
+                        var nameForce = jQuery(this).attr("name").trim();
+                        console.log(this);
                         //console.debug(nameForce, "loadRosterFromFile");
+                        var forceUnits = listForceUnits(this);
+                        var subfactionName = forceUnits.subfaction.name?forceUnits.subfaction.name:null;
                         var force = {
                             'name': nameForce,
-                            'units': listForceUnits(forcesXML)
+                            'catalogueName': jQuery(this).attr("catalogueName").trim(),
+                            'catalogueRevision': jQuery(this).attr("catalogueRevision").trim(),
+                            'subFaction' : subfactionName,
+                            'units': forceUnits.units
                         };
                         forces.push(force);
                         roster.forces = forces;
                     });
                     roster.forces = forces;
                     roster.name = rosterName;
+                    roster.costs = getModelCost(rosterXML);
+                    roster.gameSystemName = rosterXML.attr("gameSystemName").trim();
+                    roster.gameSystemRevision = rosterXML.attr("gameSystemRevision").trim();
                 });
 
                 resolve(roster);
