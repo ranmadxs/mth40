@@ -2,7 +2,6 @@
 echo "Hello World"
 ls -la
 apt --version
-apt-get update
+python --version
 pwd
-ftp -h
 echo "END RELEASE TASK XD"
