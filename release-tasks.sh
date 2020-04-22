@@ -3,6 +3,6 @@ echo "[INFO] INIT Release-task"
 ls -la
 apt --version
 python --version
-python copyFTP.py
+#python copyFTP.py
 pwd
 echo "[INFO] END RELEASE TASK"
