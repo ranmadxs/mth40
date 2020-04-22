@@ -1,7 +1,8 @@
 #!/bin/bash
-echo "Hello World"
+echo "[INFO] INIT Release-task"
 ls -la
 apt --version
 python --version
+python copyFTP.py
 pwd
-echo "END RELEASE TASK XD"
+echo "[INFO] END RELEASE TASK"
