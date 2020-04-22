@@ -45,6 +45,30 @@ app.controller('RosterImportController', function ($http, $scope, $filter, $loca
     }
     //var listTournaments = challongeSvc.listTournaments("pending");
 
+    $scope.guardarRoster = function () {
+        console.debug("init", "validateRoster");
+        $scope.data.roster.status = "SENDING_TO_SAVE";
+        console.debug($scope.data.roster, "guardarRoster");
+        var formData = new FormData();
+        formData.append('roster_json', JSON.stringify($scope.data.roster));
+        formData.append('roster_file', $scope.rosterFile);
+        $http({
+            method: 'POST',
+            url: 'http://localhost:4001/roster/save',
+            headers: {
+                'Content-Type': undefined,
+            },
+            data: formData           
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.data.roster = response.data;
+        }, function errorCallback(response) {
+            if (response.status = 401) { // If you have set 401
+                console.error("ohohoh")
+            }
+        });        
+    }
+
     $scope.validarRoster = function () {
         console.debug("init", "validateRoster");
         $scope.data.roster.status = "VALIDATE";
@@ -54,11 +78,11 @@ app.controller('RosterImportController', function ($http, $scope, $filter, $loca
         formData.append('roster_file', $scope.rosterFile);
         $http({
             method: 'POST',
-            url: 'http://localhost:4001/roster/validate?saveJson=false',
+            url: 'http://localhost:4001/roster/validate',
             headers: {
-                'Content-Type': undefined,
+                'Content-Type': 'application/json',
             },
-            data: formData           
+            data: {roster_json: JSON.stringify($scope.data.roster)}           
         }).then(function successCallback(response) {
             console.log(response.data);
             $scope.data.roster = response.data;

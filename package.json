@@ -1,0 +1,29 @@
+{
+  "name": "mth40",
+  "version": "1.0.0",
+  "description": "Mth40K Front",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ranmadxs/mth40.git"
+  },
+  "keywords": [
+    "Mth40k"
+  ],
+  "author": "Edgar Sánchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ranmadxs/mth40/issues"
+  },
+  "homepage": "https://github.com/ranmadxs/mth40#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.25",
+    "express": "^4.17.1"
+  }
+}

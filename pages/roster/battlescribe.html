@@ -3,7 +3,7 @@
     <select name="repeatSelect" id="repeatSelect" ng-model="data.roster.tournaments.selected">
         <option value>[Seleccione Torneo Challonge]</option>
         <option ng-repeat="option in data.roster.tournaments.suggestions" value="{{option.id}}">{{option.name}}</option>
-    </select>    
+    </select>  
 </div>
 <ul>
     <li class="force" ng-repeat="force in data.roster.forces">

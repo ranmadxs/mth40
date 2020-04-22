@@ -60,8 +60,9 @@
                     <img src ="images/tutorial02.png" title="Units" />
                 </div>  
             </fieldset>   
-            <button ng-click="previewRoster()">Preview Roster</button>
-            <button ng-click="validarRoster()" ng-show="data.roster.status == 'READY' || data.roster.status == 'VALID'">Validar Roster</button>
+            <button ng-click="previewRoster()" >Preview Roster</button>
+            <button ng-click="validarRoster()" ng-show="['READY', 'VALID', 'SENDING_TO_SAVE'].includes(data.roster.status)">Validar Roster</button>
+            <button ng-click="guardarRoster()" ng-show="['VALID', 'SENDING_TO_SAVE'].includes(data.roster.status)">Guardar Roster</button>
             <br/>             
             <div ng-include="'pages/roster/battlescribe.html'" class="battlescribe" ng-show="data.roster.status == 'READY' || data.roster.status == 'VALID'"></div>                           
             <div class="lds-spinner" ng-show="data.roster.status == 'VALIDATE'">
