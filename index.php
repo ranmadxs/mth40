@@ -1,3 +1,3 @@
 <?php
-  echo "WH40K Index"
+  echo "WH40K Index" . $_ENV;
 ?>
