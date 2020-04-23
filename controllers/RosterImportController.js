@@ -13,7 +13,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     if(envVars && envVars.MTH40_API_PORT && envVars.MTH40_API_PORT.length > 0){
         apiPort = envVars.MTH40_API_PORT;
     }
-    console.log(apiHost);
+    console.log(apiHost + ":" + apiPort);
     //console.log($rootScope.varEnv.MTH40_API_HOST);
     rndUrl = function () {
         return Math.random() * 6;
