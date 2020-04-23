@@ -13,7 +13,8 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     if(envVars && envVars.MTH40_API_PORT && envVars.MTH40_API_PORT.length > 0){
         apiPort = envVars.MTH40_API_PORT;
     }
-    console.log(apiHost + ":" + apiPort);
+    const urlMath40Api = apiHost + ":" + apiPort;
+    console.log(urlMath40Api, "[INFO]");
     //console.log($rootScope.varEnv.MTH40_API_HOST);
     rndUrl = function () {
         return Math.random() * 6;
@@ -65,7 +66,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
         formData.append('roster_file', $scope.rosterFile);
         $http({
             method: 'POST',
-            url: 'http://localhost:4001/roster/save',
+            url: urlMath40Api+'/roster/save',
             headers: {
                 'Content-Type': undefined,
             },
@@ -89,7 +90,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
         formData.append('roster_file', $scope.rosterFile);
         $http({
             method: 'POST',
-            url: 'http://localhost:4001/roster/validate',
+            url: urlMath40Api+'/roster/validate',
             headers: {
                 'Content-Type': 'application/json',
             },
