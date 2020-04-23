@@ -4,16 +4,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     //console.log(process.env.MTH40_API_URL, "process.env.MTH40_API_URL");
     //console.log($rootScope.env);
     $scope.properties = properties;
-    const envVars = await requestUtil.getEnv();
-    let apiHost = properties.mth40_api.MTH40_API_HOST;
-    let apiPort = properties.mth40_api.MTH40_API_PORT;
-    if(envVars && envVars.MTH40_API_HOST && envVars.MTH40_API_HOST.length > 0){
-        apiHost = envVars.MTH40_API_HOST;
-    }
-    if(envVars && envVars.MTH40_API_PORT && envVars.MTH40_API_PORT.length > 0){
-        apiPort = envVars.MTH40_API_PORT;
-    }
-    const urlMath40Api = apiHost + ":" + apiPort;
+    const urlMath40Api = await requestUtil.getEnv();
     console.log(urlMath40Api, "[INFO]");
     //console.log($rootScope.varEnv.MTH40_API_HOST);
     rndUrl = function () {

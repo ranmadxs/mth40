@@ -18,7 +18,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 app.constant('properties', wh40KProperties);
 
-app.factory('requestUtil', function ($location, $http) {
+app.factory('requestUtil', function ($location, $http, properties) {
 
     return {
         getEnv: async () => {
@@ -35,7 +35,17 @@ app.factory('requestUtil', function ($location, $http) {
                 }
             });   
             console.log(environment, "[INFO]");
-            return(environment);
+            let apiHost = properties.mth40_api.MTH40_API_HOST;
+            let apiPort = properties.mth40_api.MTH40_API_PORT;
+            const envVars = environment;
+            if(envVars && envVars.MTH40_API_HOST && envVars.MTH40_API_HOST.length > 0){
+                apiHost = envVars.MTH40_API_HOST;
+            }
+            if(envVars && envVars.MTH40_API_PORT && envVars.MTH40_API_PORT.length > 0){
+                apiPort = envVars.MTH40_API_PORT;
+            }
+            const urlMath40Api = apiHost + ":" + apiPort;            
+            return(urlMath40Api);
         },
 
         getParam: function ($paramName) {
