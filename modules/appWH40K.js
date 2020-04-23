@@ -21,6 +21,23 @@ app.constant('properties', wh40KProperties);
 app.factory('requestUtil', function ($location, $http) {
 
     return {
+        getEnv: async () => {
+            var environment = null;
+            await $http({
+                method: 'GET',
+                url: 'environment-vars.php'     
+            }).then(function successCallback(response) {
+                //console.log(response.data);
+                environment = JSON.parse(response.data);          
+            }, function errorCallback(response) {
+                if (response.status = 401) { // If you have set 401
+                    console.error("ohohoh");
+                }
+            });   
+            console.log(environment, "[INFO]");
+            return(environment);
+        },
+
         getParam: function ($paramName) {
             console.log($paramName)
             console.log($location);
@@ -54,8 +71,10 @@ var errHandler = function (err) {
     console.log(err);
 }
 
-app.run(['editableOptions', 'wh40KFactory', function (editableOptions, wh40KFactory) {
+app.run(async (editableOptions, wh40KFactory, $http, $rootScope) => {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+        console.log("INIT_LOAD_ENV", "appRun");
+
         //var load40KPromised = wh40KFactory.load();
         //var orksCodex = wh40KFactory.getCodex("Orks");
         //console.log(orksCodex);
@@ -65,4 +84,4 @@ app.run(['editableOptions', 'wh40KFactory', function (editableOptions, wh40KFact
          console.log(this);
          });
          */
-    }]);
+    });

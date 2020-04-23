@@ -1,9 +1,20 @@
-app.controller('RosterImportController', function ($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, rosterSvc, challongeSvc) {
+app.controller('RosterImportController', async ($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, rosterSvc, challongeSvc) => {
     console.info("init", "RosterImportController");    
     //console.log(process.env.MTH40_API_PORT, "process.env.MTH40_API_PORT");
     //console.log(process.env.MTH40_API_URL, "process.env.MTH40_API_URL");
+    //console.log($rootScope.env);
     $scope.properties = properties;
-
+    const envVars = await requestUtil.getEnv();
+    const apiHost = properties.mth40_api.MTH40_API_HOST;
+    const apiPort = properties.mth40_api.MTH40_API_PORT;
+    if(envVars && envVars.MTH40_API_HOST && envVars.MTH40_API_HOST.length > 0){
+        apiHost = envVars.MTH40_API_HOST;
+    }
+    if(envVars && envVars.MTH40_API_PORT && envVars.MTH40_API_PORT.length > 0){
+        apiPort = envVars.MTH40_API_PORT;
+    }
+    console.log(apiHost);
+    //console.log($rootScope.varEnv.MTH40_API_HOST);
     rndUrl = function () {
         return Math.random() * 6;
     };
