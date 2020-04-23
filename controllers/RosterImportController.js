@@ -5,8 +5,8 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     //console.log($rootScope.env);
     $scope.properties = properties;
     const envVars = await requestUtil.getEnv();
-    const apiHost = properties.mth40_api.MTH40_API_HOST;
-    const apiPort = properties.mth40_api.MTH40_API_PORT;
+    let apiHost = properties.mth40_api.MTH40_API_HOST;
+    let apiPort = properties.mth40_api.MTH40_API_PORT;
     if(envVars && envVars.MTH40_API_HOST && envVars.MTH40_API_HOST.length > 0){
         apiHost = envVars.MTH40_API_HOST;
     }
