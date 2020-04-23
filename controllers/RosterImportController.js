@@ -1,8 +1,8 @@
 app.controller('RosterImportController', function ($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, rosterSvc, challongeSvc) {
-    console.info("init", "RosterImportController");
+    console.info("init", "RosterImportController");    
+    //console.log(process.env.MTH40_API_PORT, "process.env.MTH40_API_PORT");
+    //console.log(process.env.MTH40_API_URL, "process.env.MTH40_API_URL");
     $scope.properties = properties;
-
-
 
     rndUrl = function () {
         return Math.random() * 6;

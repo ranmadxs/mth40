@@ -41,6 +41,9 @@
     </head>
     <body ng-controller="RosterImportController" class="battlescribe">
         <div>V 1.0.0</div>
+        <?php
+            echo 'MTH40_API_HOST : ' . $_ENV["MTH40_API_HOST"] . '!';
+        ?>        
         <br/>
         version ::  {{properties.version}}
 
