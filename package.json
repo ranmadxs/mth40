@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/ranmadxs/mth40#readme",
   "dependencies": {
-    "angular": "^1.7.9",
     "express": "^4.17.1",
     "log4js": "^6.2.1"
   }
