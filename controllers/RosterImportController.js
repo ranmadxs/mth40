@@ -64,7 +64,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
             data: formData           
         }).then(function successCallback(response) {
             console.log(response.data);
-            $scope.data.roster = response.data;
+            $scope.data.roster.status = 'SAVED';
         }, function errorCallback(response) {
             if (response.status = 401) { // If you have set 401
                 console.error("ohohoh")
@@ -72,13 +72,32 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
         });        
     }
 
+    $scope.findParticipant = function () {
+        console.debug("init", "findParticipant");
+        $scope.data.roster.status = "VALIDATE";
+        console.debug($scope.data.roster, "validateRoster");
+        $http({
+            method: 'POST',
+            url: urlMath40Api+'/roster/findParticipant',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: {roster_json: JSON.stringify($scope.data.roster)}           
+        }).then(function successCallback(response) {            
+            $scope.data.roster = response.data;
+            $scope.data.roster.status = "VALID";
+            console.log(response.data);
+        }, function errorCallback(response) {
+            if (response.status = 401) { // If you have set 401
+                console.error("ohohoh")
+            }
+        });
+    }
+
     $scope.validarRoster = function () {
         console.debug("init", "validateRoster");
         $scope.data.roster.status = "VALIDATE";
         console.debug($scope.data.roster, "validateRoster");
-        var formData = new FormData();
-        formData.append('roster_json', JSON.stringify($scope.data.roster));
-        formData.append('roster_file', $scope.rosterFile);
         $http({
             method: 'POST',
             url: urlMath40Api+'/roster/validate',

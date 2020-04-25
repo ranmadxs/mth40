@@ -382,7 +382,9 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
                             'subFaction' : subfactionName,
                             'units': forceUnits.units
                         };
-                        forces.push(force);
+
+                        //console.log(force, "[FORCE]");
+                        forces.push(force);                        
                         roster.forces = forces;
                     });
                     roster.forces = forces;

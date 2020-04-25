@@ -1,9 +1,13 @@
 <h1>{{data.roster.name}} [{{data.roster.costs.PL}} PL, {{data.roster.costs.CP}} CP, {{data.roster.costs.pts}}pts]</h1>
 <div ng-show="data.roster.status == 'VALID'">
-    <select name="repeatSelect" id="repeatSelect" ng-model="data.roster.tournaments.selected">
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.roster.tournaments.selected" ng-change="findParticipant()">
         <option value>[Seleccione Torneo Challonge]</option>
         <option ng-repeat="option in data.roster.tournaments.suggestions" value="{{option.id}}">{{option.name}}</option>
     </select>  
+    <select name="repeatSelectPart" id="repeatSelectPart" ng-model="data.roster.tournaments.participant.selected">
+        <option value>[Seleccione Participante Challonge]</option>
+        <option ng-repeat="option in data.roster.tournaments.participant.suggestions" value="{{option.id}}">{{option.name}}</option>
+    </select>      
 </div>
 <ul>
     <li class="force" ng-repeat="force in data.roster.forces">
