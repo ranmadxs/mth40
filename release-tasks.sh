@@ -5,4 +5,5 @@ npm --version
 python --version
 node --version
 pwd
+node index.js &
 echo "[INFO] END RELEASE TASK"
