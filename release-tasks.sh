@@ -5,6 +5,6 @@ npm --version
 python --version
 node --version
 pwd
-echo "Iniciando node"
-node index.js
+#echo "Iniciando node"
+#node index.js
 echo "[INFO] END RELEASE TASK"
