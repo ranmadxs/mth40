@@ -1,7 +1,0 @@
-<span class="bold">Selections:</span>
-<span ng-repeat="selection in unit.selections">        
-    <span ng-show="selection.number > 1" >{{selection.number}}x</span>
-    <span ng-show="selection.name.trim() === 'Warlord'" class="bold">* {{selection.name}}</span>
-    <span ng-show="selection.name.trim() != 'Warlord'" >{{selection.name}}</span>
-    <span ng-show="$index < unit.selections.length-1" >, </span>
-</span>
