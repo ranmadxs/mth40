@@ -11,11 +11,10 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "dev": "export PORT=3006 && react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "export PORT=3006 && react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
