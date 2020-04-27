@@ -8,7 +8,8 @@ pwd
 #echo "Iniciando node"
 #node index.js
 #printenv
-echo  "var ENV_MTH40 = { MTH40_API_HOST: '$MTH40_API_HOST'," > public/config/env.properties
-echo "MTH40_API_PORT: '$MTH40_API_PORT' }" >> public/config/env.properties
-cat public/config/env.properties
+echo  "var ENV_MTH40 = { MTH40_API_HOST: '$MTH40_API_HOST'," > public/config/env2.properties
+echo "MTH40_API_PORT: '$MTH40_API_PORT' }" >> public/config/env2.properties
+cat public/config/env2.properties
+ls -la public/config/
 echo "[INFO] END RELEASE TASK"
