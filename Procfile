@@ -1,2 +1,2 @@
 release: ./release-tasks.sh
-web: node index.js
+web: npm start
