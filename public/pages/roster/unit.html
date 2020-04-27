@@ -1,0 +1,5 @@
+<h4>
+    <a href="{{unit.suggestion.url}}" target="_blank" >{{unit.name}}</a> [{{unit.costs.PL}} PL, {{unit.costs.pts}}pts]
+</h4>
+<p ng-if="unit.selections.length >= 1" ng-include="url.selections"></p>
+<div ng-repeat="model in unit.models" ng-include="url.model"></div>

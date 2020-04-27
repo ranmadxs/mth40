@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="WH40KApp">
+    <head>
+        <title>Shooting Phase</title>
+        <meta charset="UTF-8">
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+     
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--        <link rel="shortcut icon" href="../../img/favicon.ico">-->
+        <!-- Angularjs -->
+        <script src="../../../plugins/angularjs-1.6.0/angular.min.js"></script>
+        <script src="../../../plugins/angularjs-1.6.0/angular-route.min.js"></script>
+        <script src="../../../plugins/angularjs-1.6.0/angular-websocket.min.js"></script>
+        
+        <!-- Angular-xeditable -->
+        <link href="../../../plugins/angular-xeditable-0.8.1/css/xeditable.css" rel="stylesheet">
+        <script src="../../../plugins/angular-xeditable-0.8.1/js/xeditable.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.css" rel="stylesheet" media="screen"> 
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
+
+        <!-- jQuery 2.2.3 -->
+        <script src="../../../plugins/jquery-2.1.4/jquery.min.js"></script>    
+        <script src="../../../plugins/xml2json.js"></script>    
+        <script src="../../../config/config.properties"></script>
+        <script src="../../../modules/appWH40K.js"></script>
+        <script src="../../../services/BattleScribeSvc.js"></script>
+        <script src="modules/ShootingController.js"></script>
+        <link href="../../../plugins/angular-xeditable-0.8.1/css/xeditable.css" rel="stylesheet">
+        <link href="../../../style/main.css" rel="stylesheet">
+    </head>
+    <body ng-controller="ShootingController">
+       <div>TODO write content</div>
+        <br/>
+        version ::  {{properties.version}}
+        <br/>
+
+<!--  
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="buscador2">
+            <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                    <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li ng-repeat="selectionEntry in listSelectionEntry" class="input-lg"><a href="#">{{selectionEntry._name}}</a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+        
+      
+                <input type="text" ng-model="buscador" />
+        <div ng-repeat="selectionEntry in listSelectionEntry|filter:buscador|orderBy:_name">
+            <pre>{{selectionEntry._name}}</pre>
+        </div>-->
+
+<!--
+        <br/><br/><br/>
+        
+        
+        <a href="#" editable-text="selectedEntry.name">{{ selectedEntry.name || "empty" }}</a>
+        
+        <br/><br/><br/>
+        
+        <a href="#" editable-select="selectedEntry.status" e-ng-options="s.value as s.text for s in statuses">
+            {{ showStatus() }}
+        </a>        
+        <br/><br/><br/>
+-->
+    <div id='parent_div_1'>
+<div class ='child_div_1'>
+    <div class="well line-example">
+        <form data-editable-form name="uiSelectForm" onbeforesave="afterSaveForm()" onaftersave="beforeSaveForm()">
+          <div editable-ui-select="selectedEntry" data-e-form="uiSelectForm" data-e-name="_name" name="_name" theme="bootstrap" data-e-ng-model="selectedEntry._id" data-e-style="min-width:300px;">
+              <a href="#" ng-click="uiSelectForm.$show()" ng-show="!uiSelectForm.$visible">{{selectedEntry._name}}</a>
+            <editable-ui-select-match placeholder="Seleccione">
+                {{$select.selected._name}}
+            </editable-ui-select-match>
+            <editable-ui-select-choices ng-click="showStatus($select)" repeat="selectionEntry in listSelectionEntry | filter: $select.search track by $index">
+              {{selectionEntry._name}}
+            </editable-ui-select-choices>
+          </div>
+          <br/>
+          <div class="buttons">
+            <!-- button to show form -->
+            <button type="button" class="btn btn-default" ng-click="uiSelectForm.$show()" ng-show="!uiSelectForm.$visible">
+              Edit
+            </button>
+            <!-- buttons to submit / cancel form -->
+            <span ng-show="uiSelectForm.$visible">
+              <br/>
+              <button type="submit" class="btn btn-primary" ng-disabled="uiSelectForm.$waiting">
+                Save
+              </button>
+              <button type="button" class="btn btn-default" ng-disabled="uiSelectForm.$waiting" ng-click="uiSelectForm.$cancel()">
+                Cancel
+              </button>
+            </span>
+          </div>
+        </form>
+       
+    </div>
+ <div class="well line-example">{{selectedEntry.catalogue._name}}
+     <table class="table table-bordered table-hover table-condensed" style="width: 100%;">
+    <tr style="font-weight: bold">
+      <td style="width:35%">Name</td>
+      <td ng-repeat="characteristic in characteristics">{{characteristic._name}}</td>
+    </tr>
+    <tr>
+        <td style="width:35%">{{selectedEntry._name}}</td>
+        <td ng-repeat="characteristic in characteristics">{{characteristic._value}}</td>
+    </tr>
+  </table>
+</div>
+       
+</div>
+<div class ='child_div_2'>&nbsp;</div>
+</div>       
+ 
+<div id='parent_div_2'>
+<div class ='child_div_1'>asd</div>
+<div class ='child_div_2'>asd</div>
+</div>
+<div id='parent_div_3'>
+<div class ='child_div_1'>asd</div>
+<div class ='child_div_2'>asd</div>
+</div>
+<!--
+<hr/>
+<br/>
+<br/>&nbsp;
+<br/>
+       
+    <h4>Static arrays</h4>
+    <pre>Model: {{selected | json}}</pre>
+    <input type="text" ng-model="selected" uib-typeahead="selectionEntry._name for selectionEntry in listSelectionEntry | filter:$viewValue | limitTo:8" class="form-control">
+  
+    
+-->
+    </body>
+</html>
