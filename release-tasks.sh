@@ -6,6 +6,7 @@ python --version
 node --version
 pwd
 chmod 755 -R  public/config/
+
 #echo "Iniciando node"
 #node index.js
 #printenv
