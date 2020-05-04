@@ -1,7 +1,5 @@
 import React from "react";
-// import Log from 'react-log';
 import {Logger} from './component/utils/Logger.jsx'
-//import {TournamentHeader} from './component/tournaments/TournamentHeader.jsx';
 
 import TournamentModule from "./module/tournaments/TournamentModule";
 import {
