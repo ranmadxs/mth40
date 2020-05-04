@@ -1,4 +1,6 @@
 import React from "react";
+import MainHeader from './component/header/MainHeader'
+import {MainIframe} from './component/utils/MainIframe';
 import {Logger} from './component/utils/Logger.jsx'
 
 import TournamentModule from "./module/tournaments/TournamentModule";
@@ -15,7 +17,7 @@ const Users = () => {
         <Logger
           msg='Logueando ando'
         />
-        <h2>Hello World 2</h2>
+        <h2>Hello World 2 [rosters]</h2>
     </div>
 ); 
 }
@@ -24,23 +26,7 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/tournaments">Tournaments</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <a href="/rosterImport.html">Roster Import</a>
-            </li>
-          </ul>
-        </nav>
-
+        <MainHeader/>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
@@ -49,12 +35,18 @@ export default function App() {
               title='XDD'
             />
           </Route>
-          <Route path="/users">
+          <Route path="/rosterImport">
+            <MainIframe />
+          </Route>          
+          <Route path="/rosters">
             <Users />
           </Route>
+          <Route path="/favorites">
+            <div>Hola Favorites</div>
+          </Route>          
           <Route path="/">
             <Home />
-          </Route>
+          </Route>          
         </Switch>
       </div>
     </Router>
@@ -62,5 +54,26 @@ export default function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return (
+    <div>
+      <h2>Home</h2>
+      <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/tournaments">Tournaments</Link>
+          </li>
+          <li>
+            <Link to="/rosters">Rosters</Link>
+          </li>
+          <li>
+            <a href="/rosterImport.html">Roster Import</a>
+          </li>
+          <li>
+            <Link to="/rosterImport">Roster Import 2</Link>
+          </li>            
+        </ul>      
+    </div>
+  );
 }
