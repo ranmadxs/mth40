@@ -31,11 +31,11 @@ function LabelBottomNavigation(props) {
         <Box mt={1} mb={2}>
             <Box mt={1} mb={2}>
             <BottomNavigation value={estado} onChange={handleChange} className={classes.root}>
-                <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} />
-                <BottomNavigationAction label="Tournaments" value="tournaments" icon={<SportsEsportsIcon />} />
-                <BottomNavigationAction label="Rosters" value="rosters" icon={<PermMediaIcon />} />
-                <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />                        
-                <BottomNavigationAction label="Roster Import" value="rosterImport" icon={<SystemUpdateAltIcon />} />
+                <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} showLabel='true'/>
+                <BottomNavigationAction label="Tournaments" value="tournaments" icon={<SportsEsportsIcon />} showLabel='true'/>
+                <BottomNavigationAction label="Rosters" value="rosters" icon={<PermMediaIcon />} showLabel='true' />
+                <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} showLabel='true' />
+                <BottomNavigationAction label="Roster Import" value="rosterImport" icon={<SystemUpdateAltIcon />} showLabel='true' />
             </BottomNavigation>            
             </Box>        
             <Divider variant="middle" />
