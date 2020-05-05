@@ -1,9 +1,11 @@
 import React from "react";
-import MainHeader from './component/header/MainHeader'
+import MainHeader from './component/header/MainHeader';
 import {MainIframe} from './component/utils/MainIframe';
-import {Logger} from './component/utils/Logger.jsx'
-
+import {Logger} from './component/utils/Logger.jsx';
 import TournamentModule from "./module/tournaments/TournamentModule";
+import SearchAll from './containers/search/SearchGlobalContainer';
+import SearchListContainer from './containers/search/SearchListContainer';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,21 +13,20 @@ import {
   Link
 } from "react-router-dom";
 
-const Users = () => {
+const Rosters = () => {
   return (
     <div>
-        <Logger
-          msg='Logueando ando'
-        />
+        <Logger msg='Logueando ando' />
         <h2>Hello World 2 [rosters]</h2>
     </div>
 ); 
 }
 
 export default function App() {
-  return (
+  return (    
     <Router>
       <div>
+        <SearchAll/>
         <MainHeader/>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -39,7 +40,7 @@ export default function App() {
             <MainIframe />
           </Route>          
           <Route path="/rosters">
-            <Users />
+            <Rosters />
           </Route>
           <Route path="/favorites">
             <div>Hola Favorites</div>
@@ -56,6 +57,7 @@ export default function App() {
 function Home() {
   return (
     <div>
+      <SearchListContainer/>
       <h2>Home</h2>
       <ul>
           <li>
