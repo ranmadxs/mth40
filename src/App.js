@@ -5,13 +5,13 @@ import {Logger} from './component/utils/Logger.jsx';
 import TournamentModule from "./module/tournaments/TournamentModule";
 import SearchAll from './containers/search/SearchGlobalContainer';
 import SearchListContainer from './containers/search/SearchListContainer';
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+var pjson = require('../package.json');
 
 const Rosters = () => {
   return (
@@ -22,7 +22,8 @@ const Rosters = () => {
 ); 
 }
 
-export default function App() {
+const App = () => {
+  const { version } = pjson;
   return (    
     <Router>
       <div>
@@ -46,7 +47,9 @@ export default function App() {
             <div>Hola Favorites</div>
           </Route>          
           <Route path="/">
-            <Home />
+            <Home 
+              version={version}
+            />
           </Route>          
         </Switch>
       </div>
@@ -54,11 +57,11 @@ export default function App() {
   );
 }
 
-function Home() {
+function Home({version}) {
   return (
     <div>
       <SearchListContainer/>
-      <h2>Home</h2>
+      <h2>Home V {version}</h2>
       <ul>
           <li>
             <Link to="/">Home</Link>
@@ -76,3 +79,5 @@ function Home() {
     </div>
   );
 }
+
+export default App;
