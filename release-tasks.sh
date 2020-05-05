@@ -13,5 +13,5 @@ echo  "var ENV_MTH40 = { MTH40_API_HOST: '$MTH40_API_HOST'," > public/config/env
 echo "MTH40_API_PORT: '$MTH40_API_PORT' }" >> public/config/env2.properties
 cat public/config/env2.properties
 ls -la public/config/
-chmod 777 
+cat package.json
 echo "[INFO] END RELEASE TASK"
