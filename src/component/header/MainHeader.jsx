@@ -9,15 +9,17 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import {styles} from './HeaderStyle'
 import {
-    useHistory,
+    useHistory
 } from "react-router-dom";
 // const [estado, setEstado] = React.useState('home');
 
 const useStyles = makeStyles(styles);
 
 function LabelBottomNavigation(props) {
+    const uri = window.location.pathname.length>1?window.location.pathname.replace("/", ""):window.location.pathname;
+    //console.log(uri, "setEstado");
     const classes = useStyles();
-    const [estado, setEstado] = useState('/');
+    const [estado, setEstado] = useState(uri);
     let history = useHistory();
 
     const handleChange = (event, newValue) => {

@@ -64,16 +64,13 @@ function Home() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/tournaments">Tournaments</Link>
+            <a href="/tournaments">Tournaments</a>
           </li>
           <li>
-            <Link to="/rosters">Rosters</Link>
+            <a href="/rosters">Rosters</a>
           </li>
           <li>
-            <a href="/rosterImport.html">Roster Import</a>
-          </li>
-          <li>
-            <Link to="/rosterImport">Roster Import 2</Link>
+            <a href="/rosterImport">Roster Import</a>
           </li>            
         </ul>      
     </div>

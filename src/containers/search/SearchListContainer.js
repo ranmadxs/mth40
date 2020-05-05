@@ -3,11 +3,11 @@ import { selectedSearch } from '../../actions/search/globalSearchActions';
 import { SearchList } from '../../component/search/SearchList';
 
 const mapStateToProps = (state) => {
-    console.log(state.SEARCH.SearchGlobal);
     return {
         globalSearch: {...state.SEARCH.SearchGlobal}
     }
-}
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
       onTodoClick: (id) => {
@@ -21,4 +21,4 @@ const SearchListContainer = connect(
     mapDispatchToProps
 )(SearchList);
 
-export default SearchListContainer
+export default SearchListContainer;

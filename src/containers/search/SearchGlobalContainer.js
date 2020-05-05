@@ -1,29 +1,24 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { addSearch } from '../../actions/search/globalSearchActions';
+import {SearchInput} from '../../component/search/SearchInput'
 
-let SearchAll = ({ dispatch }) => {
-    let input;  
-    return (
-      <div>
-        <form onSubmit={e => {
-          e.preventDefault()
-          if (!input.value.trim()) {
-            return
-          }
-          dispatch(addSearch(input.value))
-          input.value = ''
-        }}>
-          <input ref={node => {
-            input = node
-          }} />
-          <button type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    );
-  };
-  SearchAll = connect()(SearchAll);
-  
-  export default SearchAll;
+const mapStateToProps = (state) => {
+  return {
+      globalSearch: {...state.SEARCH.SearchGlobal}
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSearch: (text) => {
+      dispatch(addSearch(text))
+    }
+  }
+};
+
+const SearchAll = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchInput);
+
+export default SearchAll;
