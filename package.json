@@ -1,6 +1,6 @@
 {
   "name": "mth40",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.12",
@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "dev": "export PORT=5000'8' && react-scripts start"
+    "dev": "export PORT=5001 && react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
