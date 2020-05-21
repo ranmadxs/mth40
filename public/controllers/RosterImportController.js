@@ -5,6 +5,7 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     //console.log($rootScope.env);
     $scope.properties = properties;
     var urlParams = new URLSearchParams(window.location.search);
+    console.log(process.env, 'process.env');
     const apiPort = urlParams.has('MTH40_API_PORT')?urlParams.get('MTH40_API_PORT'):env.MTH40_API_PORT;
     const apiHost = urlParams.has('MTH40_API_HOST')?urlParams.get('MTH40_API_HOST'):env.MTH40_API_HOST;
     const urlMath40Api = apiHost + ":" + apiPort;   
