@@ -7,6 +7,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
+require('dotenv').config();
+
 // export PORT=5000
 // npm run dev
 const store = createStore(
