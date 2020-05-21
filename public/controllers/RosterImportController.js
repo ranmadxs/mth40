@@ -4,7 +4,10 @@ app.controller('RosterImportController', async ($http, $scope, $filter, $locatio
     //console.log(process.env.MTH40_API_URL, "process.env.MTH40_API_URL");
     //console.log($rootScope.env);
     $scope.properties = properties;
-    const urlMath40Api = env.MTH40_API_HOST + ":" + env.MTH40_API_PORT;
+    var urlParams = new URLSearchParams(window.location.search);
+    const apiPort = urlParams.has('MTH40_API_PORT')?urlParams.get('MTH40_API_PORT'):env.MTH40_API_PORT;
+    const apiHost = urlParams.has('MTH40_API_HOST')?urlParams.get('MTH40_API_HOST'):env.MTH40_API_HOST;
+    const urlMath40Api = apiHost + ":" + apiPort;   
     console.log(urlMath40Api, "[INFO]");
     //console.log($rootScope.varEnv.MTH40_API_HOST);
     rndUrl = function () {

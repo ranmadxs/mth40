@@ -11,6 +11,9 @@ export const MainIframe = () => {
         });
     };
 
+    const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
+    const MTH40_API_PORT = process.env.MTH40_API_PORT?process.env.MTH40_API_PORT:4001;
+    const urlIframe = '/rosterImport.html?MTH40_API_HOST=' + MTH40_API_HOST + "&MTH40_API_PORT=" + MTH40_API_PORT;
     return (
         <div className="container rsvp-wrapper">
             <Logger msg={estado} />
@@ -19,7 +22,7 @@ export const MainIframe = () => {
             ) : null}
             <iframe
                 title='Roster Import'
-                src="/rosterImport.html"
+                src={urlIframe}
                 width="100%"
                 height="700"
                 onLoad={hideSpinner}
