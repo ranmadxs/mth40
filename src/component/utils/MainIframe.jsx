@@ -1,3 +1,4 @@
+const dotenv = require('dotenv');
 import React from 'react';
 import {Logger} from './Logger'
 import { CircularProgress } from '@material-ui/core';
@@ -10,7 +11,8 @@ export const MainIframe = () => {
           loading: false
         });
     };
-    console.log(process.env, "process.env");
+    const env = dotenv.config().parsed;
+    console.log(env, "env");
     const MTH40_API_HOST = process.env.MTH40_API_HOST || 'http://localhost';
     console.log(MTH40_API_HOST, 'MTH40_API_HOST');
     //const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
