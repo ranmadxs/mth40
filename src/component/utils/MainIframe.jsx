@@ -10,8 +10,10 @@ export const MainIframe = () => {
           loading: false
         });
     };
-
-    const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
+    console.log(process.env, "process.env");
+    const MTH40_API_HOST = process.env.MTH40_API_HOST || 'http://localhost';
+    console.log(MTH40_API_HOST, 'MTH40_API_HOST');
+    //const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
     const MTH40_API_PORT = process.env.MTH40_API_PORT?process.env.MTH40_API_PORT:4001;
     const urlIframe = '/rosterImport.html?MTH40_API_HOST=' + MTH40_API_HOST + "&MTH40_API_PORT=" + MTH40_API_PORT;
     return (
