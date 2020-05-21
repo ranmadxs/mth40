@@ -14,6 +14,7 @@ export const MainIframe = () => {
     };
     const env = dotenv.config().parsed;
     console.log(env, "env");
+    console.log(process.env, 'process.env');
     const MTH40_API_HOST = process.env.MTH40_API_HOST || 'http://localhost';
     console.log(MTH40_API_HOST, 'MTH40_API_HOST');
     //const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
