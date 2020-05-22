@@ -12,14 +12,8 @@ export const MainIframe = () => {
           loading: false
         });
     };
-    //const env = dotenv.config().parsed;
-    console.log(process.env, "env");
-    console.log(process, 'process2');
-    const MTH40_API_HOST = process.env.MTH40_API_HOST || 'http://localhost';
-    console.log(MTH40_API_HOST, 'MTH40_API_HOST');
-    //const MTH40_API_HOST = process.env.MTH40_API_HOST?process.env.MTH40_API_HOST:"http://localhost";
-    const MTH40_API_PORT = process.env.MTH40_API_PORT?process.env.MTH40_API_PORT:4001;
-    const urlIframe = '/rosterImport.html?MTH40_API_HOST=' + MTH40_API_HOST + "&MTH40_API_PORT=" + MTH40_API_PORT;
+    const NODE_ENV = process.env.NODE_ENV;
+    const urlIframe = '/rosterImport.html?NODE_ENV=' + NODE_ENV;
     return (
         <div className="container rsvp-wrapper">
             <Logger msg={estado} />
