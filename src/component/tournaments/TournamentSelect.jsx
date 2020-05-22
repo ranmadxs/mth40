@@ -17,7 +17,6 @@ export const TournamentSelect = (props) => {
     } = props;
     const classes = useStyles();
     const [selectedVal, setSelectedVal] = React.useState('');
-  
     const handleChange = (event) => {
         setSelectedVal(event.target.value);
     };    
@@ -25,16 +24,16 @@ export const TournamentSelect = (props) => {
         <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-helper-label">{inputLabel}</InputLabel>
             <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
+                labelId="tournamenty-simple-select"
+                id="tournament-simple-select"
                 value={selectedVal}
                 onChange={handleChange}
             >
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                {items.map((item, key) =>
-                    <MenuItem value={item.id}>{item.name}</MenuItem>
+                {items.map((item) =>
+                    <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                 )}
             </Select>
             <FormHelperText>{formHelper}</FormHelperText>
