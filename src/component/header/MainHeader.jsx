@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {BottomNavigation, Divider, Box} from '@material-ui/core';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -8,6 +8,8 @@ import PermMediaIcon from '@material-ui/icons/PermMedia';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import {styles} from './HeaderStyle'
+import PropTypes from 'prop-types';
+
 import {
     useHistory
 } from "react-router-dom";
@@ -15,7 +17,11 @@ import {
 
 const useStyles = makeStyles(styles);
 
-function LabelBottomNavigation(props) {
+export const MainHeader = (props) => {  
+    const {
+        loadListRoster
+    } = props;
+//function LabelBottomNavigation(props) {
     const uri = window.location.pathname.length>1?window.location.pathname.replace("/", ""):window.location.pathname;
     //console.log(uri, "setEstado");
     const classes = useStyles();
@@ -23,8 +29,28 @@ function LabelBottomNavigation(props) {
     const showLabel = true;
     let history = useHistory();
 
+    const loadData = (menuSelected) => {
+        if(menuSelected === 'rosters'){
+            loadListRoster();
+        }        
+    };
+
+    //loadData(uri);
+    
+    useEffect(() => {
+        loadData(uri);
+    });
+
+/*
+    useEffect(() => {
+        //const menuSelec = uri;
+        loadData(uri);
+    }, []);
+
+*/    
     const handleChange = (event, newValue) => {
         setEstado(newValue);
+        loadData(newValue);
         history.push(newValue);
     };
   
@@ -44,5 +70,7 @@ function LabelBottomNavigation(props) {
     );
   }
   
-
-  export default LabelBottomNavigation;
+MainHeader.propTypes = {
+    loadListRoster:    PropTypes.func.isRequired,
+}
+ //export default LabelBottomNavigation;
