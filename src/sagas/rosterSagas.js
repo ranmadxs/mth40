@@ -1,5 +1,6 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { put, take, cancel, takeEvery } from 'redux-saga/effects'
+import { put, take, cancel, takeEvery } from 'redux-saga/effects';
+import mth40 from '../config';
 import {
     LOAD_LIST_ROSTER_REQUEST, 
     LOAD_LIST_ROSTER_SUCESS, 
@@ -7,7 +8,7 @@ import {
 } from "../actions/roster/rosterActions";
 
 async function fetchAsync() {
-    const response = await fetch('http://localhost:4001/roster/list?projections=name%20teamOwner%20status%20mainFaction');
+    const response = await fetch(mth40.config.API_MTH40_URL+'/roster/list?projections=name%20teamOwner%20status%20mainFaction');
     const json = await response.json();
     return json;
 }

@@ -6,15 +6,13 @@ import * as serviceWorker from './serviceWorker';
 //import { createStore } from 'redux';
 import configureStore from './store';
 import { Provider } from 'react-redux';
+import mth40 from './config';
 //import rootReducer from './reducers';
 
 require('dotenv').config();
 
-console.log("LOLASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", 2);
-console.log(process.env.PORT, 'process.env.PORT');
-console.log(process.env.MTH40_API_HOST, 'process.env.MTH40_API_HOST');
-console.log(process.env.REACT_APP_MTH40_API_HOST, 'process.env.REACT_APP_MTH40_API_HOST');
-console.log(process.env);
+console.log(process.env, 'process.env');
+console.log(mth40, 'mth40');
 
 const store = configureStore({});
 

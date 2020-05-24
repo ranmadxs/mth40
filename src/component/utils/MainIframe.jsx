@@ -1,6 +1,7 @@
 import React from 'react';
 import {Logger} from './Logger'
 import { CircularProgress } from '@material-ui/core';
+import mth40 from '../../config';
 
 require('dotenv').config();
 
@@ -12,8 +13,7 @@ export const MainIframe = () => {
           loading: false
         });
     };
-    const NODE_ENV = process.env.NODE_ENV;
-    const urlIframe = '/rosterImport.html?NODE_ENV=' + NODE_ENV;
+    const urlIframe = '/rosterImport.html?API_MTH40_URL=' + mth40.config.API_MTH40_URL;
     return (
         <div className="container rsvp-wrapper">
             <Logger msg={estado} />
