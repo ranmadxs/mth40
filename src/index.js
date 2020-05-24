@@ -10,9 +10,10 @@ import { Provider } from 'react-redux';
 
 require('dotenv').config();
 
-console.log("LOLASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", 1);
+console.log("LOLASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", 2);
 console.log(process.env.PORT, 'process.env.PORT');
-console.log(process.env.DB_HOST, 'process.env.DB_HOST');
+console.log(process.env.MTH40_API_HOST, 'process.env.MTH40_API_HOST');
+console.log(process.env.REACT_APP_MTH40_API_HOST, 'process.env.REACT_APP_MTH40_API_HOST');
 console.log(process.env);
 
 const store = configureStore({});
