@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { loadListRoster as loadListRosterAction} from '../../actions/roster/rosterActions';
-import {MainHeader} from '../../component/header/MainHeader'
+import { setMenuStatus as setMenuStatusAction } from '../../actions/menu/menuActions'
+import { MainHeader } from '../../component/header/MainHeader'
 
 const mapStateToProps = (state) => ({
+    menu: {...state.SEARCH.Menu}
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadListRoster: () => dispatch(loadListRosterAction())
+    setMenuStatus: (status) => dispatch(setMenuStatusAction(status)),
 });
 
 const MenuContainer = connect(

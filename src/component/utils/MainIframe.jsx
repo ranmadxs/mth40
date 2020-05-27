@@ -1,5 +1,4 @@
 import React from 'react';
-import {Logger} from './Logger'
 import { CircularProgress } from '@material-ui/core';
 import mth40 from '../../config';
 
@@ -15,8 +14,7 @@ export const MainIframe = () => {
     };
     const urlIframe = '/rosterImport.html?API_MTH40_URL=' + mth40.config.API_MTH40_URL;
     return (
-        <div className="container rsvp-wrapper">
-            <Logger msg={estado} />
+        <div className="container rsvp-wrapper">            
             {estado.loading ? (
                 <CircularProgress/>
             ) : null}

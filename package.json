@@ -1,6 +1,6 @@
 {
   "name": "mth40",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.12",
@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "dotenv": "^8.2.0",
     "locale": "^0.1.0",
-    "moment": "2.24.0",
+    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-data-table-component": "^6.9.2",
     "react-dom": "^16.13.1",

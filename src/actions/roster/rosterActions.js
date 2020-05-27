@@ -6,7 +6,7 @@ export function loadListRoster() {
 //export const loadListRoster = () => dispatch =>{
     return { type: LOAD_LIST_ROSTER_REQUEST }    
     //dispatch({ type: LOAD_LIST_ROSTER_REQUEST });
- };
+};
 
 export function loadListRosterSuccess(data) {
     return {

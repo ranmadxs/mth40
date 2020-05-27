@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {BottomNavigation, Divider, Box} from '@material-ui/core';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -19,45 +19,23 @@ const useStyles = makeStyles(styles);
 
 export const MainHeader = (props) => {  
     const {
-        loadListRoster
+        menu,
+        setMenuStatus,
     } = props;
-//function LabelBottomNavigation(props) {
-    const uri = window.location.pathname.length>1?window.location.pathname.replace("/", ""):window.location.pathname;
-    //console.log(uri, "setEstado");
+    console.log(menu, "Menu");
     const classes = useStyles();
-    const [estado, setEstado] = useState(uri);
     const showLabel = true;
     let history = useHistory();
 
-    const loadData = (menuSelected) => {
-        if(menuSelected === 'rosters'){
-            loadListRoster();
-        }        
-    };
-
-    //loadData(uri);
-    
-    useEffect(() => {
-        loadData(uri);
-    });
-
-/*
-    useEffect(() => {
-        //const menuSelec = uri;
-        loadData(uri);
-    }, []);
-
-*/    
     const handleChange = (event, newValue) => {
-        setEstado(newValue);
-        loadData(newValue);
+        setMenuStatus(newValue);
         history.push(newValue);
     };
   
     return (
         <Box mt={1} mb={2}>
             <Box mt={1} mb={2}>
-            <BottomNavigation value={estado} onChange={handleChange} className={classes.root}>
+            <BottomNavigation value={menu.status} onChange={handleChange} className={classes.root}>
                 <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} showLabel={showLabel} />
                 <BottomNavigationAction label="Tournaments" value="tournaments" icon={<SportsEsportsIcon />} showLabel={showLabel}/>
                 <BottomNavigationAction label="Rosters" value="rosters" icon={<PermMediaIcon />} showLabel={showLabel} />
@@ -71,6 +49,6 @@ export const MainHeader = (props) => {
   }
   
 MainHeader.propTypes = {
-    loadListRoster:    PropTypes.func.isRequired,
+    menu: PropTypes.object.isRequired,    
+    setMenuStatus: PropTypes.func.isRequired,
 }
- //export default LabelBottomNavigation;

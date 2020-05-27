@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 //import { routerReducer as routing } from 'react-router-redux';
 import {reducer as SearchGlobal} from './reducers/search/searchGlobalReducer';
 import {reducer as Roster} from './reducers/roster/rosterReducer';
+import {reducer as Menu} from './reducers/menu/menuReducer';
 import {ADD_TODO} from './actions/generalActions'
 
 function TODOS(state = [], action) {
@@ -15,6 +16,7 @@ function TODOS(state = [], action) {
 
 const SEARCH = combineReducers({
   SearchGlobal,
+  Menu,
 });
 
 const MTH40 = combineReducers({

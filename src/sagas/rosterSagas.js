@@ -8,7 +8,10 @@ import {
 } from "../actions/roster/rosterActions";
 
 async function fetchAsync() {
-    const response = await fetch(mth40.config.API_MTH40_URL+'/roster/list?projections=name%20teamOwner%20status%20mainFaction');
+    const response = await fetch(
+        mth40.config.API_MTH40_URL+
+        '/roster/list?projections=name%20teamOwner%20status%20mainFaction%20createdAt'
+    );
     const json = await response.json();
     return json;
 }

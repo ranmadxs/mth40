@@ -1,6 +1,6 @@
 import React from "react";
 import {MainIframe} from './component/utils/MainIframe';
-import {Logger} from './component/utils/Logger.jsx';
+//import {Logger} from './component/utils/Logger.jsx';
 import TournamentModule from "./module/tournaments/TournamentModule";
 import SearchAll from './containers/search/SearchGlobalContainer';
 import MenuContainer from './containers/menu/MenuContainer'
@@ -10,20 +10,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 var pjson = require('../package.json');
 
-const Rosters = () => {
-  return (
-    <div>
-        <Logger msg='Logueando ando' />
-        <h2>Hello World 2 [rosters]</h2>
-    </div>
-); 
+function onAppInit(dispatch) {
+  console.log("appInit");
 }
 
-const App = () => {
+const App = ({store}) => {
   const { version } = pjson;
   return (    
     <Router>
@@ -42,14 +36,12 @@ const App = () => {
           <Route path="/rosterImport">
             <MainIframe />
           </Route>          
-          <Route path="/rosters">
-            <Rosters />
-            <RosterContainer />
+          <Route path="/rosters" component={RosterContainer}>
           </Route>
           <Route path="/favorites">
             <div>Hola Favorites</div>
           </Route>          
-          <Route path="/">
+          <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <Home 
               version={version}
             />
@@ -67,7 +59,7 @@ function Home({version}) {
       <h2>Home V {version}</h2>
       <ul>
           <li>
-            <Link to="/">Home</Link>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="/tournaments">Tournaments</a>

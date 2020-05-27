@@ -1,23 +1,37 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
 import DataTable from 'react-data-table-component';
+import moment from 'moment';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+// import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+// import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import {Box} from '@material-ui/core';
+import {
+  //useHistory,
+  Link
+} from "react-router-dom";
 //https://www.npmjs.com/package/react-data-table-component#demo-and-examples
 
+// moment.utc(date).format(formatDate, 'YYYY/MM/DD');
 export const RosterList = (props) => {  
   const { 
-    roster, 
+    listRoster, 
+    loadListRoster,
   } = props;
   
+  //let history = useHistory();
+  //const [estado, setEstado] = useState('rosters');
+
+  const formatDateCustom = (fecha) => {
+    return moment.utc(fecha).format('YYYY/MM/DD');
+  }
 
   useEffect(() => {
-  }, [roster]);
+    loadListRoster();
+    // eslint-disable-next-line
+  }, [] );    
 
   const columns = [
-    {
-      name: 'ID',
-      selector: '_id',
-      sortable: false,
-    },
     {
       name: 'Name',
       selector: 'name',
@@ -31,10 +45,28 @@ export const RosterList = (props) => {
       right: false,
     },
     {
-      name: 'Status',
-      selector: 'status',
+      name: 'Faction',
+      selector: 'mainFaction',
       sortable: true,
       right: false,
+    },    
+    {
+      name: 'Created At',
+      sortable: true,
+      right: false,
+      cell: row => <div>{formatDateCustom(row.createdAt)}</div>,
+    },
+    {
+      name: 'Actions',
+      sortable: false,
+      right: false,
+      cell: row => 
+        <Box mt={1} mb={1}>
+          <Link to={`/rosterImport`}>
+            <VisibilityIcon fontSize="small" />
+          </Link>
+        </Box>,
+      width: '140px',
     },
   ];
 
@@ -44,13 +76,13 @@ export const RosterList = (props) => {
       <DataTable        
         title="Rosters"
         columns={columns}
-        data={roster.list}
+        data={listRoster}
       />
     </div>
     )
   };
     
   RosterList.propTypes = {
-    roster:   PropTypes.object.isRequired,
-  //  loadListRoster:    PropTypes.func.isRequired,
+    listRoster:   PropTypes.array.isRequired,
+    loadListRoster:    PropTypes.func.isRequired,
   }

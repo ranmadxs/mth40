@@ -1,9 +1,9 @@
 import {
     LOAD_LIST_ROSTER_REQUEST, 
     LOAD_LIST_ROSTER_SUCESS, 
-    LOAD_LIST_ROSTER_ERROR
+    LOAD_LIST_ROSTER_ERROR,
 } from "../../actions/roster/rosterActions";
- 
+
 const initialState = {
     list: [],
     loading: false,
@@ -35,7 +35,6 @@ const initialState = {
                 error: action.error
             };
         }
-
         default: {
             return state;
         }
