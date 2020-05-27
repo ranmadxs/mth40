@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import {reducer as SearchGlobal} from './reducers/search/searchGlobalReducer';
 import {reducer as Roster} from './reducers/roster/rosterReducer';
 import {reducer as Menu} from './reducers/menu/menuReducer';
+import {reducer as Challonge} from './reducers/tournament/challongeReducer';
 import {ADD_TODO} from './actions/generalActions'
 
 function TODOS(state = [], action) {
@@ -13,6 +14,10 @@ function TODOS(state = [], action) {
         return state
     }
 };
+
+const TOURNAMENTS = combineReducers({
+  Challonge,
+});
 
 const SEARCH = combineReducers({
   SearchGlobal,
@@ -27,6 +32,7 @@ const reducers = combineReducers({
     SEARCH,
     MTH40,
     TODOS,
+    TOURNAMENTS,
 });
 
 export default reducers;

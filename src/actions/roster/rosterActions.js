@@ -7,10 +7,3 @@ export function loadListRoster() {
     return { type: LOAD_LIST_ROSTER_REQUEST }    
     //dispatch({ type: LOAD_LIST_ROSTER_REQUEST });
 };
-
-export function loadListRosterSuccess(data) {
-    return {
-      type: LOAD_LIST_ROSTER_SUCESS,
-      data,
-    };
-}

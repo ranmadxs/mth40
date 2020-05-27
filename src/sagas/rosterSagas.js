@@ -7,18 +7,13 @@ import {
     LOAD_LIST_ROSTER_ERROR, 
 } from "../actions/roster/rosterActions";
 
-async function fetchAsync() {
-    const response = await fetch(
-        mth40.config.API_MTH40_URL+
-        '/roster/list?projections=name%20teamOwner%20status%20mainFaction%20createdAt'
-    );
-    const json = await response.json();
-    return json;
-}
-
 function* listRoster() {
     try {
-        const data = yield fetchAsync();
+        const response = yield fetch(
+            mth40.config.API_MTH40_URL+
+            '/roster/list?projections=name%20teamOwner%20status%20mainFaction%20createdAt'
+        );        
+        const data = yield response.json();
         yield put({type: LOAD_LIST_ROSTER_SUCESS, data: data});
     } catch (e) {
         yield put({type: LOAD_LIST_ROSTER_ERROR, error: e.message});

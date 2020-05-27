@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {styles} from './TournamentStyle'
+import {styles} from '../utils/select/MTH40SelectStyle';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -8,13 +8,25 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import {TournamentSelect} from './TournamentSelect';
+import {MTH40Select} from '../utils/select/MTH40Select';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => (styles(theme)));
 
-export const TournamentHeader = () => {
+export const TournamentFilter = (props) => {
+  const { 
+    challongeList, 
+    loadListTournaments,
+  } = props;
+  console.log(challongeList,'challongeList');
   const classes = useStyles();  
   const message = `Partidas del Torneo de Challonge`;
+
+  useEffect(() => {
+    loadListTournaments();
+    // eslint-disable-next-line
+  }, [] );
+
   const participants = [{id: 1, name: 'Partido1 (A vs B)'}, {id: 2, name: 'Partido2 (A vs C)'}];
   return (
     <React.Fragment>
@@ -32,9 +44,10 @@ export const TournamentHeader = () => {
                     <Avatar>1</Avatar>
                   </Grid>
                   <Grid item xs>
-                    <TournamentSelect 
+                    <MTH40Select 
                       inputLabel='Torneo'
                       formHelper='Seleccione el Torneo de Challonge'
+                      items={challongeList}
                     />
                   </Grid>
                 </Grid>
@@ -47,7 +60,7 @@ export const TournamentHeader = () => {
                     <Avatar>2</Avatar>
                   </Grid>
                   <Grid item xs>
-                    <TournamentSelect 
+                    <MTH40Select 
                       inputLabel='Partido'
                       formHelper={message}
                       items={participants}
@@ -62,3 +75,8 @@ export const TournamentHeader = () => {
     </React.Fragment>
   );
 };
+
+TournamentFilter.propTypes = {
+  challongeList:   PropTypes.array.isRequired,
+  loadListTournaments:    PropTypes.func.isRequired,
+}

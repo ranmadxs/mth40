@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {styles} from './TournamentStyle'
+import {styles} from './MTH40SelectStyle'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -9,11 +9,11 @@ import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => (styles(theme)));
 
-export const TournamentSelect = (props) => {
+export const MTH40Select = (props) => {
     const {
         formHelper = 'None', 
         inputLabel = 'None',
-        items = [{id: 1, name: 'Torneo1'}, {id: 2, name: 'Torneo2'}],
+        items = [],
     } = props;
     const classes = useStyles();
     const [selectedVal, setSelectedVal] = React.useState('');
@@ -22,10 +22,10 @@ export const TournamentSelect = (props) => {
     };    
     return (
         <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-helper-label">{inputLabel}</InputLabel>
+            <InputLabel id="input-select-label">{inputLabel}</InputLabel>
             <Select
-                labelId="tournamenty-simple-select"
-                id="tournament-simple-select"
+                labelId="label-simple-select"
+                id="id-simple-select"
                 value={selectedVal}
                 onChange={handleChange}
             >
