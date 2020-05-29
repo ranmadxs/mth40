@@ -2,6 +2,14 @@ export const LOAD_LIST_TOURNAMENTS_REQUEST = 'APP/TOURNAMENTS/LIST_REQUEST';
 export const LOAD_LIST_TOURNAMENTS_SUCESS = 'APP/TOURNAMENTS/LIST_SUCESS';
 export const LOAD_LIST_TOURNAMENTS_ERROR = 'APP/TOURNAMENTS/LIST_ERROR';
 
+export const LOAD_LIST_MATCHES_REQUEST = 'APP/MATCHES/LIST_REQUEST';
+export const LOAD_LIST_MATCHES_SUCESS = 'APP/MATCHES/LIST_SUCESS';
+export const LOAD_LIST_MATCHES_ERROR = 'APP/MATCHES/LIST_ERROR';
+
 export const loadListTournaments = () => {
-    return { type: LOAD_LIST_TOURNAMENTS_REQUEST }
+    return { type: LOAD_LIST_TOURNAMENTS_REQUEST };
+};
+
+export const loadListMatches = (tournamentId) => {
+    return { type: LOAD_LIST_MATCHES_REQUEST, tournamentId };
 };

@@ -14,11 +14,11 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => (styles(theme)));
 
 export const TournamentFilter = (props) => {
-  const { 
-    challongeList, 
+  const {
+    challonge,
     loadListTournaments,
+    loadListMatches,
   } = props;
-  console.log(challongeList,'challongeList');
   const classes = useStyles();  
   const message = `Partidas del Torneo de Challonge`;
 
@@ -27,7 +27,11 @@ export const TournamentFilter = (props) => {
     // eslint-disable-next-line
   }, [] );
 
-  const participants = [{id: 1, name: 'Partido1 (A vs B)'}, {id: 2, name: 'Partido2 (A vs C)'}];
+  const onChangeTournament = (tournamentId) => {
+    loadListMatches(tournamentId);
+  }
+
+  const participants = challonge.tournament.matches;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -47,7 +51,8 @@ export const TournamentFilter = (props) => {
                     <MTH40Select 
                       inputLabel='Torneo'
                       formHelper='Seleccione el Torneo de Challonge'
-                      items={challongeList}
+                      items={challonge.tournaments}
+                      onChange={onChangeTournament}
                     />
                   </Grid>
                 </Grid>
@@ -77,6 +82,7 @@ export const TournamentFilter = (props) => {
 };
 
 TournamentFilter.propTypes = {
-  challongeList:   PropTypes.array.isRequired,
-  loadListTournaments:    PropTypes.func.isRequired,
+  challonge: PropTypes.object.isRequired,
+  loadListTournaments: PropTypes.func.isRequired,
+  loadListMatches: PropTypes.func.isRequired,
 }

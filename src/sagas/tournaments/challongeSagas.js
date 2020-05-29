@@ -6,6 +6,9 @@ import {
     LOAD_LIST_TOURNAMENTS_REQUEST,
     LOAD_LIST_TOURNAMENTS_SUCESS,
     LOAD_LIST_TOURNAMENTS_ERROR,
+    LOAD_LIST_MATCHES_REQUEST,
+    LOAD_LIST_MATCHES_SUCESS,
+    LOAD_LIST_MATCHES_ERROR,
 } from '../../actions/tournament/challongeActions';
 
 function* listTournament() {
@@ -19,7 +22,25 @@ function* listTournament() {
     } catch (e) {
         yield put({type: LOAD_LIST_TOURNAMENTS_ERROR, error: e.message});
     }
- }
+}
+
+function* listMatches({tournamentId}) {
+    try {
+        const response = yield fetch(
+            mth40.config.API_MTH40_URL+
+            `/challonge/matches?tournamentId=${tournamentId}`
+        );
+        const data = yield response.json();
+        const tournament = {
+            id: tournamentId,
+            matches: data,
+        }
+        console.log(tournament);
+        yield put({type: LOAD_LIST_MATCHES_SUCESS, data: tournament});
+    } catch (e) {
+        yield put({type: LOAD_LIST_MATCHES_ERROR, error: e.message});
+    }
+}
 
 export function* listTournamentSaga() {
     const watcher = yield takeEvery(LOAD_LIST_TOURNAMENTS_REQUEST, listTournament);
@@ -27,6 +48,13 @@ export function* listTournamentSaga() {
     yield cancel(watcher);
 }
 
+export function* listMatchesSaga() {
+    const watcher = yield takeEvery(LOAD_LIST_MATCHES_REQUEST, listMatches);
+    yield take(LOCATION_CHANGE);
+    yield cancel(watcher);
+}
+
 export default [
     listTournamentSaga(),
+    listMatchesSaga(),
 ]; 
