@@ -53,6 +53,7 @@ export const TournamentFilter = (props) => {
                       formHelper='Seleccione el Torneo de Challonge'
                       items={challonge.tournaments}
                       onChange={onChangeTournament}
+                      loading={challonge.loading}
                     />
                   </Grid>
                 </Grid>
@@ -69,6 +70,7 @@ export const TournamentFilter = (props) => {
                       inputLabel='Partido'
                       formHelper={message}
                       items={participants}
+                      loading={challonge.loadingMatches}
                     />
                   </Grid>
                 </Grid>

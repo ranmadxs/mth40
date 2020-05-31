@@ -26,17 +26,25 @@ function* listTournament() {
 
 function* listMatches({tournamentId}) {
     try {
+        /*
         const response = yield fetch(
             mth40.config.API_MTH40_URL+
             `/challonge/matches?tournamentId=${tournamentId}`
         );
+        */
+       const response = yield fetch(
+            mth40.config.API_MTH40_URL+
+            `/challonge/tournament?tournamentId=${tournamentId}&include_participants=1&include_matches=1`
+        );
         const data = yield response.json();
+        /*
         const tournament = {
             id: tournamentId,
             matches: data,
-        }
+        }        
         console.log(tournament);
-        yield put({type: LOAD_LIST_MATCHES_SUCESS, data: tournament});
+        */
+        yield put({type: LOAD_LIST_MATCHES_SUCESS, data: data});
     } catch (e) {
         yield put({type: LOAD_LIST_MATCHES_ERROR, error: e.message});
     }

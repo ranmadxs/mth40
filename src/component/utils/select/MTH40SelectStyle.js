@@ -7,6 +7,13 @@ export const styles = (theme) => {
       selectEmpty: {
         marginTop: theme.spacing(2),
       },
+      fabProgress: {
+        color: '#3F51B5',
+        position: 'absolute',
+        top: -7,
+        left: -65,
+        zIndex: 1,
+      },
       root: {
         flexGrow: 1,
         overflow: 'hidden',

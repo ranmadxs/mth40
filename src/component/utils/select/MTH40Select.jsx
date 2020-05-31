@@ -7,6 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 import Select from '@material-ui/core/Select';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => (styles(theme)));
 
@@ -16,6 +17,7 @@ export const MTH40Select = (props) => {
         inputLabel = 'None',
         onChange,
         items = [],
+        loading = false,
     } = props;
     const classes = useStyles();
     const [selectedVal, setSelectedVal] = React.useState('');
@@ -25,7 +27,7 @@ export const MTH40Select = (props) => {
         if (onChange) {
             onChange(event.target.value);
         }
-    };    
+    };
     return (
         <FormControl className={classes.formControl}>
             <InputLabel id="input-select-label">{inputLabel}</InputLabel>
@@ -33,6 +35,7 @@ export const MTH40Select = (props) => {
                 labelId="label-simple-select"
                 id="id-simple-select"
                 value={selectedVal}
+                disabled={loading}
                 onChange={handleChange}
             >
                 <MenuItem value="">
@@ -42,6 +45,7 @@ export const MTH40Select = (props) => {
                     <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                 )}
             </Select>
+            {loading && <CircularProgress size={42} className={classes.fabProgress} />}
             <FormHelperText>{formHelper}</FormHelperText>
         </FormControl>        
     );

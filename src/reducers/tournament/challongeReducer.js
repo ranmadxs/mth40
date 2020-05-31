@@ -14,6 +14,7 @@ const initialState = {
         matches: [],
     },
     loading: false,
+    loadingMatches: false,
     error: ''
  };
 
@@ -46,7 +47,7 @@ const initialState = {
                 tournament: {
                     id: action.tournamentId
                 },
-                loading: true,
+                loadingMatches: true,
                 error:''
             };
         }        
@@ -54,13 +55,13 @@ const initialState = {
             return {
                 ...state,
                 tournament: action.data,
-                loading: false
+                loadingMatches: false
             }
         }        
         case LOAD_LIST_MATCHES_ERROR: {
             return {
                 ...state,
-                loading: false,                
+                loadingMatches: false,
                 error: action.error
             };
         }

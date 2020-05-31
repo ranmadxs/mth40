@@ -17,9 +17,9 @@ export const RosterContainer = (props) => {
             <RosterHeader />
             <RosterList 
                 listRoster = {roster.list}
+                loading = {roster.loading}
                 loadListRoster = {loadListRoster}
             />
-            Hola mundo soy el Roster del orto
         </Container>
     );
 };
