@@ -8,6 +8,11 @@ import {
 } from '../../actions/tournament/challongeActions';
 import {Container} from '@material-ui/core';
 
+//TODO: Agregar Datacheet como componente
+//https://nadbm.github.io/react-datasheet/
+//https://github.com/nadbm/react-datasheet
+//TODO: Se podría abrir el excel en una nueva pantalla y la de 
+//tournament valida los roser con hipervínculos y cosas
 const TournamentContainer = (props) => {
     const {
         challonge,

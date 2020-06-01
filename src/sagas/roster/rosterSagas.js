@@ -1,11 +1,11 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { put, take, cancel, takeEvery } from 'redux-saga/effects';
-import mth40 from '../config';
+import mth40 from '../../config';
 import {
     LOAD_LIST_ROSTER_REQUEST, 
     LOAD_LIST_ROSTER_SUCESS, 
     LOAD_LIST_ROSTER_ERROR, 
-} from "../actions/roster/rosterActions";
+} from "../../actions/roster/rosterActions";
 
 function* listRoster() {
     try {

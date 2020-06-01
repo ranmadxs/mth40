@@ -1,0 +1,7 @@
+export const LOAD_GET_ROSTER_TOURNAMENT_REQUEST = 'APP/ROSTER_TOURNAMENT/GET_REQUEST';
+export const LOAD_GET_ROSTER_TOURNAMENT_SUCESS = 'APP/ROSTER_TOURNAMENT/GET_SUCESS';
+export const LOAD_GET_ROSTER_TOURNAMENT_ERROR = 'APP/ROSTER_TOURNAMENT/GET_ERROR';
+
+export const getRosterTournament = (tournamentId, participantId) => {
+    return { type: LOAD_GET_ROSTER_TOURNAMENT_REQUEST, tournamentId, participantId};
+};

@@ -1,6 +1,6 @@
 {
   "name": "mth40",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.12",
@@ -13,6 +13,7 @@
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-data-table-component": "^6.9.2",
+    "react-datasheet": "^1.4.4",
     "react-dom": "^16.13.1",
     "react-log": "^4.0.0",
     "react-redux": "^7.2.0",

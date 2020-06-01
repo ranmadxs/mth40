@@ -1,18 +1,18 @@
 import {
-    LOAD_LIST_ROSTER_REQUEST, 
-    LOAD_LIST_ROSTER_SUCESS, 
-    LOAD_LIST_ROSTER_ERROR,
-} from "../../actions/roster/rosterActions";
+    LOAD_GET_ROSTER_TOURNAMENT_REQUEST, 
+    LOAD_GET_ROSTER_TOURNAMENT_SUCESS, 
+    LOAD_GET_ROSTER_TOURNAMENT_ERROR,
+} from "../../actions/roster/rosterTournamentActions";
 
 const initialState = {
-    list: [],
+    selected: {},
     loading: false,
     error: ''
  };
 
-export const reducer = (state = initialState, action) => {
+ export const reducer = (state = initialState, action) => {
     switch (action.type) {                
-        case LOAD_LIST_ROSTER_REQUEST: {
+        case LOAD_GET_ROSTER_TOURNAMENT_REQUEST: {
             return {
                 ...state,
                 loading: true,
@@ -20,23 +20,24 @@ export const reducer = (state = initialState, action) => {
             };
         }
         
-        case LOAD_LIST_ROSTER_SUCESS: {
+        case LOAD_GET_ROSTER_TOURNAMENT_SUCESS: {
             return {
                 ...state,
-                list: action.data,
+                selected: action.data,
                 loading: false
             }
         }
         
-        case LOAD_LIST_ROSTER_ERROR: {
+        case LOAD_GET_ROSTER_TOURNAMENT_ERROR: {
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
+                selected: {}
             };
         }
         default: {
             return state;
         }
     }
-}
+ }

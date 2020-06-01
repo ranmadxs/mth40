@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//TODO: Revisar como poner los tanques y las escuadras.
 //<entryLinks>
 //<sharedSelectionEntries> -> 
 app.controller('ShootingController', function($http, $scope, $filter, $location, $rootScope, $q, $routeParams, requestUtil, properties, battleScribeSvc, comparaSvc) {

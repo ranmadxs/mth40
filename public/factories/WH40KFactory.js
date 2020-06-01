@@ -1,4 +1,3 @@
-//TODO:promised
 app.factory('wh40KFactory', function ($location, $http, properties) {
 
     parseXmlObj = function ($fileContent, $mainTag) {

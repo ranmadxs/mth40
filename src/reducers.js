@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 //import { routerReducer as routing } from 'react-router-redux';
 import {reducer as SearchGlobal} from './reducers/search/searchGlobalReducer';
 import {reducer as Roster} from './reducers/roster/rosterReducer';
+import {reducer as RosterTournament} from './reducers/roster/rosterTournamentReducer';
 import {reducer as Menu} from './reducers/menu/menuReducer';
 import {reducer as Challonge} from './reducers/tournament/challongeReducer';
 import {ADD_TODO} from './actions/generalActions'
@@ -26,6 +27,7 @@ const SEARCH = combineReducers({
 
 const MTH40 = combineReducers({
   Roster,
+  RosterTournament,
 });
 
 const reducers = combineReducers({
