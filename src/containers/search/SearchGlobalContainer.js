@@ -1,24 +1,33 @@
+import React from 'react';
 import { connect } from 'react-redux';
-import { addSearch } from '../../actions/search/globalSearchActions';
-import {SearchInput} from '../../component/search/SearchInput'
+import PropTypes from 'prop-types';
+import { addSearch as addSearchAction} from '../../actions/search/globalSearchActions';
+import {SearchAppBar} from '../../component/search/SearchAppBar'
+import {Container} from '@material-ui/core';
 
-const mapStateToProps = (state) => {
-  return {
-      globalSearch: {...state.SEARCH.SearchGlobal}
-  }
-};
+export const SearchGlobalContainer = (props) => {
+  const {
+    addSearch
+  } = props;
+  return (
+    <Container maxWidth="lg">
+      <SearchAppBar
+        addSearch={addSearch}
+      />
+    </Container>
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addSearch: (text) => {
-      dispatch(addSearch(text))
-    }
-  }
-};
+}
 
-const SearchAll = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchInput);
+const mapStateToProps = (state) => ({
+});
 
-export default SearchAll;
+const mapDispatchToProps = (dispatch) => ({
+  addSearch: (text) => dispatch(addSearchAction(text)),
+});
+
+SearchGlobalContainer.propTypes = {
+  addSearch: PropTypes.func.isRequired,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchGlobalContainer);

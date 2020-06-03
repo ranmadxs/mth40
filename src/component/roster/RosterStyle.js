@@ -1,5 +1,3 @@
-export const styles = (theme) => {
-    return({
-        
-    });
-};  
+export const styles = (theme) => ({
+
+});

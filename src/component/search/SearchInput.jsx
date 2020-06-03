@@ -26,6 +26,5 @@ export const SearchInput = ({ addSearch }) => {
 };
    
 SearchInput.propTypes = {
-  globalSearch:   PropTypes.object.isRequired,
   addSearch:    PropTypes.func.isRequired,
 }

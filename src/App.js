@@ -1,6 +1,6 @@
 import React from "react";
 import {MainIframe} from './component/utils/MainIframe';
-import SearchAll from './containers/search/SearchGlobalContainer';
+import SearchGlobalContainer from './containers/search/SearchGlobalContainer';
 import MenuContainer from './containers/menu/MenuContainer'
 import RosterContainer from './containers/roster/RosterContainer';
 import SearchListContainer from './containers/search/SearchListContainer';
@@ -21,7 +21,7 @@ const App = ({store}) => {
   return (    
     <Router>
       <div>
-        <SearchAll/>
+        <SearchGlobalContainer/>
         <MenuContainer/>
         {/*<MainHeader/>*/}
         {/* A <Switch> looks through its children <Route>s and

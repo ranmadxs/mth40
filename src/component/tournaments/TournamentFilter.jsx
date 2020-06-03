@@ -13,11 +13,13 @@ import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => (styles(theme)));
 
+//TODO: Rescatar de la lista el match seleccionado para ir a preguntar por tmatch con itRoutnament y los dos idPlayers
 export const TournamentFilter = (props) => {
   const {
     challonge,
     loadListTournaments,
     loadListMatches,
+    getRosterTournament,
   } = props;
   const classes = useStyles();  
   const message = `Partidas del Torneo de Challonge`;
@@ -29,6 +31,11 @@ export const TournamentFilter = (props) => {
 
   const onChangeTournament = (tournamentId) => {
     loadListMatches(tournamentId);
+  }
+  
+  const onChangeMatch = (matchId) => {
+    console.log(matchId, 'matchId');
+    //loadListMatches(tournamentId);
   }
 
   const participants = challonge.tournament.matches;
@@ -71,6 +78,7 @@ export const TournamentFilter = (props) => {
                       formHelper={message}
                       items={participants}
                       loading={challonge.loadingMatches}
+                      onChange={onChangeMatch}
                     />
                   </Grid>
                 </Grid>
@@ -87,4 +95,5 @@ TournamentFilter.propTypes = {
   challonge: PropTypes.object.isRequired,
   loadListTournaments: PropTypes.func.isRequired,
   loadListMatches: PropTypes.func.isRequired,
+  getRosterTournament: PropTypes.func.isRequired,
 }
