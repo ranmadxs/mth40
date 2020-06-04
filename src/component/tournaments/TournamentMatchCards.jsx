@@ -22,24 +22,25 @@ export const TournamentMatchCards = (props) => {
     }
   // eslint-disable-next-line
   }, [match]);
-  
+  const nbsp = '\u00A0';
   return (<>
     {!_.isEmpty(tmatch) && !_.isEmpty(match) && (
-      <Grid container spacing={2}>
+      <Grid container spacing={2} alignContent='center' alignItems='center' justify='center'>
         {!_.isEmpty(tmatch.player1) && (
-          <MatchCard 
-            roster = {tmatch.player1.roster}
-            tournament = {tmatch.tournament}
-            participant = {tmatch.player1.participant}
-          />
+            <MatchCard
+              roster = {tmatch.player1.roster}
+              tournament = {tmatch.tournament}
+              participant = {tmatch.player1.participant}
+            />
         )}
+        <div>{nbsp}V/S{nbsp}</div>
         {!_.isEmpty(tmatch.player2) && (
-          <MatchCard 
-            roster = {tmatch.player2.roster}
-            tournament = {tmatch.tournament}
-            participant = {tmatch.player2.participant}
-          />
-        )}        
+            <MatchCard 
+              roster = {tmatch.player2.roster}
+              tournament = {tmatch.tournament}
+              participant = {tmatch.player2.participant}
+            />
+        )}
       </Grid>
     )}
   </>);

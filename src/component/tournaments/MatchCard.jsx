@@ -56,8 +56,8 @@ export const MatchCard = (props) => {
                     <ThemeProvider theme={muiTheme}>
                         <Typography variant="subtitle1" >
                             {seed}{bull}{name}
-                            <br />
-                            {fechaCreacion}
+                            <br /><br />
+                            Fecha Creación: {fechaCreacion}
                         </Typography>
                     </ThemeProvider>
                 </CardContent>
