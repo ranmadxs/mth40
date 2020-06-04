@@ -1,10 +1,11 @@
 import {
-    LOAD_LIST_TOURNAMENTS_REQUEST, 
-    LOAD_LIST_TOURNAMENTS_SUCESS, 
-    LOAD_LIST_TOURNAMENTS_ERROR,
-    LOAD_LIST_MATCHES_REQUEST,
-    LOAD_LIST_MATCHES_SUCESS,
-    LOAD_LIST_MATCHES_ERROR,
+    CHALLONGE_TOURNAMENTS_LIST_REQUEST, 
+    CHALLONGE_TOURNAMENTS_LIST_SUCESS, 
+    CHALLONGE_TOURNAMENTS_LIST_ERROR,
+    CHALLONGE_MATCHES_LIST_REQUEST,
+    CHALLONGE_MATCHES_LIST_SUCESS,
+    CHALLONGE_MATCHES_LIST_ERROR,
+    CHALLONGE_MATCH_SET_SELECTED,
 } from "../../actions/tournament/challongeActions";
 
 const initialState = {
@@ -13,52 +14,64 @@ const initialState = {
         id: null,
         matches: [],
     },
+    match: {},
     loading: false,
     loadingMatches: false,
     error: ''
  };
 
  export const reducer = (state = initialState, action) => {
-    switch (action.type) {                
-        case LOAD_LIST_TOURNAMENTS_REQUEST: {
+    switch (action.type) {
+      case "RESET":
+        return initialState;      
+      case CHALLONGE_MATCH_SET_SELECTED: {
+        return {
+          ...state,
+          loading: false,
+          match: action.match,
+          error:''
+        };            
+      }      
+        case CHALLONGE_TOURNAMENTS_LIST_REQUEST: {
             return {
                 ...state,
                 loading: true,
                 error:''
             };
         }        
-        case LOAD_LIST_TOURNAMENTS_SUCESS: {
+        case CHALLONGE_TOURNAMENTS_LIST_SUCESS: {
             return {
                 ...state,
                 tournaments: action.data,
                 loading: false
             }
         }        
-        case LOAD_LIST_TOURNAMENTS_ERROR: {
+        case CHALLONGE_TOURNAMENTS_LIST_ERROR: {
             return {
                 ...state,
                 loading: false,
                 error: action.error
             };
         }
-        case LOAD_LIST_MATCHES_REQUEST: {
+        case CHALLONGE_MATCHES_LIST_REQUEST: {
             return {
                 ...state,
                 tournament: {
                     id: action.tournamentId
                 },
                 loadingMatches: true,
+                match: {},
                 error:''
             };
         }        
-        case LOAD_LIST_MATCHES_SUCESS: {
+        case CHALLONGE_MATCHES_LIST_SUCESS: {
             return {
                 ...state,
                 tournament: action.data,
                 loadingMatches: false
             }
         }        
-        case LOAD_LIST_MATCHES_ERROR: {
+        case CHALLONGE_MATCHES_LIST_ERROR: {
             return {
                 ...state,
                 loadingMatches: false,
@@ -69,4 +82,4 @@ const initialState = {
             return state;
         }
     }
- }
+}

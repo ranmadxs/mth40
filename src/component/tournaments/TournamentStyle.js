@@ -3,7 +3,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 export const styles = (theme) => ({
     root: {
-        maxWidth: 300,
+        maxWidth: 400,
     },
     bullet: {
         display: 'inline-block',
@@ -22,6 +22,10 @@ export const styles = (theme) => ({
         width: theme.spacing(3),
         height: theme.spacing(3),
     },
+    medium: {
+      width: theme.spacing(5),
+      height: theme.spacing(5),
+    },    
     large: {
         width: theme.spacing(7),
         height: theme.spacing(7),

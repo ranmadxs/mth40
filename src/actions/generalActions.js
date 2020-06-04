@@ -12,3 +12,7 @@ export const SEARCH_GLOBAL = 'SEARCH_GLOBAL'
 export function addTodo(text) {
     return { type: ADD_TODO, text }
 }
+
+export const reset = () => {
+  return { type: "RESET"};
+}

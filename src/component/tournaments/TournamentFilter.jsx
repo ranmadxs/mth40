@@ -17,9 +17,10 @@ const useStyles = makeStyles((theme) => (styles(theme)));
 export const TournamentFilter = (props) => {
   const {
     challonge,
+    challonge: {tournament: {matches}},
     loadListTournaments,
     loadListMatches,
-    getRosterTournament,
+    setChallongeSelectedMatch,
   } = props;
   const classes = useStyles();  
   const message = `Partidas del Torneo de Challonge`;
@@ -34,7 +35,14 @@ export const TournamentFilter = (props) => {
   }
   
   const onChangeMatch = (matchId) => {
-    console.log(matchId, 'matchId');
+    //console.log(matchId, 'matchId');
+    //console.log('find Match in tournaments');
+    let match = matches.filter(match => match.id === matchId);
+    if(match && match.length > 0) {
+      match = match[0];
+      //console.log(match, 'match');
+      setChallongeSelectedMatch(match);
+    }
     //loadListMatches(tournamentId);
   }
 
@@ -95,5 +103,5 @@ TournamentFilter.propTypes = {
   challonge: PropTypes.object.isRequired,
   loadListTournaments: PropTypes.func.isRequired,
   loadListMatches: PropTypes.func.isRequired,
-  getRosterTournament: PropTypes.func.isRequired,
+  setChallongeSelectedMatch: PropTypes.func.isRequired,
 }

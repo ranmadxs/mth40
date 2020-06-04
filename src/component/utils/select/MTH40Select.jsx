@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {styles} from './MTH40SelectStyle'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,14 +15,19 @@ export const MTH40Select = (props) => {
     const {
         formHelper = 'None', 
         inputLabel = 'None',
+        defaultValue = '',
         onChange,
         items = [],
         loading = false,
     } = props;
     const classes = useStyles();
     const [selectedVal, setSelectedVal] = React.useState('');
+    useEffect(() => {
+        setSelectedVal(defaultValue);
+        // eslint-disable-next-line
+    }, [items] );
+
     const handleChange = (event) => {
-        console.log(event.target.value, 'TournamentId');
         setSelectedVal(event.target.value);
         if (onChange) {
             onChange(event.target.value);
@@ -39,15 +44,17 @@ export const MTH40Select = (props) => {
                 onChange={handleChange}
             >
                 <MenuItem value="">
-                    <em>None</em>
+                    {<span className={classes.spanRed}>[... Seleccione]</span>}
                 </MenuItem>
                 {items.map((item) =>
-                    <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                    <MenuItem key={item.id} value={item.id}>
+                        {<span className={classes.spanItem}>{item.name}</span>}
+                    </MenuItem>
                 )}
             </Select>
             {loading && <CircularProgress size={42} className={classes.fabProgress} />}
             <FormHelperText>{formHelper}</FormHelperText>
-        </FormControl>        
+        </FormControl>           
     );
 };
 

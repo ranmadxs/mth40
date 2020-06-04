@@ -22,7 +22,7 @@ export const MainHeader = (props) => {
         menu,
         setMenuStatus,
     } = props;
-    console.log(menu, "Menu");
+    //console.log(menu, "Menu");
     const classes = useStyles();
     const showLabel = true;
     let history = useHistory();

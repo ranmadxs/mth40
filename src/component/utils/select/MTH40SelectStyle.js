@@ -23,6 +23,12 @@ export const styles = (theme) => {
         maxWidth: 400,
         margin: `${theme.spacing(1)}px auto`,
         padding: theme.spacing(2),
+      },
+      spanItem: {
+        color: '#3F51B5', 'font-size': '12px'
+      },
+      spanRed: {
+        color: '#B07C79', 'font-size': '12px'
       },      
     });
 };

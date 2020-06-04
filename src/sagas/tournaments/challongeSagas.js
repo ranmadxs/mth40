@@ -3,12 +3,12 @@ import { put, take, cancel, takeEvery } from 'redux-saga/effects';
 import mth40 from '../../config';
 
 import {
-    LOAD_LIST_TOURNAMENTS_REQUEST,
-    LOAD_LIST_TOURNAMENTS_SUCESS,
-    LOAD_LIST_TOURNAMENTS_ERROR,
-    LOAD_LIST_MATCHES_REQUEST,
-    LOAD_LIST_MATCHES_SUCESS,
-    LOAD_LIST_MATCHES_ERROR,
+    CHALLONGE_TOURNAMENTS_LIST_REQUEST,
+    CHALLONGE_TOURNAMENTS_LIST_SUCESS,
+    CHALLONGE_TOURNAMENTS_LIST_ERROR,
+    CHALLONGE_MATCHES_LIST_REQUEST,
+    CHALLONGE_MATCHES_LIST_SUCESS,
+    CHALLONGE_MATCHES_LIST_ERROR,
 } from '../../actions/tournament/challongeActions';
 
 function* listTournament() {
@@ -18,9 +18,9 @@ function* listTournament() {
             '/challonge/tournaments'
         );
         const data = yield response.json();
-        yield put({type: LOAD_LIST_TOURNAMENTS_SUCESS, data: data});
+        yield put({type: CHALLONGE_TOURNAMENTS_LIST_SUCESS, data: data});
     } catch (e) {
-        yield put({type: LOAD_LIST_TOURNAMENTS_ERROR, error: e.message});
+        yield put({type: CHALLONGE_TOURNAMENTS_LIST_ERROR, error: e.message});
     }
 }
 
@@ -44,20 +44,20 @@ function* listMatches({tournamentId}) {
         }        
         console.log(tournament);
         */
-        yield put({type: LOAD_LIST_MATCHES_SUCESS, data: data});
+        yield put({type: CHALLONGE_MATCHES_LIST_SUCESS, data: data});
     } catch (e) {
-        yield put({type: LOAD_LIST_MATCHES_ERROR, error: e.message});
+        yield put({type: CHALLONGE_MATCHES_LIST_ERROR, error: e.message});
     }
 }
 
 export function* listTournamentSaga() {
-    const watcher = yield takeEvery(LOAD_LIST_TOURNAMENTS_REQUEST, listTournament);
+    const watcher = yield takeEvery(CHALLONGE_TOURNAMENTS_LIST_REQUEST, listTournament);
     yield take(LOCATION_CHANGE);
     yield cancel(watcher);
 }
 
 export function* listMatchesSaga() {
-    const watcher = yield takeEvery(LOAD_LIST_MATCHES_REQUEST, listMatches);
+    const watcher = yield takeEvery(CHALLONGE_MATCHES_LIST_REQUEST, listMatches);
     yield take(LOCATION_CHANGE);
     yield cancel(watcher);
 }

@@ -18,7 +18,7 @@ export const SearchAppBar = (props) => {
   const classes = useStyles();
 
   const onChange = (event) => {
-    if(event.target && event.target.value.length > 3){
+    if(event.target && event.target.value.length >= 0){
       console.log(event.target.value, 'onchange');
       addSearch(event.target.value);
     }

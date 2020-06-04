@@ -13,7 +13,7 @@ function* getRosterTournament({tournamentId, participantId}) {
     try {
         const response = yield fetch(
             mth40.config.API_MTH40_URL+
-            `/roster/rtournament?tournamentId=${tournamentId}&participantId=${participantId}`
+            `/roster/tmatch?tournamentId=${tournamentId}&participantId=${participantId}`
         );
         const data = yield response.json();
         yield put({type: LOAD_GET_ROSTER_TOURNAMENT_SUCESS, data: data});

@@ -16,22 +16,23 @@ const useStyles = makeStyles((theme) => (styles(theme)));
 export const MatchCard = (props) => {
     const {
         roster : {name, teamOwner, conferenceName, mainFaction},
-        tournament,
+        // tournament,
         participant: {seed, created_at},
     } = props;
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
-    const nbsp = '\u00A0';
+    // const nbsp = '\u00A0';
     const fechaCreacion = moment.utc(created_at).format('YYYY/MM/DD HH:mm');
     const conferenceLogo = `/images/logos/${conferenceName}.png`;
-    const factionLogo = `/images/logos/${mainFaction}.png`;
+    const factionImageName = mainFaction.replace(/ /g, "_");
+    const factionLogo = `/images/logos/${factionImageName}.png`;
     return (
         <div className={classes.root}>            
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <br/>
-                    <Grid container spacing={2}>
-                        <Avatar alt={conferenceName} src={conferenceLogo} className={classes.small} />
+                    <Grid container spacing={2} alignItems="center">
+                        <Avatar alt={conferenceName} src={conferenceLogo} className={classes.medium} />
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                         {bull}{conferenceName}
                         </Typography>
@@ -41,11 +42,15 @@ export const MatchCard = (props) => {
                         {teamOwner}
                     </Typography>
                     <br />
-                    <Grid container spacing={2}>
-                        <Avatar alt="Inquisition" src={factionLogo} className={classes.small} />
-                        <Typography className={classes.pos} color="textSecondary">
-                        {bull}{mainFaction}
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs={2}>
+                        <Avatar alt="Inquisition" src={factionLogo} className={classes.medium} />
+                      </Grid>
+                      <Grid item xs={10}>
+                        <Typography className={classes.pos} color="textSecondary">                      
+                          {bull}{mainFaction}
                         </Typography>
+                      </Grid>
                     </Grid>
                     <br/>
                     <ThemeProvider theme={muiTheme}>
