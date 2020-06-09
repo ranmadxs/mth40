@@ -28,24 +28,25 @@ export const TournamentMatchCards = (props) => {
     {!_.isEmpty(tmatch) && !_.isEmpty(match) && (
       <Grid container spacing={2} alignContent='center' alignItems='center' justify='center'>
         {!_.isEmpty(tmatch.player1) && (
-            <MatchCard
-              roster = {tmatch.player1.roster}
-              tournament = {tmatch.tournament}
-              participant = {tmatch.player1.participant}
-            />
+          <MatchCard
+            roster = {tmatch.player1.roster}
+            tournament = {tmatch.tournament}
+            participant = {tmatch.player1.participant}
+          />
         )}
-        <TournamentMatchCard
-          matchName={match.name}
-          conferenceName={tmatch.tournament.name}
-          tournamentMatch={tmatch}
-
-        />
+        {!_.isEmpty(tmatch.player1) && !_.isEmpty(tmatch.player2) && (
+          <TournamentMatchCard
+            matchName={match.name}
+            conferenceName={tmatch.tournament.name}
+            tournamentMatch={tmatch}
+          />
+        )}
         {!_.isEmpty(tmatch.player2) && (
-            <MatchCard 
-              roster = {tmatch.player2.roster}
-              tournament = {tmatch.tournament}
-              participant = {tmatch.player2.participant}
-            />
+          <MatchCard 
+            roster = {tmatch.player2.roster}
+            tournament = {tmatch.tournament}
+            participant = {tmatch.player2.participant}
+          />
         )}
       </Grid>
     )}
