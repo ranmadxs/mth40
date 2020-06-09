@@ -7,12 +7,12 @@ import {
   LOAD_TOURNAMENT_MATCH_REQUEST,
 } from "../../actions/tournament/tournamentActions";
 
-function* getTournamentMatch({tournamentId, idPlayer1, idPlayer2}) {
-  console.log(tournamentId, idPlayer1);    
+function* getTournamentMatch({tournamentId, matchId}) {
+  console.log(matchId, tournamentId);    
   try {
     const response = yield fetch(
       mth40.config.API_MTH40_URL+
-      `/tournament/tmatch?tournamentId=${tournamentId}&idPlayer1=${idPlayer1}&idPlayer2=${idPlayer2}`
+      `/tournament/tmatch?tournamentId=${tournamentId}&matchId=${matchId}`
     );
     const data = yield response.json();
     yield put({type: LOAD_TOURNAMENT_MATCH_SUCESS, data: data});

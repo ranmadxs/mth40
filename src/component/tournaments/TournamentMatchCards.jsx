@@ -19,7 +19,7 @@ export const TournamentMatchCards = (props) => {
 
   useEffect(() => {        
     if (!_.isEmpty(match)) {
-      getTournamentMatch(tournament.id, players.player1.id, players.player2.id);
+      getTournamentMatch(tournament.id, match.id);
     }
   // eslint-disable-next-line
   }, [match]);

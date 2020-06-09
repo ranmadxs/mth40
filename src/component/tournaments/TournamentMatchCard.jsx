@@ -24,8 +24,7 @@ const useStyles = makeStyles({
 
 export const TournamentMatchCard = (props) => {
   const classes = useStyles();
-  const {conferenceName, matchName, tournamentMatch} = props;
-  console.log(conferenceName, 'conferenceName');
+  const { matchName, tournamentMatch} = props;
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -43,7 +42,7 @@ export const TournamentMatchCard = (props) => {
       <CardActions>
         <Button size="small" color="primary">
           <Link 
-            to={`/tournament/tmatch/${tournamentMatch.tournament.id}/participants/${tournamentMatch.player1._id}/${tournamentMatch.player2._id}`} 
+            to={`/tournament/tmatch/${tournamentMatch.tournament.id}/${tournamentMatch.id}`} 
             params={{ testvalue: "hello" }}
           >
               Scores
@@ -57,7 +56,6 @@ export const TournamentMatchCard = (props) => {
   );
 }
 TournamentMatchCard.propTypes = {
-  matchName: PropTypes.string.isRequired,
-  conferenceName: PropTypes.string.isRequired,
+  matchName: PropTypes.string.isRequired,  
   tournamentMatch: PropTypes.object.isRequired,
 }

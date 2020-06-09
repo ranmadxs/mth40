@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadListTournaments: () => dispatch(loadListTournamentsAction()),
     reset: () => dispatch(resetAction()),
     loadListMatches: (tournamentId) => dispatch(loadListMatchesAction(tournamentId)),
-    getTournamentMatch: (tournamentId, idPlayer1, idPlayer2) => dispatch(getTournamentMatchAction(tournamentId, idPlayer1, idPlayer2)),
+    getTournamentMatch: (tournamentId, matchId) => dispatch(getTournamentMatchAction(tournamentId, matchId)),
     setChallongeSelectedMatch: (match) => dispatch(setChallongeSelectedMatchAction(match)),
 });
 

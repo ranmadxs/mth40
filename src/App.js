@@ -37,9 +37,9 @@ const App = ({store}) => {
           <Route path="/favorites">
             <div>Hola Favorites</div>
           </Route>
-          <Route  path="/tournament/tmatch/:tournamentId/participants/:participantId1/:participantId2" render={(props) => 
+          <Route  path="/tournament/tmatch/:tournamentId/:matchId" render={(props) => 
             <MatchScoreContainer {...props} />} >
-          </Route>          
+          </Route>
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <Home 
               version={version}

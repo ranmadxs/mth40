@@ -11,13 +11,12 @@ import {Container} from '@material-ui/core';
 //tournament valida los roser con hipervínculos y cosas
 const MatchScoreContainer = (props) => {
     const {
-        tournamentMatch,
-        testvalue,
+        match: { params: {tournamentId, matchId} },
     } = props;
 
     useEffect(() => {        
-      console.log(tournamentMatch, testvalue);
-      console.log(props.match);
+      console.log(tournamentId, 'tournamentId');
+      console.log(matchId, 'matchId');
       // eslint-disable-next-line
     }, []);    
 
