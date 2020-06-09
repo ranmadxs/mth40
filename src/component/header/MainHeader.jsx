@@ -37,10 +37,10 @@ export const MainHeader = (props) => {
             <Box mt={1} mb={2}>
             <BottomNavigation value={menu.status} onChange={handleChange} className={classes.root}>
                 <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} showLabel={showLabel} />
-                <BottomNavigationAction label="Tournaments" value="tournaments" icon={<SportsEsportsIcon />} showLabel={showLabel}/>
-                <BottomNavigationAction label="Rosters" value="rosters" icon={<PermMediaIcon />} showLabel={showLabel} />
-                <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} showLabel={showLabel} />
-                <BottomNavigationAction label="Roster Import" value="rosterImport" icon={<SystemUpdateAltIcon />} showLabel={showLabel} />
+                <BottomNavigationAction label="Tournaments" value="/tournaments" icon={<SportsEsportsIcon />} showLabel={showLabel}/>
+                <BottomNavigationAction label="Rosters" value="/rosters" icon={<PermMediaIcon />} showLabel={showLabel} />
+                <BottomNavigationAction label="Favorites" value="/favorites" icon={<FavoriteIcon />} showLabel={showLabel} />
+                <BottomNavigationAction label="Roster Import" value="/rosterImport" icon={<SystemUpdateAltIcon />} showLabel={showLabel} />
             </BottomNavigation>            
             </Box>        
             <Divider variant="middle" />

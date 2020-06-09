@@ -5,9 +5,11 @@ import MenuContainer from './containers/menu/MenuContainer'
 import RosterContainer from './containers/roster/RosterContainer';
 import SearchListContainer from './containers/search/SearchListContainer';
 import TournamentContainer from "./containers/tournament/TournamentContainer";
+import MatchScoreContainer from './containers/tournament/MatchScoreContainer'
+
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch, 
   Route,
 } from "react-router-dom";
 var pjson = require('../package.json');
@@ -34,12 +36,15 @@ const App = ({store}) => {
           <Route path="/rosters" component={RosterContainer} />
           <Route path="/favorites">
             <div>Hola Favorites</div>
+          </Route>
+          <Route  path="/tournament/tmatch/:tournamentId/participants/:participantId1/:participantId2" render={(props) => 
+            <MatchScoreContainer {...props} />} >
           </Route>          
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <Home 
               version={version}
             />
-          </Route>          
+          </Route>
         </Switch>
       </div>
     </Router>

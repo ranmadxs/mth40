@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { styles, muiTheme } from './TournamentStyle'
 import { Card, Grid } from '@material-ui/core';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -19,12 +17,13 @@ export const MatchCard = (props) => {
         // tournament,
         participant: {seed, created_at},
     } = props;
+
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
     // const nbsp = '\u00A0';
     const fechaCreacion = moment.utc(created_at).format('YYYY/MM/DD HH:mm');
     const conferenceLogo = `/images/logos/${conferenceName}.png`;
-    const factionImageName = mainFaction.replace(/ /g, "_");
+    const factionImageName = mainFaction.replace(/ /g, '_');
     const factionLogo = `/images/logos/${factionImageName}.png`;
     return (
         <div className={classes.root}>            
@@ -44,7 +43,7 @@ export const MatchCard = (props) => {
                     <br />
                     <Grid container spacing={2} alignItems="center">
                       <Grid item xs={2}>
-                        <Avatar alt="Inquisition" src={factionLogo} className={classes.medium} />
+                        <Avatar alt={mainFaction} src={factionLogo} className={classes.medium} />
                       </Grid>
                       <Grid item xs={10}>
                         <Typography className={classes.pos} color="textSecondary">                      
@@ -61,9 +60,6 @@ export const MatchCard = (props) => {
                         </Typography>
                     </ThemeProvider>
                 </CardContent>
-                <CardActions>
-                    <Button size="small">Scores</Button>
-                </CardActions>
             </Card>
         </div> 
     );

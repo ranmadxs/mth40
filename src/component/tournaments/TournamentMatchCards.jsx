@@ -3,6 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import { MatchCard } from './MatchCard'
+import { TournamentMatchCard} from './TournamentMatchCard'
 
 export const TournamentMatchCards = (props) => {
   const {
@@ -22,7 +23,7 @@ export const TournamentMatchCards = (props) => {
     }
   // eslint-disable-next-line
   }, [match]);
-  const nbsp = '\u00A0';
+  // const nbsp = '\u00A0';
   return (<>
     {!_.isEmpty(tmatch) && !_.isEmpty(match) && (
       <Grid container spacing={2} alignContent='center' alignItems='center' justify='center'>
@@ -33,7 +34,12 @@ export const TournamentMatchCards = (props) => {
               participant = {tmatch.player1.participant}
             />
         )}
-        <div>{nbsp}V/S{nbsp}</div>
+        <TournamentMatchCard
+          matchName={match.name}
+          conferenceName={tmatch.tournament.name}
+          tournamentMatch={tmatch}
+
+        />
         {!_.isEmpty(tmatch.player2) && (
             <MatchCard 
               roster = {tmatch.player2.roster}
