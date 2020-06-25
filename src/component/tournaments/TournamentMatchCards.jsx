@@ -13,7 +13,6 @@ export const TournamentMatchCards = (props) => {
     match,
     match: {
       tournament = null, 
-      players = null,
     },
   } = props;
 

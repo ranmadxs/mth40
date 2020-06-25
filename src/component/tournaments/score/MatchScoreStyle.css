@@ -1,0 +1,160 @@
+span.data-grid-container, span.data-grid-container:focus {
+  outline: none;
+}
+
+.data-grid-container .data-grid {
+  table-layout: fixed;
+  border-collapse: collapse;
+} 
+
+.data-grid-container .data-grid .cell.updated {
+    background-color: rgba(0, 145, 253, 0.16);
+    transition : background-color 0ms ease ;
+}
+
+.data-grid-container .data-grid .cell {
+  height: 17px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  cursor: cell;
+  background-color: unset;
+  transition : background-color 500ms ease;
+  vertical-align: middle;
+  text-align: right;
+  border: 1px solid #DDD;
+  padding: 0;
+}
+
+.data-grid-container .data-grid .cell.selected {
+  border: 1px double rgb(33, 133, 208);
+  transition: none;
+  box-shadow: inset 0 -100px 0 rgba(33, 133, 208, 0.15);
+}
+
+.data-grid-container .data-grid .cell.axys {
+  background: whitesmoke;
+  color: #999;
+  text-align: center;
+}
+
+.data-grid-container .data-grid .cell.colspawn1 {
+  background: #5C6BC0;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.data-grid-container .data-grid .cell.colspawn2 {
+  background: #AD5E4E;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.data-grid-container .data-grid .cell.colspawn3 {
+  background: #BEC098;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.data-grid-container .data-grid .cell.colspawn4 {
+  background: yellow;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell.colspawn4 {
+  background: yellow;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell.colspawn5 {
+  background: #F5F6F7;
+  color: black;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell.colorr {
+  background: #F7CAAC;
+  color: #B5543F;
+  text-align: center;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell.colorg {
+  background: #C5E0B3;
+  color: #3FB54C;
+  text-align: center;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell.colorb {
+  background: #BDD6EE;
+  color: #3F51B5;
+  text-align: center;
+  border: 1px double black;
+}
+
+.data-grid-container .data-grid .cell > .text {
+  padding: 2px 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.data-grid-container .data-grid .cell > input {
+  outline: none !important;
+  border: 2px solid rgb(33, 133, 208);
+  text-align:right;
+  width: 63px;
+  /* width: calc(100% - 6px); */
+  height: 11px;
+  background: none;
+  display: block;
+}
+
+.data-grid-container .data-grid .cell {
+  vertical-align: bottom;
+}
+
+.data-grid-container .data-grid .cell,
+.data-grid-container .data-grid.wrap .cell,
+.data-grid-container .data-grid.wrap .cell.wrap,
+.data-grid-container .data-grid .cell.wrap,
+.data-grid-container .data-grid.nowrap .cell.wrap,
+.data-grid-container .data-grid.clip .cell.wrap {
+  white-space: normal;
+}
+
+.data-grid-container .data-grid.nowrap .cell,
+.data-grid-container .data-grid.nowrap .cell.nowrap,
+.data-grid-container .data-grid .cell.nowrap,
+.data-grid-container .data-grid.wrap .cell.nowrap,
+.data-grid-container .data-grid.clip .cell.nowrap {
+  white-space: nowrap;
+  overflow-x: visible;
+}
+
+.data-grid-container .data-grid.clip .cell,
+.data-grid-container .data-grid.clip .cell.clip,
+.data-grid-container .data-grid .cell.clip,
+.data-grid-container .data-grid.wrap .cell.clip,
+.data-grid-container .data-grid.nowrap .cell.clip {
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.data-grid-container .data-grid .cell .value-viewer, .data-grid-container .data-grid .cell .data-editor {
+  display: block;
+}

@@ -327,6 +327,8 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
                     console.log("[" + categoryName + "] " + jQuery(this).attr("name"));
                     console.log(this);
                     var unit = {
+                        'id': jQuery(this).attr('id').trim(),
+                        'entryId': jQuery(this).attr('entryId').trim(),
                         'name': jQuery(this).attr('name').trim(),
                         'type': jQuery(this).attr('type').trim(),
                         'costs': getModelCost(this),

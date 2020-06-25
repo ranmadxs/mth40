@@ -5,7 +5,8 @@ import MenuContainer from './containers/menu/MenuContainer'
 import RosterContainer from './containers/roster/RosterContainer';
 import SearchListContainer from './containers/search/SearchListContainer';
 import TournamentContainer from "./containers/tournament/TournamentContainer";
-import MatchScoreContainer from './containers/tournament/MatchScoreContainer'
+import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
+import HomeContainer from './containers/home/HomeContainer';
 
 import {
   BrowserRouter as Router,
@@ -41,36 +42,13 @@ const App = ({store}) => {
             <MatchScoreContainer {...props} />} >
           </Route>
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
-            <Home 
+            <HomeContainer
               version={version}
             />
           </Route>
         </Switch>
       </div>
     </Router>
-  );
-}
-
-function Home({version}) {
-  return (
-    <div>
-      <SearchListContainer/>
-      <h2>Home V {version}</h2>
-      <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/tournaments">Tournaments</a>
-          </li>
-          <li>
-            <a href="/rosters">Rosters</a>
-          </li>
-          <li>
-            <a href="/rosterImport">Roster Import</a>
-          </li>            
-        </ul>      
-    </div>
   );
 }
 
