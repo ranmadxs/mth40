@@ -6,7 +6,7 @@ import {reducer as RosterTournament} from './reducers/roster/rosterTournamentRed
 import {reducer as Menu} from './reducers/menu/menuReducer';
 import {reducer as TournamentMatch} from './reducers/tournament/tournamentMatchReducer'
 import {reducer as Challonge} from './reducers/tournament/challongeReducer';
-import {reducer as MatchScore} from './reducers/match/matchScoreReducer';
+import {reducer as MatchScore} from './containers/match/reducers/matchScoreReducer';
 import {ADD_TODO} from './actions/generalActions'
 
 function TODOS(state = [], action) {

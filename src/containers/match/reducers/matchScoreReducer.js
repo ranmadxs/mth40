@@ -2,7 +2,7 @@ import {
   LOAD_MATCH_SCORE_REQUEST,
   LOAD_MATCH_SCORE_SUCESS,
   LOAD_MATCH_SCORE_ERROR,
-} from "../../actions/match/matchActions";
+} from "../actions/matchActions";
 
 const initialState = {
   score: {},

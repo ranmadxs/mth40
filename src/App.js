@@ -3,9 +3,9 @@ import {MainIframe} from './component/utils/MainIframe';
 import SearchGlobalContainer from './containers/search/SearchGlobalContainer';
 import MenuContainer from './containers/menu/MenuContainer'
 import RosterContainer from './containers/roster/RosterContainer';
-import SearchListContainer from './containers/search/SearchListContainer';
 import TournamentContainer from "./containers/tournament/TournamentContainer";
-import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
+//import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
+import MatchScoreContainer from './containers/match/MatchScoreContainer';
 import HomeContainer from './containers/home/HomeContainer';
 
 import {

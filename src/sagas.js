@@ -4,7 +4,7 @@ import RosterSagas from './sagas/roster/rosterSagas';
 import RosterTournamentSagas from './sagas/roster/rosterTournamentSagas';
 import TournamentSagas from './sagas/tournaments/tournamentSagas';
 import ChallongeSagas from './sagas/tournaments/challongeSagas';
-import MatchSagas from './sagas/match/matchSagas';
+import MatchSagas from './containers/match/sagas/matchSagas';
 
 export default function* rootSaga() {
     yield all([

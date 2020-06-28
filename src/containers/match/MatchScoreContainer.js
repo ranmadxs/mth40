@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {Container} from '@material-ui/core';
 import {MatchScores} from '../../component/tournaments/score/MatchScores'
 import _ from 'lodash';
-import {getMatchScore as getMatchScoreAction} from '../../actions/match/matchActions';
+import {
+  getMatchScore as getMatchScoreAction,
+  updateUnitScoreOption as updateUnitScoreOptionAction,
+} from './actions/matchActions';
 import xlsHelper from '../../helpers/xlsHelper';
 
-
-//TODO: Agregar Datacheet como componente
+/********* Docs del datasheet  **********/
 //https://nadbm.github.io/react-datasheet/
 //https://github.com/nadbm/react-datasheet
-//TODO: Se podría abrir el excel en una nueva pantalla y la de 
-//tournament valida los roser con hipervínculos y cosas
+//TODO: Agregar hipervínculos a los datasheet
 const MatchScoreContainer = (props) => {
   const {
     match: { params: {tournamentId, matchId} },
     getMatchScore,
-    matchScore: { data = {}},
+    updateUnitScoreOption,
+    matchScore: { data = {}},    
   } = props;  
 
   useEffect(() => {
-    console.log(tournamentId, 'tournamentId');
-    console.log(matchId, 'matchId');
     getMatchScore(tournamentId, matchId);
     // eslint-disable-next-line
   }, []);
@@ -37,6 +37,7 @@ const MatchScoreContainer = (props) => {
       {!_.isEmpty(data) && (
         <MatchScores
           grid={generateGrid()}
+          updateUnitScoreOption={updateUnitScoreOption}
         />
       )}
     </Container>
@@ -45,6 +46,7 @@ const MatchScoreContainer = (props) => {
 
 MatchScoreContainer.propTypes = {
     tournamentMatch: PropTypes.object.isRequired,
+    updateUnitScoreOption: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -54,6 +56,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getMatchScore: (tournamentId, matchId) => dispatch(getMatchScoreAction(tournamentId, matchId)),
+  updateUnitScoreOption: (unitScoreOption) => dispatch(updateUnitScoreOptionAction(unitScoreOption)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchScoreContainer);

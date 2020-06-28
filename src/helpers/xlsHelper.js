@@ -60,14 +60,38 @@ const xlsHelper = {
     let row = [
       {readOnly: true, value: idy, width: 40, className: 'axys'}, 
       {readOnly: true, value: ''},
-      {readOnly: true, value: unitScore.name, width: 120, className: 'colspawn5'}, 
-      {readOnly: false, value: unitScore.offensive.kill, className: 'colorr', key: `C${idy}`},
-      {readOnly: false, value: unitScore.offensive.wound, className: 'colorg', key: `D${idy}`},
-      {readOnly: false, value: unitScore.offensive.objetive, className: 'colorb', key: `E${idy}`},
+      {readOnly: true, value: unitScore.name, width: 120, className: 'colspawn5'},
+      {
+        id: `${unitScore.id}`, type:'offensive', subType:'kill', key: `C${idy}`, 
+        readOnly: false, className: 'colorr',        
+        value: unitScore.offensive.kill
+      },
+      {
+        id: `${unitScore.id}`, type:'offensive', subType:'wound', key: `D${idy}`,
+        readOnly: false, className: 'colorg',
+        value: unitScore.offensive.wound
+      },
+      {
+        id: `${unitScore.id}`, type:'offensive', subType:'objetive', key: `E${idy}`,
+        readOnly: false, className: 'colorb',
+        value: unitScore.offensive.objetive
+      },
       {readOnly: true, value: ''},
-      {readOnly: false, value: unitScore.defensive.death, className: 'colorr', key: `G${idy}`},
-      {readOnly: false, value: unitScore.defensive.wound, className: 'colorg', key: `H${idy}`},
-      {readOnly: false, value: unitScore.defensive.saving, className: 'colorb', key: `I${idy}`},
+      {
+        id: `${unitScore.id}`, type:'defensive', subType:'death', key: `G${idy}`,
+        readOnly: false, className: 'colorr',
+        value: unitScore.defensive.death
+      },
+      {
+        id: `${unitScore.id}`, type:'defensive', subType:'wound', key: `H${idy}`,
+        readOnly: false, className: 'colorg',
+        value: unitScore.defensive.wound
+      },
+      {
+        id: `${unitScore.id}`, type:'defensive', subType:'saving', key: `I${idy}`,
+        readOnly: false, className: 'colorb',
+        value: unitScore.defensive.saving
+      },
       {readOnly: true, value: ''},
     ];    
     return row;
@@ -107,7 +131,6 @@ const xlsHelper = {
       formulas.saving.push(`I${y}`);
       grid[y] = this.getUnitRow(unit, y);
     });
-    console.log(grid[y0]);
     grid[y0][3] = {readOnly: true, value: 0, expr: `=${formulas.kill.join('+')}`, className:'colspawn4'};
     grid[y0][4] = {readOnly: true, value: 0, expr: `=${formulas.oWound.join('+')}`, className:'colspawn4'};
     grid[y0][5] = {readOnly: true, value: 0, expr: `=${formulas.objetive.join('+')}`, className:'colspawn4'};
@@ -116,16 +139,13 @@ const xlsHelper = {
     grid[y0][8] = {readOnly: true, value: 0, expr: `=${formulas.dWound.join('+')}`, className:'colspawn4'};
     grid[y0][9] = {readOnly: true, value: 0, expr: `=${formulas.saving.join('+')}`, className:'colspawn4'};
 
-    console.log(formulas, 'formulas');
     return grid;
   },
 
   merge: function (...arrays) {
     let array = [];
-    let i = 0;
     arrays.forEach(arrayElement => {
       let idx = 0;
-      i++;
       for (let index = 0; index < arrayElement.length; index++) {
         const element = arrayElement[index];  
         if (!_.isEmpty(element)) {
@@ -144,16 +164,13 @@ const xlsHelper = {
         y: 50,
         dy: 2,
       },
-      data,
-      data: {matchScore, players}
+      data: { players },
     } = props;
-    console.log(data, 'data');
     let gridBase = this.getGridBase(axys);
     let gridHeader = this.getGridHeader(axys);
        
     let grid = this.merge(gridBase, gridHeader);
     let y = 5;
-    console.log(players, 'players');
     players.forEach(player => {
       let gridPartScore = this.getParticipantScoreGrid(player, y);
       y = y + axys.dy*(player.units.length + 1);
