@@ -57,10 +57,21 @@ const xlsHelper = {
 
   getUnitRow: function (unitScore, idy) {
     /** Header PartScor */
+    console.log(unitScore, 'unitScore');
+    const unitName = unitScore.alias?unitScore.alias:unitScore.name;
     let row = [
       {readOnly: true, value: idy, width: 40, className: 'axys'}, 
       {readOnly: true, value: ''},
-      {readOnly: true, value: unitScore.name, width: 120, className: 'colspawn5'},
+      {
+        id: `${unitScore.id}`,
+        readOnly: false, 
+        value: unitName, 
+        width: 120, 
+        className: 'colspawn5', 
+        type:'alias',
+        name: unitScore.name,
+        unitId: unitScore.unitId
+      },
       {
         id: `${unitScore.id}`, type:'offensive', subType:'kill', key: `C${idy}`, 
         readOnly: false, className: 'colorr',        
@@ -171,13 +182,23 @@ const xlsHelper = {
        
     let grid = this.merge(gridBase, gridHeader);
     let y = 5;
+    let playersInfo = [];
     players.forEach(player => {
       let gridPartScore = this.getParticipantScoreGrid(player, y);
+      const playerInfo = {
+        name: player.roster.mainFaction.name,
+        y: y,
+        x: 5,
+      };
       y = y + axys.dy*(player.units.length + 1);
       grid = this.merge(grid, gridPartScore);
+      playersInfo.push(playerInfo);
     });
     
-    return grid;
+    return {
+      grid: grid,
+      playersInfo: playersInfo,
+    };
   }
 };
 

@@ -43,7 +43,7 @@ export const ExpandableTableRow = (props) => {
   */
     return (
       <div>
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Table>
           <TableHead>
             <TableRow>
@@ -54,17 +54,17 @@ export const ExpandableTableRow = (props) => {
             </TableRow> 
           </TableHead>
           <TableBody>
-          <TableRow>
-          <TableCell colSpan={6}>
-            <ExpandableContent />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-        <TableCell colSpan={6}>
-        <ExpandableContent />
-        </TableCell>
-        </TableRow>
-        </TableBody>
+            <TableRow>
+              <TableCell colSpan={6}>
+                <ExpandableContent />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell colSpan={6}>
+                <ExpandableContent />
+              </TableCell>
+            </TableRow>
+          </TableBody>
         </Table>        
         </ThemeProvider>
       </div>

@@ -313,8 +313,9 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
             .each(function (x) {
             var category = jQuery(this).find("selection categories category[primary='true'][name!='Stratagems']");
             var categoryPrimary = category.attr("primary");
+            var categoryName = category.attr("name");
             if (categoryPrimary == "true") {
-                var categoryName = category.attr("name");
+              console.log("[" + categoryName + "] " + jQuery(this).attr("name"));       
                 if (!categoryName.includes(properties.no_type)) {
                     if(categoryName == "Configuration"){
                         var selectionConfigsObj = jQuery(this).find("selection selections selection");                        
@@ -323,8 +324,7 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
                             subfaction['name'] = nameSubfaction;
                             console.log("**** Subfaction = " + nameSubfaction);
                         }
-                    }
-                    console.log("[" + categoryName + "] " + jQuery(this).attr("name"));
+                    }                    
                     console.log(this);
                     var unit = {
                         'id': jQuery(this).attr('id').trim(),

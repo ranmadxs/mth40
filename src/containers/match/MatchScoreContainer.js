@@ -36,7 +36,7 @@ const MatchScoreContainer = (props) => {
       CONTAINER
       {!_.isEmpty(data) && (
         <MatchScores
-          grid={generateGrid()}
+          sheet={generateGrid()}
           updateUnitScoreOption={updateUnitScoreOption}
         />
       )}

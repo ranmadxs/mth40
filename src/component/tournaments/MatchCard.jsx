@@ -22,9 +22,11 @@ export const MatchCard = (props) => {
     const bull = <span className={classes.bullet}>•</span>;
     // const nbsp = '\u00A0';
     const fechaCreacion = moment.utc(created_at).format('YYYY/MM/DD HH:mm');
-    const conferenceLogo = `/images/logos/${conferenceName}.png`;
-    const factionImageName = mainFaction.replace(/ /g, '_');
+    const conferenceImageName = conferenceName.replace(/ /g, '_');
+    const conferenceLogo = `/images/logos/${conferenceImageName}.png`;
+    const factionImageName = mainFaction.replace(/ /g, '_');    
     const factionLogo = `/images/logos/${factionImageName}.png`;
+    console.log(conferenceLogo, 'conferenceLogo');
     return (
         <div className={classes.root}>            
             <Card className={classes.root} variant="outlined">
