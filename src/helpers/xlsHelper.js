@@ -61,7 +61,7 @@ const xlsHelper = {
     const unitName = unitScore.alias?unitScore.alias:unitScore.name;
     let row = [
       {readOnly: true, value: idy, width: 40, className: 'axys'}, 
-      {readOnly: true, value: ''},
+      {readOnly: true, value: unitScore.mvp.score, className: 'axys'},
       {
         id: `${unitScore.id}`,
         readOnly: false, 
