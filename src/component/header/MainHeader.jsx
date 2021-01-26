@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {BottomNavigation, Divider, Box} from '@material-ui/core';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -41,6 +42,7 @@ export const MainHeader = (props) => {
                 <BottomNavigationAction label="Rosters" value="/rosters" icon={<PermMediaIcon />} showLabel={showLabel} />
                 <BottomNavigationAction label="Favorites" value="/favorites" icon={<FavoriteIcon />} showLabel={showLabel} />
                 <BottomNavigationAction label="Roster Import" value="/rosterImport" icon={<SystemUpdateAltIcon />} showLabel={showLabel} />
+                <BottomNavigationAction label="Friendly Games" value="/friendlyGames" icon={<ThumbsUpDownIcon />} showLabel={showLabel} />
             </BottomNavigation>            
             </Box>        
             <Divider variant="middle" />

@@ -27,9 +27,12 @@ export const HomeContainer = (props) => {
           </li>
           <li>
             <a href="/rosterImport">Roster Import</a>
-          </li>            
+          </li>
+          <li>
+            <a href="/friendlyGames">Friendly Games</a>
+          </li>
         </ul>      
-      </div>      
+      </div>
     );
 };
 

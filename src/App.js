@@ -3,10 +3,12 @@ import {MainIframe} from './component/utils/MainIframe';
 import SearchGlobalContainer from './containers/search/SearchGlobalContainer';
 import MenuContainer from './containers/menu/MenuContainer'
 import RosterContainer from './containers/roster/RosterContainer';
+import FriendlyContainers from './containers/friendly/friendlyContainers';
 import TournamentContainer from "./containers/tournament/TournamentContainer";
 //import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
 import MatchScoreContainer from './containers/match/MatchScoreContainer';
 import HomeContainer from './containers/home/HomeContainer';
+
 
 import {
   BrowserRouter as Router,
@@ -40,6 +42,9 @@ const App = ({store}) => {
           </Route>
           <Route  path="/tournament/tmatch/:tournamentId/:matchId" render={(props) => 
             <MatchScoreContainer {...props} />} >
+          </Route>
+          <Route path="/friendlyGames">
+            <FriendlyContainers />
           </Route>
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <HomeContainer
