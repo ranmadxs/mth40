@@ -29,8 +29,14 @@ export const HomeContainer = (props) => {
             <a href="/rosterImport">Roster Import</a>
           </li>
           <li>
+            <a href="/favorites">Favorites</a>
+          </li>
+          <li>
             <a href="/friendlyGames">Friendly Games</a>
           </li>
+          <li>
+            <a href="/statistics">Statistics</a>
+          </li>          
         </ul>      
       </div>
     );

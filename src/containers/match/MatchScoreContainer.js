@@ -7,6 +7,7 @@ import _ from 'lodash';
 import {
   getMatchScore as getMatchScoreAction,
   updateUnitScoreOption as updateUnitScoreOptionAction,
+  calculateMVP as calculateMVPAction,
 } from './actions/matchActions';
 import xlsHelper from '../../helpers/xlsHelper';
 
@@ -19,8 +20,9 @@ const MatchScoreContainer = (props) => {
     match: { params: {tournamentId, matchId} },
     getMatchScore,
     updateUnitScoreOption,
-    matchScore: { data = {}},    
-  } = props;  
+    calculateMVP,
+    matchScore: { currentMVP, data = {}},
+  } = props;
 
   useEffect(() => {
     getMatchScore(tournamentId, matchId);
@@ -38,6 +40,8 @@ const MatchScoreContainer = (props) => {
         <MatchScores
           sheet={generateGrid()}
           updateUnitScoreOption={updateUnitScoreOption}
+          calculateMVP={calculateMVP}
+          currentMVP={currentMVP}
         />
       )}
     </Container>
@@ -47,6 +51,7 @@ const MatchScoreContainer = (props) => {
 MatchScoreContainer.propTypes = {
     tournamentMatch: PropTypes.object.isRequired,
     updateUnitScoreOption: PropTypes.func.isRequired,
+    calculateMVP: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +62,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getMatchScore: (tournamentId, matchId) => dispatch(getMatchScoreAction(tournamentId, matchId)),
   updateUnitScoreOption: (unitScoreOption) => dispatch(updateUnitScoreOptionAction(unitScoreOption)),
+  calculateMVP: (unitScore) => dispatch(calculateMVPAction(unitScore)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchScoreContainer);

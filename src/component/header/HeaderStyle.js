@@ -1,5 +1,5 @@
 export const styles = {
-    root: {
-      width: 500,
+    root: {      
+      width: 800,
     },
 };

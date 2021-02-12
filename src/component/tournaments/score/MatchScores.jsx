@@ -18,7 +18,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 export const MatchScores = (props) => {
   const {
     sheet: {grid = [], playersInfo =[]},
+    currentMVP,
     updateUnitScoreOption,
+    calculateMVP,
     vertical = 'top',
     horizontal = 'right',
     open = true,
@@ -53,16 +55,39 @@ export const MatchScores = (props) => {
   const [player2, setPlayer2] = useState(0);
 
   useEffect(() => {
-    // eslint-disable-next-line
-  }, []);
+  
+    if(currentMVP && currentMVP.row) {
+      console.log(currentMVP, 'currentMVP');
+      let localGrid = state.grid;
+      console.log(state.grid, 'grid');
+      localGrid[currentMVP.row][1] = {...localGrid[currentMVP.row][1], value: currentMVP.value};
+      setState({...state, localGrid});
+    }
+  // eslint-disable-next-line
+  }, [currentMVP]);
   
   const onCellsChanged = (changes) => {
     const grid = state.grid.map(row => [...row]);
     changes.forEach(({ cell, row, col, value }) => {
       grid[row][col] = { ...grid[row][col], value };
       const celda = grid[row][col];
-      celda.alias = value;
+      console.log(grid[row], 'grid[row]');
+      const unitScore = {
+        offensive: {          
+          kill: grid[row][3].value,
+          wound: grid[row][4].value,
+          objetive: grid[row][5].value,
+        }, 
+        defensive: {
+          death: grid[row][7].value,
+          wound: grid[row][8].value,
+          saving: grid[row][9].value,
+        },
+        row: row
+      };
+      celda.alias = value;      
       updateUnitScoreOption(celda);
+      calculateMVP(unitScore);
     });
     const scope = getScope(grid);
     setState({ grid, scope });
@@ -132,6 +157,8 @@ export const MatchScores = (props) => {
 };
 
 MatchScores.propTypes = {
-    sheet: PropTypes.any.isRequired,
-    updateUnitScoreOption: PropTypes.func.isRequired,
+  sheet: PropTypes.any.isRequired,
+  currentMVP: PropTypes.any.isRequired,
+  updateUnitScoreOption: PropTypes.func.isRequired,
+  calculateMVP: PropTypes.func.isRequired,
 };

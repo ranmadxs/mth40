@@ -6,7 +6,9 @@ import RosterContainer from './containers/roster/RosterContainer';
 import FriendlyContainers from './containers/friendly/friendlyContainers';
 import TournamentContainer from "./containers/tournament/TournamentContainer";
 //import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
+import FavoritesContainer from './containers/favorites/favoritesContainer'
 import MatchScoreContainer from './containers/match/MatchScoreContainer';
+import StatisticsContainer from './containers/statistics/statisticsContainer';
 import HomeContainer from './containers/home/HomeContainer';
 
 
@@ -37,15 +39,14 @@ const App = ({store}) => {
             <MainIframe />
           </Route>          
           <Route path="/rosters" component={RosterContainer} />
-          <Route path="/favorites">
-            <div>Hola Favorites</div>
-          </Route>
+          <Route path="/favorites" component={FavoritesContainer} />
           <Route  path="/tournament/tmatch/:tournamentId/:matchId" render={(props) => 
             <MatchScoreContainer {...props} />} >
           </Route>
           <Route path="/friendlyGames">
             <FriendlyContainers />
           </Route>
+          <Route path="/statistics" component={StatisticsContainer} />
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <HomeContainer
               version={version}
