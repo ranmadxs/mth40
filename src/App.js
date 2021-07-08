@@ -8,7 +8,7 @@ import TournamentContainer from "./containers/tournament/TournamentContainer";
 //import MatchScoreContainer from './containers/tournament/MatchScoreContainer';
 import FavoritesContainer from './containers/favorites/favoritesContainer'
 import MatchScoreContainer from './containers/match/MatchScoreContainer';
-import StatisticsContainer from './containers/statistics/statisticsContainer';
+import StatisticsContainer from './containers/statistics/StatisticsContainer';
 import HomeContainer from './containers/home/HomeContainer';
 
 
@@ -46,7 +46,9 @@ const App = ({store}) => {
           <Route path="/friendlyGames">
             <FriendlyContainers />
           </Route>
-          <Route path="/statistics" component={StatisticsContainer} />
+          <Route path="/statistics/:criteria" render={(props) =>
+            <StatisticsContainer {...props} />} >
+          </Route>
           <Route path="/" onEnter={onAppInit(store.dispatch)}>
             <HomeContainer
               version={version}

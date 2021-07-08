@@ -311,20 +311,21 @@ app.service("rosterSvc", function (properties, wh40KFactory, ruleSvc) {
         //jQuery($forceXML).find("force selections selection[type='model'], force selections selection[type='unit']")
         jQuery($forceXML).find("force selections selection")
             .each(function (x) {
-            var category = jQuery(this).find("selection categories category[primary='true'][name!='Stratagems']");
+            var category = jQuery(this).find("selection categories category[primary='true'][name!='Stratagems'][name!='Configuration']");
             var categoryPrimary = category.attr("primary");
             var categoryName = category.attr("name");
             if (categoryPrimary == "true") {
               console.log("[" + categoryName + "] " + jQuery(this).attr("name"));       
                 if (!categoryName.includes(properties.no_type)) {
                     if(categoryName == "Configuration"){
+                        console.log('Configuration iffffff');
                         var selectionConfigsObj = jQuery(this).find("selection selections selection");                        
                         var nameSubfaction = selectionConfigsObj.attr("name");
                         if(nameSubfaction) { 
                             subfaction['name'] = nameSubfaction;
                             console.log("**** Subfaction = " + nameSubfaction);
                         }
-                    }                    
+                    }
                     console.log(this);
                     var unit = {
                         'id': jQuery(this).attr('id').trim(),

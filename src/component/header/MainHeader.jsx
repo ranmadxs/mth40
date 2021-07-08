@@ -44,7 +44,7 @@ export const MainHeader = (props) => {
                 <BottomNavigationAction label="Favorites" value="/favorites" icon={<FavoriteIcon />} showLabel={showLabel} />
                 <BottomNavigationAction label="Roster Import" value="/rosterImport" icon={<SystemUpdateAltIcon />} showLabel={showLabel} />
                 <BottomNavigationAction label="Friendly Games" value="/friendlyGames" icon={<ThumbsUpDownIcon />} showLabel={showLabel} />
-                <BottomNavigationAction label="Statistics" value="/statistics" icon={<AssessmentIcon />} showLabel={showLabel} />
+                <BottomNavigationAction label="Statistics" value="/statistics/null" icon={<AssessmentIcon />} showLabel={showLabel} />
             </BottomNavigation>            
             </Box>        
             <Divider variant="middle" />

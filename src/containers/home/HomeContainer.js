@@ -35,7 +35,7 @@ export const HomeContainer = (props) => {
             <a href="/friendlyGames">Friendly Games</a>
           </li>
           <li>
-            <a href="/statistics">Statistics</a>
+            <a href="/statistics/null">Statistics</a>
           </li>          
         </ul>      
       </div>

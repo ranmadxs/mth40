@@ -34,6 +34,18 @@ export const RosterList = (props) => {
     return moment.utc(fecha).format('YYYY/MM/DD');
   }
 
+  const rosterLink = (roster) => {
+    const linkRoster = '/statistics/rosterId='+roster._id;
+    return (
+      <Box mt={1} mb={1}>
+        <Link to={linkRoster}>
+          <VisibilityIcon fontSize="small" />
+        </Link>
+      </Box>      
+    );
+  }
+
+  console.log(listRoster, 'listRoster');
   useEffect(() => {
     loadListRoster();
     // eslint-disable-next-line
@@ -69,11 +81,7 @@ export const RosterList = (props) => {
       sortable: false,
       right: false,
       cell: row => 
-        <Box mt={1} mb={1}>
-          <Link to={`/rosterImport`}>
-            <VisibilityIcon fontSize="small" />
-          </Link>
-        </Box>,
+        <Box mt={1} mb={1}>{rosterLink(row)}</Box>,
       width: '140px',
     },
   ];
